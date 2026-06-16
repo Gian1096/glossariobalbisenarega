@@ -1,3 +1,7 @@
+---
+layout: default
+title: Home
+---
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -234,7 +238,7 @@
                 </div>
             </div>
 
-            <div class="Sezione-Navigazione-Ricerca">
+           <div class="Sezione-Navigazione-Ricerca">
                 
                 <div class="Search-Container">
                     <input type="text" class="Search-Input" placeholder="Cerca un termine nel glossario... (es. loggia, finestra, atrio)">
@@ -268,9 +272,9 @@
 
                 <div class="Schede-Container-Home" style="margin-top: 40px; background: #ffffff; padding: 25px; border-radius: 8px; border: 1px solid #d0e1f2; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
                     <div class="Alpha-Titolo" style="margin-bottom: 20px; text-align: center;">Tutti i Lemmi del Glossario</div>
-                    <ul id="Lista-Schede-Home" style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
+                    <ul id="Lista-Schede-Home" style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; text-align: left;">
                         {% for pagina in site.pages %}
-                            {% if pagina.layout == "scheda" or pagina.url contains ".html" and pagina.url != "/index.html" and pagina.url != "/test.html" %}
+                            {% if pagina.url contains ".html" and pagina.url != "/index.html" and pagina.url != "/test.html" %}
                                 <li style="margin: 0;">
                                     <a href="{{ pagina.url | relative_url }}" style="color: #2b6cb0; text-decoration: none; font-weight: 600; display: block; padding: 10px 12px; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 4px; transition: all 0.2s ease;">
                                         {{ pagina.title | default: pagina.name }}
@@ -283,7 +287,7 @@
                 
             </div>
         </main>
-
+        
         <footer class="Footer-Curatore">
             Progetto di ricerca a cura di: Giovanni Mantegazza (Università degli Studi di Genova)
         </footer>
