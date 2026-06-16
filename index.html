@@ -116,81 +116,31 @@ title: Home
             text-align: left;
         }
 
-        /* --- ZONA OPERATIVA INFERIORE --- */
-        .Sezione-Navigazione-Ricerca {
-            background-color: #eef4fa; 
-            border: 1px solid #d0e1f2;
-            border-radius: 8px;
-            padding: 40px;
-            margin-top: 35px;
-        }
-
-        .Search-Container {
-            max-width: 750px;
-            margin: 0 auto 35px auto;
-            position: relative;
-        }
-
-        .Search-Input {
-            width: 100%;
-            padding: 18px 26px;
-            font-size: 1.1em;
-            border: 2px solid #cbd5e1;
-            border-radius: 50px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-            outline: none;
-            transition: all 0.2s ease;
-            box-sizing: border-box;
-            background-color: #ffffff;
-        }
-
-        .Search-Input:focus {
-            border-color: #2b6cb0;
-            box-shadow: 0 10px 20px rgba(43, 108, 176, 0.1);
-        }
-
-        .Alpha-Container {
+        /* --- PULSANTE DI ACCESSO AL GLOSSARIO --- */
+        .Contenitore-Accesso {
             text-align: center;
-            max-width: 750px;
-            margin: 0 auto;
+            margin: 50px auto;
         }
 
-        .Alpha-Titolo {
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #718096;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .Alpha-Nav {
-            display: flex;
-            justify-content: space-between;
-            gap: 4px;
-            width: 100%;
-        }
-
-        .Alpha-Link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            height: 40px;
-            background-color: #ffffff;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            text-decoration: none;
-            color: #4a5568;
-            font-weight: 600;
-            font-size: 0.9em;
-            transition: all 0.2s ease;
-        }
-
-        .Alpha-Link:hover {
+        .Btn-Accesso {
+            display: inline-block;
             background-color: #1a365d;
             color: #ffffff;
-            border-color: #1a365d;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3em;
+            padding: 18px 45px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(26, 54, 93, 0.25);
+            transition: all 0.3s ease;
+            border: 2px solid #1a365d;
+        }
+
+        .Btn-Accesso:hover {
+            background-color: #ffffff;
+            color: #1a365d;
+            box-shadow: 0 15px 35px rgba(26, 54, 93, 0.35);
+            transform: translateY(-3px);
         }
 
         .Footer-Curatore {
@@ -238,52 +188,12 @@ title: Home
                 </div>
             </div>
 
-            <div class="Sezione-Navigazione-Ricerca">
-                
-                <div class="Search-Container">
-                    <input type="text" class="Search-Input" placeholder="Cerca un termine nel glossario... (es. loggia, finestra, atrio)">
-                </div>
-
-                <div class="Alpha-Container">
-                    <div class="Alpha-Titolo">Esplora per ordine alfabetico</div>
-                    <nav class="Alpha-Nav">
-                        <a href="#" class="Alpha-Link">A</a>
-                        <a href="#" class="Alpha-Link">B</a>
-                        <a href="#" class="Alpha-Link">C</a>
-                        <a href="#" class="Alpha-Link">D</a>
-                        <a href="#" class="Alpha-Link">E</a>
-                        <a href="#" class="Alpha-Link">F</a>
-                        <a href="#" class="Alpha-Link">G</a>
-                        <a href="#" class="Alpha-Link">I</a>
-                        <a href="#" class="Alpha-Link">L</a>
-                        <a href="#" class="Alpha-Link">M</a>
-                        <a href="#" class="Alpha-Link">N</a>
-                        <a href="#" class="Alpha-Link">O</a>
-                        <a href="#" class="Alpha-Link">P</a>
-                        <a href="#" class="Alpha-Link">Q</a>
-                        <a href="#" class="Alpha-Link">R</a>
-                        <a href="#" class="Alpha-Link">S</a>
-                        <a href="#" class="Alpha-Link">T</a>
-                        <a href="#" class="Alpha-Link">U</a>
-                        <a href="#" class="Alpha-Link">V</a>
-                        <a href="#" class="Alpha-Link">Z</a>
-                    </nav>
-                </div>
-
-                <div class="Schede-Container-Home" style="margin-top: 40px; background: #ffffff; padding: 25px; border-radius: 8px; border: 1px solid #d0e1f2; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-                    <div class="Alpha-Titolo" style="margin-bottom: 20px; text-align: center;">Tutti i Lemmi del Glossario</div>
-                    <ul id="Lista-Schede-Home" style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; text-align: left;">
-{% for p in site.pages %}{% if p.url contains ".html" and p.url != "/index.html" and p.url != "/test.html" %}
-                        <li style="margin: 0;">
-                            <a href="{{ p.url | relative_url }}" style="color: #2b6cb0; text-decoration: none; font-weight: 600; display: block; padding: 10px 12px; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 4px; transition: all 0.2s ease;">
-                                {{ p.title | default: p.name }}
-                            </a>
-                        </li>
-{% endif %}{% endfor %}
-                    </ul>
-                </div>
-                
+            <div class="Contenitore-Accesso">
+                <a href="{{ '/ricerca.html' | relative_url }}" class="Btn-Accesso">
+                    Accedi al Glossario →
+                </a>
             </div>
+            
         </main>
         
         <footer class="Footer-Curatore">
