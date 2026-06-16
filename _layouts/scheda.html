@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }} | Glossario Rolli</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background-color: #edf2f7;
+            font-size: 1.15em;
+            text-align: justify;
+        }
+
+        .Scheda-Container {
+            background: #ffffff;
+            border-top: 6px solid #1a365d;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        /* --- IMPIANTO STRUTTURALE DEL LAYOUT --- */
+        .Main-Layout {
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr) 250px;
+            gap: 25px;
+            margin-top: 20px;
+            align-items: flex-start;
+        }
+
+        /* 1. Barra laterale sinistra (Indice fisso a schermo intero) */
+        .Sidebar-Lemmi {
+            border-right: 1px solid #e2e8f0;
+            padding-right: 15px;
+        }
+
+        .Sidebar-Lemmi summary {
+            display: block;
+            cursor: pointer;
+            outline: none;
+            list-style: none; 
+        }
+        .Sidebar-Lemmi summary::-webkit-details-marker {
+            display: none; 
+        }
+
+        .Sidebar-Titolo {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #718096;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .Albero-Lemmi {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .Albero-Lemmi li { 
+            margin-bottom: 6px; 
+            break-inside: avoid;
+        }
+
+        .Albero-Lemmi a {
+            display: block;
+            padding: 8px 12px;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: all 0.2s ease;
+        }
+
+        .Albero-Lemmi a:hover {
+            background-color: #f7fafc;
+            color: #2b6cb0;
+        }
+
+        /* Gestione dinamica del lemma attivo tramite Jekyll */
+        .Albero-Lemmi li.attivo a {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            font-weight: 600;
+            border-left: 4px solid #2b6cb0;
+            border-radius: 0 6px 6px 0;
+            padding-left: 8px;
+        }
+
+        /* 2. Contenuto della scheda al centro (CINTURATO) */
+        .Contenuto-Scheda {
+            min-width: 0;
+            width: 100%;
+        }
+
+        /* Formattazione automatica degli elementi Markdown generati da Jekyll */
+        .Contenuto-Scheda h1 { display: none; } /* Nasconde il titolo duplicato del Markdown */
+        
+        .Contenuto-Scheda h3 {
+            color: #2c5282; 
+            font-size: 1.15em; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px; 
+            margin: 30px 0 10px 0;
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+        }
+        .Contenuto-Scheda h3::after { 
+            content: ""; 
+            flex: 1; 
+            height: 1px; 
+            background-color: #e2e8f0; 
+            margin-left: 10px; 
+        }
+
+        /* Mappatura stilistica per i blocchi di citazione/contesto del Markdown */
+        .Contenuto-Scheda blockquote, .Contenuto-Scheda em {
+            display: block;
+            background-color: #f8fafc; 
+            border-left: 4px solid #3182ce;
+            padding: 20px; 
+            border-radius: 0 8px 8px 0;
+            font-style: italic; 
+            color: #2d3748; 
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+
+        /* Trascrizione fonetica generata come codice dal Markdown */
+        .Contenuto-Scheda code {
+            font-family: monospace; 
+            background-color: #f7fafc; 
+            padding: 8px 12px;
+            border-radius: 4px; 
+            border: 1px solid #e2e8f0; 
+            display: inline-block; 
+            font-size: 1.05em; 
+            color: #2d3748;
+            font-style: normal;
+        }
+
+        /* Box delle fonti automatico da liste ordinate Markdown */
+        .Contenuto-Scheda ol {
+            background-color: #f8fafc; 
+            border: 1px solid #e2e8f0;
+            padding: 20px 20px 20px 40px; 
+            border-radius: 6px; 
+            font-size: 0.9em; 
+            color: #4a5568;
+            margin: 10px 0;
+            list-style-position: outside;
+        }
+        .Contenuto-Scheda ol li {
+            margin-bottom: 12px; 
+            line-height: 1.6; 
+            padding-left: 5px; 
+            word-break: break-all !important; 
+            overflow-wrap: break-word !important; 
+            text-align: left;
+        }
+        .Contenuto-Scheda ol li::marker { 
+            color: #2b6cb0; 
+            font-weight: bold; 
+        }
+        .Contenuto-Scheda ol a {
+            word-break: break-all !important; 
+            overflow-wrap: break-word !important;
+            color: #2b6cb0; 
+            display: inline-block !important; 
+            max-width: 100%;
+        }
+
+        /* Paragrafi di testo semplici (Definizioni, varianti) */
+        .Contenuto-Scheda p {
+            font-size: 1.05em; 
+            color: #4a5568;
+            margin: 10px 0;
+        }
+
+        /* 3. Colonna destra per l'apparato iconografico */
+        .Sidebar-Immagine {
+            border-left: 1px solid #e2e8f0;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .Visual-Card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .Visual-Foto {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .Visual-Didascalia {
+            padding: 12px;
+            font-size: 0.85em;
+            color: #718096;
+            line-height: 1.4;
+            border-top: 1px solid #e2e8f0;
+            background-color: #ffffff;
+        }
+
+        /* --- INTERFACCIA INTERNA --- */
+        .Header-Podio {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
+        .Logo-Dip { height: 95px; width: auto; display: block; }
+        .Podio-Ateneo { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .Logo-Unige-Sigillo { height: 125px; width: auto; display: block; }
+        .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+        .Logo-Phd { height: 95px; width: auto; display: block; }
+
+        .Title-Area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; 
+            gap: 15px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        h1.Lemma-Titolo {
+            color: #1a365d;
+            font-size: 2.6em;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-transform: lowercase; /* Mantiene la coerenza stilistica del corpus */
+        }
+
+        .Link-Equivalente-FR {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f7fafc;
+            border: 1px solid #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .Link-Equivalente-FR:hover {
+            border-color: #2b6cb0;
+            color: #2b6cb0;
+            background-color: #f0f4f8;
+        }
+
+        .Link-Equivalente-FR span {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 8px;
+            text-transform: uppercase;
+        }
+
+        .Meta-Grid {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .Meta-Item {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #4a5568;
+        }
+
+        .Meta-Item strong { color: #1a365d; margin-right: 5px; }
+        .Meta-Item.lingua-active { background-color: #ebf8ff; border-color: #bee3f8; color: #2b6cb0; }
+        .Meta-Item.data-scheda { background-color: #f0fff4; border-color: #c6f6d5; color: #22543d; }
+
+        .Navigazione-Schede {
+            display: flex; justify-content: space-between; margin-top: 50px;
+            padding-top: 25px; border-top: 1px solid #e2e8f0;
+        }
+
+        .Btn-Navigazione {
+            display: inline-flex; align-items: center; text-decoration: none;
+            color: #4a5568; background-color: #f7fafc; border: 1px solid #e2e8f0;
+            padding: 10px 18px; border-radius: 6px; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease;
+        }
+
+        .Btn-Navigazione:hover { background-color: #1a365d; color: #ffffff; border-color: #1a365d; }
+
+        .Footer-Curatore {
+            margin-top: 40px; padding-top: 20px; border-top: 1px dashed #e2e8f0;
+            text-align: right; font-size: 0.85em; color: #718096; font-style: italic;
+        }
+
+        /* --- RESPONSIVE DESIGN CON INDICE MULTI-COLONNA A COMPARSA --- */
+        @media (max-width: 1100px) {
+            .Main-Layout {
+                grid-template-columns: 1fr; 
+                gap: 20px;
+            }
+
+            .Sidebar-Lemmi {
+                border-right: none;
+                padding-right: 0;
+                background-color: #ebf8ff; 
+                border: 1px solid #bee3f8;
+                border-radius: 8px;
+                padding: 12px 18px;
+            }
+
+            .Sidebar-Titolo {
+                margin-bottom: 0;
+                color: #2b6cb0;
+                font-size: 1em;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .Sidebar-Titolo::after {
+                content: "▼ (Mostra Indice dei Lemmi)";
+                font-size: 0.85em;
+                font-weight: 600;
+                color: #2b6cb0;
+            }
+
+            details[open] .Sidebar-Titolo::after {
+                content: "▲ (Nascondi Indice dei Lemmi)";
+            }
+
+            .Albero-Lemmi {
+                margin-top: 15px;
+                border-top: 1px dashed #bee3f8;
+                padding-top: 15px;
+                max-height: 380px; 
+                overflow-y: auto;  
+                columns: 3;
+                column-gap: 20px;
+                column-rule: 1px dashed #bee3f8; 
+            }
+
+            .Sidebar-Immagine {
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+                padding-left: 0;
+                padding-top: 20px;
+                margin-top: 10px;
+            }
+
+            .Sidebar-Immagine .Visual-Card {
+                max-width: 350px; 
+            }
+        }
+
+        @media (max-width: 600px) {
+            .Albero-Lemmi {
+                columns: 2; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="Scheda-Container">
+        
+        <!-- Intestazione istituzionale con baseurl dinamico per la pubblicazione su GitHub Pages -->
+        <div class="Header-Podio">
+            <div class="Podio-Dipartimento">
+                <img src="{{ site.baseurl }}/Logo_DLCM_UniGe_black.png" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
+            </div>
+            <div class="Podio-Ateneo">
+                <img src="{{ site.baseurl }}/logo_verticale_COLORE.png" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
+            </div>
+            <div class="Podio-Dottorato">
+                <img src="{{ site.baseurl }}/Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png" alt="Dottorato in Digital Humanities" class="Logo-Phd">
+            </div>
+        </div>
+
+        <div class="Main-Layout">
+            
+            <!-- Generazione ciclica automatica dell'albero dei Lemmi tramite Jekyll -->
+            <details class="Sidebar-Lemmi" open>
+                <summary>
+                    <div class="Sidebar-Titolo">Indice dei Lemmi ({{ page.lingua | upcase }})</div>
+                </summary>
+                <ul class="Albero-Lemmi">
+                    {% assign schede_ordinate = site.pages | sort: "title" %}
+                    {% for scheda in schede_ordinate %}
+                        {% if scheda.layout == "scheda" and scheda.lingua == page.lingua %}
+                            <li class="{% if scheda.url == page.url %}attivo{% endif %}">
+                                <a href="{{ site.baseurl }}{{ scheda.url }}">{{ scheda.title }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </details>
+
+            <!-- CONTENUTO AUTOMATICO DELLA SCHEDA (Pescato dal file .md) -->
+            <div class="Contenuto-Scheda">
+                <div class="Title-Area">
+                    <h1 class="Lemma-Titolo">{{ page.title }}</h1>
+                    <!-- Visualizzazione condizionale dell'equivalente se presente nel Front Matter -->
+                    {% if page.fr_equivalent %}
+                    <a href="#" class="Link-Equivalente-FR">
+                        <span>fr</span> Équivalent: <strong>{{ page.fr_equivalent }}</strong>
+                    </a>
+                    {% endif %}
+                </div>
+                
+                <div class="Meta-Grid">
+                    <div class="Meta-Item lingua-active"><strong>Dominio:</strong> {{ page.dominio }}</div>
+                    <div class="Meta-Item"><strong>Modello teorico:</strong> CeRTeM</div>
+                </div>
+
+                <!-- L'interezza del testo scritto in Markdown confluisce qui sotto -->
+                {{ content }}
+                
+                <nav class="Navigazione-Schede">
+                    <a href="#" class="Btn-Navigazione">← Precedente</a>
+                    <a href="#" class="Btn-Navigazione">Successiva →</a>
+                </nav>
+            </div> 
+
+            <!-- Apparato visivo collegato all'eventuale immagine definita nella scheda -->
+            <aside class="Sidebar-Immagine">
+                <div class="Sidebar-Titolo">Apparato visivo</div>
+                <div class="Visual-Card">
+                    <img src="{% if page.immagine %}{{ site.baseurl }}/{{ page.immagine }}{% else %}https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=500{% endif %}" alt="Esempio Visivo" class="Visual-Foto">
+                    <div class="Visual-Didascalia">
+                        <strong>Fig. 1:</strong> {% if page.didascalia %}{{ page.didascalia }}{% else %}Dettaglio strutturale inserito nel prospetto facciata.{% endif %}
+                    </div>
+                </div>
+            </aside>
+
+        </div> 
+        
+        <footer class="Footer-Curatore">
+            Scheda a cura di: Giovanni Mantegazza (Università degli Studi di Genova)
+        </footer>
+
+    </div> 
+</body>
+</html>
