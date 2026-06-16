@@ -265,6 +265,28 @@
                         <a href="#" class="Alpha-Link">Z</a>
                     </nav>
                 </div>
+
+                <div class="Sezione-Navigazione-Ricerca">
+                
+                <div class="Search-Container">
+                    <input type="text" class="Search-Input" placeholder="Cerca un termine nel glossario... (es. loggia, finestra, atrio)">
+                </div>
+
+                <!-- NUOVO BLOCCO: Elenco Dinamico delle Schede Terminologiche -->
+                <div class="Schede-Container-Home" style="margin-top: 30px; background: #ffffff; padding: 20px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <div class="Alpha-Titolo" style="margin-bottom: 15px;">Tutti i Lemmi del Glossario</div>
+                    <ul id="Lista-Schede-Home" style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;">
+                        {% for pagina in site.pages %}
+                            {% if pagina.layout == "scheda" or pagina.url contains ".html" and pagina.url != "/index.html" and pagina.url != "/test.html" %}
+                                <li style="margin: 0;">
+                                    <a href="{{ pagina.url | relative_url }}" style="color: #2b6cb0; text-decoration: none; font-weight: 600; display: block; padding: 10px 12px; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 4px; transition: background 0.2s, border-color 0.2s;">
+                                        {{ pagina.title | default: pagina.name }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
                 
             </div>
         </main>
