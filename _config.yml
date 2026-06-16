@@ -1,0 +1,13 @@
+title: "Glossario Multilingue dei Palazzi dei Rolli"
+description: "Glossario terminologico bilingue (Italiano-Francese) dedicato all'arte e all'architettura di Palazzo Balbi Senarega."
+baseurl: "/glossariobalbisenarega"
+url: "https://Gian1096.github.io"
+
+# Informazioni istituzionali e autore
+author:
+  name: "Giovanni Mantegazza"
+  institution: "Università degli Studi di Genova"
+  center: "Centro di Ricerca in Terminologia Multilingue (CeRTeM)"
+
+# Motore di Markdown
+markdown: kramdown
