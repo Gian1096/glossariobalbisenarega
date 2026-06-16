@@ -1,0 +1,296 @@
+---
+layout: default
+title: Home
+---
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Glossario Multilingue dei Rolli di Ateneo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background-color: #edf2f7;
+            font-size: 1.15em;
+            text-align: justify;
+        }
+
+        .Homepage-Container {
+            background: #ffffff;
+            border-top: 6px solid #1a365d;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            margin-top: 20px;
+        }
+
+        /* --- PODIO ISTITUZIONALE --- */
+        .Header-Podio {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+            gap: 15px;
+        }
+
+        .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
+        .Logo-Dip { height: 95px; width: auto; display: block; }
+        .Podio-Ateneo { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .Logo-Unige-Sigillo { height: 125px; width: auto; display: block; }
+        .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+        .Logo-Phd { height: 95px; width: auto; display: block; }
+
+        /* --- CORPO CENTRALE --- */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .Sezione-Presentazione {
+            text-align: center;
+            background-color: #eef4fa; 
+            border: 1px solid #d0e1f2;
+            border-radius: 8px;
+            padding: 35px 40px;
+            margin-bottom: 35px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.01);
+        }
+
+        .Titolo-Principale {
+            color: #1a365d;
+            font-size: 2.6em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 5px 0;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+
+        .Linea-Separazione {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, rgba(208,225,242,0), rgba(26,54,93,0.85), rgba(208,225,242,0));
+            margin: 20px auto;
+            max-width: 750px;
+        }
+
+        .Testo-Introduzione {
+            color: #4a5568;
+            font-size: 1.05em;
+            text-align: justify;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* --- IMMAGINE DELLA GALLERIA INTERNA --- */
+        .Contenitore-Immagine-Evidenza {
+            width: 100%;
+            background-color: #eef4fa;
+            border: 1px solid #d0e1f2;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+            margin-bottom: 45px;
+        }
+
+        .Immagine-Evidenza {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .Didascalia-Evidenza {
+            padding: 14px 20px;
+            font-size: 0.85em;
+            color: #718096;
+            line-height: 1.4;
+            border-top: 1px solid #d0e1f2;
+            background-color: #ffffff;
+            text-align: left;
+        }
+
+        /* --- ZONA OPERATIVA INFERIORE --- */
+        .Sezione-Navigazione-Ricerca {
+            background-color: #eef4fa; 
+            border: 1px solid #d0e1f2;
+            border-radius: 8px;
+            padding: 40px;
+            margin-top: 35px;
+        }
+
+        .Search-Container {
+            max-width: 750px;
+            margin: 0 auto 35px auto;
+            position: relative;
+        }
+
+        .Search-Input {
+            width: 100%;
+            padding: 18px 26px;
+            font-size: 1.1em;
+            border: 2px solid #cbd5e1;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            outline: none;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            background-color: #ffffff;
+        }
+
+        .Search-Input:focus {
+            border-color: #2b6cb0;
+            box-shadow: 0 10px 20px rgba(43, 108, 176, 0.1);
+        }
+
+        .Alpha-Container {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .Alpha-Titolo {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #718096;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .Alpha-Nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 4px;
+            width: 100%;
+        }
+
+        .Alpha-Link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            height: 40px;
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.2s ease;
+        }
+
+        .Alpha-Link:hover {
+            background-color: #1a365d;
+            color: #ffffff;
+            border-color: #1a365d;
+        }
+
+        .Footer-Curatore {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px dashed #e2e8f0;
+            text-align: right;
+            font-size: 0.85em;
+            color: #718096;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="Homepage-Container">
+        
+        <div class="Header-Podio">
+            <div class="Podio-Dipartimento">
+                <img src="Logo_DLCM_UniGe_black.png" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
+            </div>
+            <div class="Podio-Ateneo">
+                <img src="logo_verticale_COLORE.png" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
+            </div>
+            <div class="Podio-Dottorato">
+                <img src="Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png" alt="Dottorato in Digital Humanities" class="Logo-Phd">
+            </div>
+        </div>
+
+        <main>
+            <div class="Sezione-Presentazione">
+                <h1 class="Titolo-Principale">Glossario dei Rolli di Ateneo</h1>
+                
+                <hr class="Linea-Separazione">
+                
+                <p class="Testo-Introduzione">
+                    Benvenuti nel repertorio terminologico digitale dedicato alla descrizione architettonica e artistica del sistema dei Palazzi dei Rolli di Genova di proprietà dell'Ateneo. Questo progetto di ricerca si propone di migliorare l'accessibilità culturale del patrimonio architettonico universitario attraverso l'implementazione di schede terminologiche basate sul modello teorico e metodologico utilizzato presso il Centro di Ricerca in Terminologia Multilingue (CeRTeM) dell'Università di Genova, consentendo al contempo una profonda valorizzazione del patrimonio culturale storico della città.
+                </p>
+            </div>
+
+            <div class="Contenitore-Immagine-Evidenza">
+                <img src="Galleria_Balbi_Senarega.jpg" alt="Galleria di Palazzo Balbi Senarega" class="Immagine-Evidenza">
+                <div class="Didascalia-Evidenza">
+                    <strong>Palazzo Balbi Senarega (Balbi 4):</strong> Vista prospettica della Galleria affrescata, prezioso esempio di spazio monumentale interno del palazzo di Ateneo.
+                </div>
+            </div>
+
+            <div class="Sezione-Navigazione-Ricerca">
+                
+                <div class="Search-Container">
+                    <input type="text" class="Search-Input" placeholder="Cerca un termine nel glossario... (es. loggia, finestra, atrio)">
+                </div>
+
+                <div class="Alpha-Container">
+                    <div class="Alpha-Titolo">Esplora per ordine alfabetico</div>
+                    <nav class="Alpha-Nav">
+                        <a href="#" class="Alpha-Link">A</a>
+                        <a href="#" class="Alpha-Link">B</a>
+                        <a href="#" class="Alpha-Link">C</a>
+                        <a href="#" class="Alpha-Link">D</a>
+                        <a href="#" class="Alpha-Link">E</a>
+                        <a href="#" class="Alpha-Link">F</a>
+                        <a href="#" class="Alpha-Link">G</a>
+                        <a href="#" class="Alpha-Link">I</a>
+                        <a href="#" class="Alpha-Link">L</a>
+                        <a href="#" class="Alpha-Link">M</a>
+                        <a href="#" class="Alpha-Link">N</a>
+                        <a href="#" class="Alpha-Link">O</a>
+                        <a href="#" class="Alpha-Link">P</a>
+                        <a href="#" class="Alpha-Link">Q</a>
+                        <a href="#" class="Alpha-Link">R</a>
+                        <a href="#" class="Alpha-Link">S</a>
+                        <a href="#" class="Alpha-Link">T</a>
+                        <a href="#" class="Alpha-Link">U</a>
+                        <a href="#" class="Alpha-Link">V</a>
+                        <a href="#" class="Alpha-Link">Z</a>
+                    </nav>
+                </div>
+
+                <div class="Schede-Container-Home" style="margin-top: 40px; background: #ffffff; padding: 25px; border-radius: 8px; border: 1px solid #d0e1f2; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    <div class="Alpha-Titolo" style="margin-bottom: 20px; text-align: center;">Tutti i Lemmi del Glossario</div>
+                    <ul id="Lista-Schede-Home" style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; text-align: left;">
+{% for p in site.pages %}{% if p.url contains ".html" and p.url != "/index.html" and p.url != "/test.html" %}
+                        <li style="margin: 0;">
+                            <a href="{{ p.url | relative_url }}" style="color: #2b6cb0; text-decoration: none; font-weight: 600; display: block; padding: 10px 12px; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 4px; transition: all 0.2s ease;">
+                                {{ p.title | default: p.name }}
+                            </a>
+                        </li>
+{% endif %}{% endfor %}
+                    </ul>
+                </div>
+                
+            </div>
+        </main>
+        
+        <footer class="Footer-Curatore">
+            Progetto di ricerca a cura di: Giovanni Mantegazza (Università degli Studi di Genova)
+        </footer>
+
+    </div>
+
+</body>
+</html>
