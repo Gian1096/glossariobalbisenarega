@@ -54,13 +54,11 @@ permalink: /ricerca-it/
         gap: 10px;
     }
 
-    /* Le colonne laterali delle ruote occupano spazio paritetico */
     .Colonna-Ruota {
         flex: 1;
         position: relative;
     }
 
-    /* La colonna centrale con la freccia di allineamento è più stretta */
     .Colonna-Connessione {
         width: 60px;
         display: flex;
@@ -100,7 +98,7 @@ permalink: /ricerca-it/
         will-change: transform;
     }
 
-    /* Elemento singolo (lemma o spazio vuoto) */
+    /* Elemento singolo */
     .ruota-item {
         position: absolute;
         width: 100%;
@@ -115,7 +113,6 @@ permalink: /ricerca-it/
         transition: transform 0.2s ease-out, opacity 0.2s ease-out, font-size 0.2s ease-out;
     }
 
-    /* Stato attivo per i lemmi stabili al centro */
     .ruota-item.attivo {
         color: #1a365d;
         font-weight: 700;
@@ -147,7 +144,6 @@ permalink: /ricerca-it/
         text-decoration: underline;
     }
 
-    /* Elemento fittizio per i vuoti traduttivi */
     .ruota-item.lemma-vuoto {
         font-style: italic;
         color: #cbd5e1;
@@ -232,22 +228,22 @@ permalink: /ricerca-it/
                     <div style="font-size: 0.8em; text-transform: uppercase; color: #718096; font-weight: 700; text-align: center; margin-bottom: 10px;">Français (FR)</div>
                     <div class="ruota-wrapper" id="WrapperFR" style="pointer-events: none;"> 
                         <ul class="ruota-lista" id="ListaFR">
-                            {% for p_it in site.pages %}
-                                {% if p_it.lingua == "it" %}
-                                    {% assign trovato = false %}
-                                    {% for p_fr in site.pages %}
-                                        {% if p_fr.lingua == "fr" and p_fr.target_italien == p_it.title %}
-                                            <li class="ruota-item" data-target="{{ p_it.title | downcase }}">
-                                                <a href="{{ p_fr.url | relative_url }}">{{ p_fr.title }}</a>
-                                            </li>
-                                            {% assign trovato = true %}
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% if trovato == false %}
-                                        <li class="ruota-item lemma-vuoto" data-target="{{ p_it.title | downcase }}">
-                                            <a href="#">&mdash;</a>
+                            {% assign pagine_fr = site.pages | where: "lingua", "fr" %}
+                            {% for p_it in pagine_it %}
+                                {% assign trovato = false %}
+                                {% for p_fr in pagine_fr %}
+                                    {% if p_fr.target_italien == p_it.title %}
+                                        <li class="ruota-item" data-target="{{ p_it.title | downcase }}">
+                                            <a href="{{ p_fr.url | relative_url }}">{{ p_fr.title }}</a>
                                         </li>
+                                        {% assign trovato = true %}
+                                        {% break %}
                                     {% endif %}
+                                {% endfor %}
+                                {% if trovato == false %}
+                                    <li class="ruota-item lemma-vuoto" data-target="{{ p_it.title | downcase }}">
+                                        <a href="#">&mdash;</a>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
@@ -279,30 +275,23 @@ permalink: /ricerca-it/
         
         if (itemsIT.length === 0) return;
 
-        let indiceVirtuale = 0; // Gestisce lo scorrimento infinito matematico
+        let indiceVirtuale = 0; 
         const raggioCilindro = 180; 
         const numeroElementiVisibili = 7; 
         const totaleElementi = itemsIT.length;
 
-        // Formula matematica del Loop Infinito e del posizionamento 3D cilindrico bilingue
         function aggiornaSincroRuote() {
-            // Calcola l'indice reale normalizzato (da 0 a totaleElementi - 1) usando il modulo matematico corretto
             let indiceAttivoReale = ((indiceVirtuale % totaleElementi) + totaleElementi) % totaleElementi;
 
-            // Aggiorna Ruota Sinistra (IT) e Ruota Destra (FR) all'unisono
             for (let i = 0; i < totaleElementi; i++) {
-                // Calcola la distanza angolare in base alla logica del loop infinito
                 let diff = i - indiceAttivoReale;
                 
-                // Correzione per la visualizzazione circolare continua (percorso più breve sul cilindro)
                 if (diff > totaleElementi / 2) diff -= totaleElementi;
                 if (diff < -totaleElementi / 2) diff += totaleElementi;
 
-                const angolo = diff * 24; // 24 gradi di distanza geometrica per elemento
+                const angolo = diff * 24; 
 
-                // Renderizzazione condizionale per ottimizzare i calcoli sul browser
                 if (Math.abs(diff) <= numeroElementiVisibili) {
-                    // Applica la trasformazione 3D a entrambe le liste in modo identico
                     [itemsIT[i], itemsFR[i]].forEach(item => {
                         if(item) {
                             item.style.display = "block";
@@ -325,15 +314,12 @@ permalink: /ricerca-it/
                 }
             }
 
-            // Mantiene l'asse di proiezione centrale fisso nello spazio tridimensionale
             listaIT.style.transform = `translateZ(-${raggioCilindro}px)`;
             listaFR.style.transform = `translateZ(-${raggioCilindro}px)`;
         }
 
-        // Inizializzazione della vista
         aggiornaSincroRuote();
 
-        // Controllo asse tramite Rotella del mouse (Wheel Event)
         wrapperIT.addEventListener("wheel", function(e) {
             e.preventDefault();
             if (e.deltaY > 0) {
@@ -344,7 +330,6 @@ permalink: /ricerca-it/
             aggiornaSincroRuote();
         }, { passive: false });
 
-        // Controllo asse tramite Gestures su dispositivi mobile (Touch Events)
         let startY = 0;
         wrapperIT.addEventListener("touchstart", function(e) {
             startY = e.touches[0].clientY;
