@@ -214,13 +214,11 @@ permalink: /ricerca-it/
                     <div style="font-size: 0.8em; text-transform: uppercase; color: #718096; font-weight: 700; text-align: center; margin-bottom: 10px;">Italiano (IT)</div>
                     <div class="ruota-wrapper" id="WrapperIT">
                         <ul class="ruota-lista" id="ListaIT">
-                            {% assign pagine_it = site.pages |情緒: "layout", "scheda" | sort: "title" %}
-                            {% for p in site.pages %}
-                                {% if p.lingua == "it" %}
-                                    <li class="ruota-item" data-id="{{ p.title | downcase }}">
-                                        <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
-                                    </li>
-                                {% endif %}
+                            {% assign pagine_it = site.pages | where: "lingua", "it" | sort: "title" %}
+                            {% for p in pagine_it %}
+                                <li class="ruota-item" data-id="{{ p.title | downcase }}">
+                                    <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -232,7 +230,8 @@ permalink: /ricerca-it/
 
                 <div class="Colonna-Ruota">
                     <div style="font-size: 0.8em; text-transform: uppercase; color: #718096; font-weight: 700; text-align: center; margin-bottom: 10px;">Français (FR)</div>
-                    <div class="ruota-wrapper" id="WrapperFR" style="pointer-events: none;"> <ul class="ruota-lista" id="ListaFR">
+                    <div class="ruota-wrapper" id="WrapperFR" style="pointer-events: none;"> 
+                        <ul class="ruota-lista" id="ListaFR">
                             {% for p_it in site.pages %}
                                 {% if p_it.lingua == "it" %}
                                     {% assign trovato = false %}
