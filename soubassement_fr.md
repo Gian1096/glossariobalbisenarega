@@ -2,7 +2,7 @@
 layout: scheda
 title: "soubassement"
 lingua: fr
-target_italien: ""
+target_italien: "basamento"
 dominio: ARCH
 ---
 
