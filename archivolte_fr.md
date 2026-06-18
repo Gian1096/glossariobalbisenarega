@@ -2,7 +2,7 @@
 layout: scheda
 title: "archivolte"
 lingua: fr
-target_italien: ""
+target_italien: "archivolto"
 dominio: ARCH
 ---
 
