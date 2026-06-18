@@ -2,7 +2,7 @@
 layout: scheda
 title: "mausolée"
 lingua: fr
-target_italien: ""
+target_italien: "mausoleo"
 dominio: ARCH
 ---
 
