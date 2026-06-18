@@ -2,7 +2,7 @@
 layout: scheda
 title: "caruggio"
 lingua: fr
-target_italien: "caruggio"
+target_italien: "carruggio"
 dominio: ARCH
 ---
 
