@@ -2,7 +2,7 @@
 layout: scheda
 title: "porte-fenêtre"
 lingua: fr
-target_italien: ""
+target_italien: "portafinestra"
 dominio: ARCH
 ---
 
