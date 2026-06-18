@@ -2,7 +2,7 @@
 layout: scheda
 title: "panneau de porte"
 lingua: fr
-target_italien: ""
+target_italien: "specchiatura"
 dominio: ARCH
 ---
 
