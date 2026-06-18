@@ -2,7 +2,7 @@
 layout: scheda
 title: "voûte en berceau"
 lingua: fr
-target_italien: "volta a bott"
+target_italien: "volta a botte"
 dominio: ARCH
 ---
 
