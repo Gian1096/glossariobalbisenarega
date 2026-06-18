@@ -2,7 +2,7 @@
 layout: scheda
 title: "Aile"
 lingua: fr
-target_italien: ""
+target_italien: "ala"
 dominio: ARCH
 ---
 
