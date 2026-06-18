@@ -2,7 +2,7 @@
 layout: scheda
 title: "fenêtre"
 lingua: fr
-target_italien: ""
+target_italien: "finestra"
 dominio: ARCH
 ---
 
