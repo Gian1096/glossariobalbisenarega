@@ -2,7 +2,7 @@
 layout: scheda
 title: "entresol"
 lingua: fr
-target_italien: "Mezzanino (inteso come piano ammezzato fra il pianterreno e il primo piano)"
+target_italien: "Mezzanino"
 dominio: ARCH
 ---
 
