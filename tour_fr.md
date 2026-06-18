@@ -2,7 +2,7 @@
 layout: scheda
 title: "tour"
 lingua: fr
-target_italien: ""
+target_italien: "torre"
 dominio: ARCH
 ---
 
