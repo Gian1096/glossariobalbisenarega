@@ -1,6 +1,6 @@
 ---
 layout: scheda
-title: "da_tradurre_muratura"
+title: "muratura"
 lingua: fr
 target_italien: "muratura"
 dominio: ARCH
