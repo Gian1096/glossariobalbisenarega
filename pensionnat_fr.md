@@ -2,7 +2,7 @@
 layout: scheda
 title: "pensionnat"
 lingua: fr
-target_italien: ""
+target_italien: "collegio"
 dominio: ARCH
 ---
 
