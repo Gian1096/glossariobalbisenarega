@@ -2,7 +2,7 @@
 layout: scheda
 title: "base"
 lingua: fr
-target_italien: ""
+target_italien: "basamento"
 dominio: ARCH
 ---
 
