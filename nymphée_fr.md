@@ -2,7 +2,7 @@
 layout: scheda
 title: "nymphée"
 lingua: fr
-target_italien: ""
+target_italien: "ninfeo"
 dominio: ARCH
 ---
 
