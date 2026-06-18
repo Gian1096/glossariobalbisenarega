@@ -2,7 +2,7 @@
 layout: scheda
 title: "oratoire"
 lingua: fr
-target_italien: ""
+target_italien: "oratorio"
 dominio: ARCH
 ---
 
