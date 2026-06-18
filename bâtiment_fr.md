@@ -2,7 +2,7 @@
 layout: scheda
 title: "bâtiment"
 lingua: fr
-target_italien: ""
+target_italien: "edificio"
 dominio: ARCH
 ---
 
