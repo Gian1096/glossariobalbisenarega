@@ -2,7 +2,7 @@
 layout: scheda
 title: "encorbellement"
 lingua: fr
-target_italien: ""
+target_italien: "aggetto"
 dominio: ARCH
 ---
 
