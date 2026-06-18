@@ -2,7 +2,7 @@
 layout: scheda
 title: "colonne dorique"
 lingua: fr
-target_italien: ""
+target_italien: "colonna dorica"
 dominio: ARCH
 ---
 
