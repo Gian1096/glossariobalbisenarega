@@ -2,7 +2,7 @@
 layout: scheda
 title: "piédestal"
 lingua: fr
-target_italien: ""
+target_italien: "piedistallo"
 dominio: ARCH
 ---
 
