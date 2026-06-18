@@ -2,7 +2,7 @@
 layout: scheda
 title: "presbyterium"
 lingua: fr
-target_italien: ""
+target_italien: "presbiterio"
 dominio: ARCH
 ---
 
