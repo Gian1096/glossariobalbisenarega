@@ -2,7 +2,7 @@
 layout: scheda
 title: "plaque commémorative"
 lingua: fr
-target_italien: ""
+target_italien: "lapide"
 dominio: ARCH
 ---
 
