@@ -2,7 +2,7 @@
 layout: scheda
 title: "monastère"
 lingua: fr
-target_italien: ""
+target_italien: "monastero"
 dominio: ARCH
 ---
 
