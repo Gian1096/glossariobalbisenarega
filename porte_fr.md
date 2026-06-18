@@ -2,7 +2,7 @@
 layout: scheda
 title: "porte"
 lingua: fr
-target_italien: ""
+target_italien: "porta"
 dominio: ARCH
 ---
 
