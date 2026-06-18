@@ -2,7 +2,7 @@
 layout: scheda
 title: "bandeau"
 lingua: fr
-target_italien: ""
+target_italien: "cornicione"
 dominio: ARCH
 ---
 
