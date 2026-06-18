@@ -1,6 +1,6 @@
 ---
 layout: scheda
-title: "dorica, colonna"
+title: "colonna dorica"
 lingua: it
 dominio: ARCH
 ---
