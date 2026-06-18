@@ -2,7 +2,7 @@
 layout: scheda
 title: "guichet"
 lingua: fr
-target_italien: ""
+target_italien: "portello"
 dominio: ARCH
 ---
 
