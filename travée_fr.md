@@ -2,7 +2,7 @@
 layout: scheda
 title: "travée"
 lingua: fr
-target_italien: ""
+target_italien: "campata"
 dominio: ARCH
 ---
 
