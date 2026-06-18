@@ -2,7 +2,7 @@
 layout: scheda
 title: "autel"
 lingua: fr
-target_italien: ""
+target_italien: "altare"
 dominio: ARCH
 ---
 
