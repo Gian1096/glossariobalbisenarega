@@ -2,7 +2,7 @@
 layout: scheda
 title: "colonne torse"
 lingua: fr
-target_italien: ""
+target_italien: "colonna tortile"
 dominio: ARCH
 ---
 
