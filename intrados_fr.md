@@ -2,7 +2,7 @@
 layout: scheda
 title: "intrados"
 lingua: fr
-target_italien: ""
+target_italien: "sottarco"
 dominio: ARCH
 ---
 
