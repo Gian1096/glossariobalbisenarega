@@ -2,7 +2,7 @@
 layout: scheda
 title: "lobe"
 lingua: fr
-target_italien: ""
+target_italien: "lobo"
 dominio: ARCH
 ---
 
