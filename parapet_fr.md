@@ -2,7 +2,7 @@
 layout: scheda
 title: "parapet"
 lingua: fr
-target_italien: ""
+target_italien: "parapetto"
 dominio: ARCH
 ---
 
