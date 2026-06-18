@@ -2,7 +2,7 @@
 layout: scheda
 title: "prison"
 lingua: fr
-target_italien: ""
+target_italien: "reclusorio"
 dominio: ARCH
 ---
 
