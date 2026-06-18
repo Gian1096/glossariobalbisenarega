@@ -20,7 +20,6 @@ title: Ricerca Lemmi (IT)
         text-align: center;
     }
 
-    /* Forzatura dimensioni loghi per evitare l'effetto gigante */
     .Header-Podio img {
         max-height: 75px;
         width: auto;
@@ -62,27 +61,30 @@ title: Ricerca Lemmi (IT)
         box-shadow: 0 10px 20px rgba(26, 54, 93, 0.1);
     }
 
-    /* --- LAYOUT DEL SISTEMA A TRE COLONNE --- */
+    /* --- LAYOUT DEL SISTEMA A TRE COLONNE (CORRETTO) --- */
     .Griglia-Sincrona-Ruote {
         display: flex;
         align-items: center;
         justify-content: space-between;
         background: #ffffff;
-        padding: 30px 10px;
+        padding: 30px 20px;
         border-radius: 8px;
         border: 1px solid #d0e1f2;
         box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         position: relative;
-        gap: 10px;
+        gap: 15px;
     }
 
     .Colonna-Ruota {
         flex: 1;
         position: relative;
+        width: 100%;
     }
 
+    /* Allineamento asse verticale freccia (350px come le ruote) */
     .Colonna-Connessione {
         width: 60px;
+        height: 350px; 
         display: flex;
         justify-content: center;
         align-items: center;
@@ -95,6 +97,8 @@ title: Ricerca Lemmi (IT)
         font-weight: bold;
         text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         user-select: none;
+        margin: 0;
+        padding: 0;
     }
 
     .ruota-wrapper {
@@ -107,12 +111,15 @@ title: Ricerca Lemmi (IT)
         -webkit-mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
     }
 
+    /* Centratura orizzontale cilindro (rimozione margini/padding parassiti delle liste) */
     .ruota-lista {
         list-style: none;
         padding: 0;
         margin: 0;
         position: absolute;
         width: 100%;
+        left: 0;
+        right: 0;
         top: 150px; 
         transform-style: preserve-3d;
         will-change: transform;
@@ -121,6 +128,8 @@ title: Ricerca Lemmi (IT)
     .ruota-item {
         position: absolute;
         width: 100%;
+        left: 0;
+        right: 0;
         height: 50px;
         line-height: 50px;
         text-align: center;
@@ -149,7 +158,7 @@ title: Ricerca Lemmi (IT)
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        padding: 0 10px;
+        padding: 0 15px;
         box-sizing: border-box;
     }
 
@@ -258,7 +267,6 @@ title: Ricerca Lemmi (IT)
                                             <a href="{{ p_fr.url | relative_url }}">{{ p_fr.title }}</a>
                                         </li>
                                         {% assign trovato = true %}
-                                        {% break %}
                                     {% endif %}
                                 {% endfor %}
                                 {% if trovato == false %}
