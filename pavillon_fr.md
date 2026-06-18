@@ -2,7 +2,7 @@
 layout: scheda
 title: "pavillon"
 lingua: fr
-target_italien: ""
+target_italien: "padiglione"
 dominio: ARCH
 ---
 
