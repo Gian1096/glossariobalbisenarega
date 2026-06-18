@@ -2,7 +2,7 @@
 layout: scheda
 title: "antépendium"
 lingua: fr
-target_italien: ""
+target_italien: "paliotto"
 dominio: ARCH
 ---
 
