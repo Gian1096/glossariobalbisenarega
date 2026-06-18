@@ -2,7 +2,7 @@
 layout: scheda
 title: "bordure"
 lingua: fr
-target_italien: ""
+target_italien: "bordura"
 dominio: ARCH
 ---
 
