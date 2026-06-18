@@ -2,7 +2,7 @@
 layout: scheda
 title: "balustre"
 lingua: fr
-target_italien: ""
+target_italien: "balaustro"
 dominio: ARCH
 ---
 
