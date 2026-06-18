@@ -2,7 +2,7 @@
 layout: scheda
 title: "chœur"
 lingua: fr
-target_italien: ""
+target_italien: "coro"
 dominio: ARCH
 ---
 
