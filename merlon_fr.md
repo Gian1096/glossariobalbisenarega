@@ -2,7 +2,7 @@
 layout: scheda
 title: "merlon"
 lingua: fr
-target_italien: ""
+target_italien: "merlo"
 dominio: ARCH
 ---
 
