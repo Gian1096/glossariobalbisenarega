@@ -2,7 +2,7 @@
 layout: scheda
 title: "cadran solaire"
 lingua: fr
-target_italien: ""
+target_italien: "meridiana"
 dominio: ARCH
 ---
 
