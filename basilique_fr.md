@@ -2,7 +2,7 @@
 layout: scheda
 title: "basilique"
 lingua: fr
-target_italien: ""
+target_italien: "basilica"
 dominio: ARCH
 ---
 
