@@ -2,7 +2,7 @@
 layout: scheda
 title: "volée"
 lingua: fr
-target_italien: ""
+target_italien: "rampa"
 dominio: ARCH
 ---
 
