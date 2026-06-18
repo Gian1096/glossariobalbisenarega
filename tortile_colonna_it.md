@@ -1,6 +1,6 @@
 ---
 layout: scheda
-title: "tortile, colonna"
+title: "colonna tortile"
 lingua: it
 dominio: ARCH
 ---
