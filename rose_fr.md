@@ -2,7 +2,7 @@
 layout: scheda
 title: "rose"
 lingua: fr
-target_italien: ""
+target_italien: "rosone"
 dominio: ARCH
 ---
 
