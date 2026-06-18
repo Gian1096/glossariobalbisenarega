@@ -2,7 +2,7 @@
 layout: scheda
 title: "fenêtre en bandeau"
 lingua: fr
-target_italien: ""
+target_italien: "finestra a nastro"
 dominio: ARCH
 ---
 
