@@ -2,7 +2,7 @@
 layout: scheda
 title: "chapiteau"
 lingua: fr
-target_italien: ""
+target_italien: "capitello"
 dominio: ARCH
 ---
 
