@@ -2,7 +2,7 @@
 layout: scheda
 title: "moulure"
 lingua: fr
-target_italien: ""
+target_italien: "modanatura"
 dominio: ARCH
 ---
 
