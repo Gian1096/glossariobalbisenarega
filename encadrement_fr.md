@@ -2,7 +2,7 @@
 layout: scheda
 title: "encadrement"
 lingua: fr
-target_italien: ""
+target_italien: "incorniciatura"
 dominio: ARCH
 ---
 
