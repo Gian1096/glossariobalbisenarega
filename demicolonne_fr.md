@@ -2,7 +2,7 @@
 layout: scheda
 title: "demi-colonne"
 lingua: fr
-target_italien: ""
+target_italien: "semicolonna"
 dominio: ARCH
 ---
 
