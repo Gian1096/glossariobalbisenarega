@@ -1,6 +1,6 @@
 ---
 layout: scheda
-title: "pensile, colonna"
+title: "colonna pensile"
 lingua: it
 dominio: ARCH
 ---
