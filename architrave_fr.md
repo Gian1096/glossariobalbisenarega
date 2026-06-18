@@ -2,7 +2,7 @@
 layout: scheda
 title: "architrave"
 lingua: fr
-target_italien: ""
+target_italien: "architrave"
 dominio: ARCH
 ---
 
