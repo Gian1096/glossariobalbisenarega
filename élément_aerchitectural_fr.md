@@ -2,7 +2,7 @@
 layout: scheda
 title: "élément aerchitectural"
 lingua: fr
-target_italien: ""
+target_italien: "elemento architettonico"
 dominio: ARCH
 ---
 
