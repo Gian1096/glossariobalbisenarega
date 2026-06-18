@@ -2,7 +2,7 @@
 layout: scheda
 title: "nef"
 lingua: fr
-target_italien: ""
+target_italien: "navata"
 dominio: ARCH
 ---
 
