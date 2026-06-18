@@ -2,7 +2,7 @@
 layout: scheda
 title: "donjon"
 lingua: fr
-target_italien: ""
+target_italien: "torrione"
 dominio: ARCH
 ---
 
