@@ -2,7 +2,7 @@
 layout: scheda
 title: "mezzanine"
 lingua: fr
-target_italien: "mezzanino (inteso compe piano ammezzato fra altri due piani)"
+target_italien: "mezzanino"
 dominio: ARCH
 ---
 
