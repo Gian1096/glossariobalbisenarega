@@ -2,7 +2,7 @@
 layout: scheda
 title: "dessus-de-porte"
 lingua: fr
-target_italien: ""
+target_italien: "sovrapporta"
 dominio: ARCH
 ---
 
