@@ -2,7 +2,7 @@
 layout: scheda
 title: "entrée"
 lingua: fr
-target_italien: ""
+target_italien: "ingresso"
 dominio: ARCH
 ---
 
