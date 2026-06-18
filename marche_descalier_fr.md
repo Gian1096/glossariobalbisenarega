@@ -2,7 +2,7 @@
 layout: scheda
 title: "marche d’escalier"
 lingua: fr
-target_italien: ""
+target_italien: "gradino"
 dominio: ARCH
 ---
 
