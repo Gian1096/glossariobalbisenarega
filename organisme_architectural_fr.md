@@ -2,7 +2,7 @@
 layout: scheda
 title: "organisme architectural"
 lingua: fr
-target_italien: ""
+target_italien: "organismo architettonico"
 dominio: ARCH
 ---
 
