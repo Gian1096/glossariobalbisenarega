@@ -1,6 +1,6 @@
 ---
 layout: scheda
-title: "ribassato, arco"
+title: "arco ribassato"
 lingua: it
 dominio: ARCH
 ---
