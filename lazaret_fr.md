@@ -2,7 +2,7 @@
 layout: scheda
 title: "lazaret"
 lingua: fr
-target_italien: ""
+target_italien: "lazzaretto"
 dominio: ARCH
 ---
 
