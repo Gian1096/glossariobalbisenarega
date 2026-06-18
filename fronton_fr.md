@@ -2,7 +2,7 @@
 layout: scheda
 title: "fronton"
 lingua: fr
-target_italien: ""
+target_italien: "frontone"
 dominio: ARCH
 ---
 
