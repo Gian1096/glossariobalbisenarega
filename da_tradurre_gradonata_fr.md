@@ -1,6 +1,6 @@
 ---
 layout: scheda
-title: "da_tradurre_gradonata"
+title: "gradonata"
 lingua: fr
 target_italien: "gradonata"
 dominio: ARCH
