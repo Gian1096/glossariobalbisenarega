@@ -2,7 +2,7 @@
 layout: scheda
 title: "palier d’escalier"
 lingua: fr
-target_italien: ""
+target_italien: "pianerottolo"
 dominio: ARCH
 ---
 
