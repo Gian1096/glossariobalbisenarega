@@ -2,7 +2,7 @@
 layout: scheda
 title: "paroi"
 lingua: fr
-target_italien: ""
+target_italien: "parete"
 dominio: ARCH
 ---
 
