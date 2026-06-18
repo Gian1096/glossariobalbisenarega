@@ -2,7 +2,7 @@
 layout: scheda
 title: "mixtiligne"
 lingua: fr
-target_italien: ""
+target_italien: "mistilineo"
 dominio: ARCH
 ---
 
