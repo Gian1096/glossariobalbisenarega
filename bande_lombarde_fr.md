@@ -2,7 +2,7 @@
 layout: scheda
 title: "bande lombarde"
 lingua: fr
-target_italien: ""
+target_italien: "lesena"
 dominio: ARCH
 ---
 
