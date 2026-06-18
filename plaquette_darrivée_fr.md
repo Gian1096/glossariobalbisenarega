@@ -2,7 +2,7 @@
 layout: scheda
 title: "plaquette d’arrivée"
 lingua: fr
-target_italien: ""
+target_italien: "caposcala"
 dominio: ARCH
 ---
 
