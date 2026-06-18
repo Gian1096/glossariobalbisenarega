@@ -2,7 +2,7 @@
 layout: scheda
 title: "foyer"
 lingua: fr
-target_italien: ""
+target_italien: "caminetto"
 dominio: ARCH
 ---
 
