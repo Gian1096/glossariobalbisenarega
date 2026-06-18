@@ -2,7 +2,7 @@
 layout: scheda
 title: "édifice cultuel"
 lingua: fr
-target_italien: ""
+target_italien: "edificio di culto"
 dominio: ARCH
 ---
 
