@@ -2,7 +2,7 @@
 layout: scheda
 title: "colonne"
 lingua: fr
-target_italien: ""
+target_italien: "colonna"
 dominio: ARCH
 ---
 
