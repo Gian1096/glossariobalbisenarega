@@ -2,7 +2,7 @@
 layout: scheda
 title: "plaque"
 lingua: fr
-target_italien: ""
+target_italien: "lastra"
 dominio: ARCH
 ---
 
