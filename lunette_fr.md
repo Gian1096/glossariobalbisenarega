@@ -2,7 +2,7 @@
 layout: scheda
 title: "lunette"
 lingua: fr
-target_italien: ""
+target_italien: "lunetta"
 dominio: ARCH
 ---
 
