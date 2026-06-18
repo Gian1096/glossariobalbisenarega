@@ -2,7 +2,7 @@
 layout: scheda
 title: "tympan"
 lingua: fr
-target_italien: ""
+target_italien: "timpano"
 dominio: ARCH
 ---
 
