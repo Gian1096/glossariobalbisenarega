@@ -2,7 +2,7 @@
 layout: scheda
 title: "couronnement"
 lingua: fr
-target_italien: ""
+target_italien: "coronamento"
 dominio: ARCH
 ---
 
