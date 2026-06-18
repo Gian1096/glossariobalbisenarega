@@ -2,7 +2,7 @@
 layout: scheda
 title: "décoration"
 lingua: fr
-target_italien: ""
+target_italien: "decorazione"
 dominio: ARCH
 ---
 
