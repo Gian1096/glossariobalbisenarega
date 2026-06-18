@@ -2,7 +2,7 @@
 layout: scheda
 title: "colonnes accouplées"
 lingua: fr
-target_italien: ""
+target_italien: "colonna binata"
 dominio: ARCH
 ---
 
