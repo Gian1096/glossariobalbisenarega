@@ -256,7 +256,6 @@ title: Glossaire Traditionnel (FR)
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const inputTesto = document.getElementById("Input-Filtro-Testo");
         const tastiera = document.getElementById("Tastiera-Lettere");
         const listaSchede = document.getElementById("Lista-Schede-Elementi");
         const messaggioVuoto = document.getElementById("Messaggio-Vuoto");
@@ -264,8 +263,9 @@ title: Glossaire Traditionnel (FR)
         const schede = Array.from(listaSchede.children);
 
         // 1. RECHERCHE TEXTE 100% INDÉPENDANTE
-        function filtraSoloTesto() {
-            const query = inputTesto.value.toLowerCase().trim();
+        function filtraSoloTesto(e) {
+            // Leggiamo il valore direttamente dall'elemento che ha scatenato l'evento
+            const query = e.target.value.toLowerCase().trim();
 
             if (!query) {
                 pannelloBenvenuto.style.display = "block";
@@ -293,9 +293,11 @@ title: Glossaire Traditionnel (FR)
             messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
         }
 
-        // 2. FILTRE PAR LETTRE
+        // 2. FILTRE PAR LETTRE (Azzera la barra di testo)
         function filtraSoloLettera(letteraSelezionata) {
-            inputTesto.value = "";
+            const inputElement = document.getElementById("Input-Filtro-Testo");
+            if (inputElement) inputElement.value = "";
+            
             pannelloBenvenuto.style.display = "none";
             listaSchede.style.display = "block";
 
@@ -303,7 +305,7 @@ title: Glossaire Traditionnel (FR)
             schede.forEach(scheda => {
                 const iniziale = scheda.getAttribute("data-iniziale") || "";
                 
-                if (letteraSelezionata === "TUTTI" || iniziale === letteraSelezionata) {
+                if (letteraSelezionata === "TUTTI" || iniziale === letteraSenzata) {
                     scheda.style.setProperty("display", "flex", "important");
                     contatore++;
                 } else {
@@ -314,10 +316,13 @@ title: Glossaire Traditionnel (FR)
             messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
         }
 
-        // PURGE DES ÉCOUTEURS ET RE-LIAISON
-        inputTesto.replaceWith(inputTesto.cloneNode(true));
-        const nuovoInputTesto = document.getElementById("Input-Filtro-Testo");
-        nuovoInputTesto.addEventListener("input", filtraSoloTesto);
+        // PURGE DEL VECCHIO INPUT E AGGANCIO DINAMICO SICURO
+        const inputOriginale = document.getElementById("Input-Filtro-Testo");
+        if (inputOriginale) {
+            inputOriginale.replaceWith(inputOriginale.cloneNode(true));
+            const nuovoInputTesto = document.getElementById("Input-Filtro-Testo");
+            nuovoInputTesto.addEventListener("input", filtraSoloTesto);
+        }
 
         tastiera.addEventListener("click", function(e) {
             if (!e.target.classList.contains("Btn-Lettera")) return;
