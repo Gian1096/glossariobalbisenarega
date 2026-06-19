@@ -116,31 +116,64 @@ title: Home
             text-align: left;
         }
 
-        /* --- PULSANTE DI ACCESSO AL GLOSSARIO --- */
-        .Contenitore-Accesso {
-            text-align: center;
+        /* --- NUOVO SISTEMA DI ACCESSO BILINGUE --- */
+        .Contenitore-Ingressi-Dizionario {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
             margin: 50px auto;
+            max-width: 900px;
         }
 
-        .Btn-Accesso {
-            display: inline-block;
-            background-color: #1a365d;
-            color: #ffffff;
+        .Card-Ingresso {
+            flex: 1;
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.3em;
-            padding: 18px 45px;
-            border-radius: 50px;
-            box-shadow: 0 10px 25px rgba(26, 54, 93, 0.25);
-            transition: all 0.3s ease;
-            border: 2px solid #1a365d;
+            color: #1a365d;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .Btn-Accesso:hover {
-            background-color: #ffffff;
-            color: #1a365d;
-            box-shadow: 0 15px 35px rgba(26, 54, 93, 0.35);
-            transform: translateY(-3px);
+        .Card-Ingresso:hover {
+            border-color: #1a365d;
+            box-shadow: 0 12px 25px rgba(26, 54, 93, 0.12);
+            transform: translateY(-4px);
+            background-color: #f8fafc;
+        }
+
+        .Card-Ingresso .Bandiera {
+            font-size: 2.8em;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .Card-Ingresso .Titolo-Bottone {
+            font-size: 1.25em;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .Card-Ingresso .Sottotitolo-Bottone {
+            font-size: 0.85em;
+            color: #718096;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Responsive per smartphone */
+        @media (max-width: 650px) {
+            .Contenitore-Ingressi-Dizionario {
+                flex-direction: column;
+                gap: 20px;
+            }
         }
 
         .Footer-Curatore {
@@ -188,10 +221,20 @@ title: Home
                 </div>
             </div>
 
-            <div class="Contenitore-Accesso">
-                <a href="{{ '/ricerca-it.html' | relative_url }}" class="Btn-Accesso">
-                    Accedi al Glossario &rarr;
+            <div class="Contenitore-Ingressi-Dizionario">
+
+                <a href="{{ '/ricerca-it.html' | relative_url }}" class="Card-Ingresso">
+                    <span class="Bandiera">🇮🇹</span>
+                    <span class="Titolo-Bottone">Consultazione in Italiano</span>
+                    <span class="Sottotitolo-Bottone">Ricerca i lemmi partendo dall'italiano</span>
                 </a>
+
+                <a href="{{ '/ricerca-fr.html' | relative_url }}" class="Card-Ingresso">
+                    <span class="Bandiera">🇫🇷</span>
+                    <span class="Titolo-Bottone">Consultation en Français</span>
+                    <span class="Sottotitolo-Bottone">Rechercher les lemmes à partir du français</span>
+                </a>
+
             </div>
             
         </main>
