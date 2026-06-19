@@ -8,23 +8,26 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             color: #2d3748;
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: 30px 20px;
             font-size: 1.15em;
             text-align: justify;
 
-            /* --- COLORE SOLIDO DI FONDO (Azzurro Polvere Chiarissimo) --- */
-            background: #eef2f7 !important;
+            /* --- AZZERAMENTO TOTALE DELLE GABBIE DEL TEMA --- */
+            margin: 0 !important;
+            padding: 0 !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            background-color: #eef2f7 !important; /* Colore grigio-azzurro di fondo */
         }
 
         .Scheda-Container {
             background: #ffffff;
             border-top: 6px solid #1a365d;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            margin-top: 20px;
+            border-radius: 0; /* Rimuoviamo il raggio per farlo fondere a tutto schermo se tocca i bordi */
+            box-shadow: none; /* Inutili se copriamo tutto */
+            padding: 40px;
+            max-width: 1500px; /* Mantiene il contenuto cinturato ed elegante al centro */
+            margin: 0 auto; /* Lo centra perfettamente nello schermo */
+            min-height: 100vh; /* Costringe il bianco a scendere fino in fondo alla pagina */
         }
 
         /* --- IMPIANTO STRUTTURALE DEL LAYOUT --- */
