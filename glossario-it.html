@@ -264,59 +264,70 @@ title: Glossario Tradizionale (IT)
         const messaggioVuoto = document.getElementById("Messaggio-Vuoto");
         const pannelloBenvenuto = document.getElementById("Pannello-Benvenuto");
         const schede = Array.from(listaSchede.children);
-        
-        let letteraSelezionata = ""; 
 
-        function eseguiFiltroGlobale() {
+        // 1. FUNZIONE DI FILTRO SOLO PER IL TESTO (Cerca ovunque)
+        function filtraSoloTesto() {
             const query = inputTesto.value.toLowerCase().trim();
-            
-            // Se l'utente svuota tutto e non ha selezionato nessuna lettera, torna allo stato iniziale
-            if (!query && !letteraSelezionata) {
+
+            if (!query) {
+                // Se svuoti la barra, torna allo stato di benvenuto iniziale
                 pannelloBenvenuto.style.display = "block";
                 listaSchede.style.display = "none";
                 messaggioVuoto.style.display = "none";
                 return;
             }
 
-            // Altrimenti nascondi il benvenuto e mostra il blocco lista
+            // Mostra la lista e resetta l'eventuale lettera attiva nella tastiera
             pannelloBenvenuto.style.display = "none";
-            listaSchede.style.display = "block"; 
+            listaSchede.style.display = "block";
+            tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
 
             let contatore = 0;
-
             schede.forEach(scheda => {
                 const titolo = scheda.getAttribute("data-titolo") || "";
-                const iniziale = scheda.getAttribute("data-iniziale") || "";
-                
-                const okTesto = !query || titolo.includes(query);
-                const okLettera = !letteraSelezionata || letteraSelezionata === "TUTTI" || iniziale === letteraSelezionata;
-
-                if (okTesto && okLettera) {
-                    scheda.style.setProperty("display", "flex", "important"); // Forza la visibilità dell'elemento flex
+                if (titolo.includes(query)) {
+                    scheda.style.setProperty("display", "flex", "important");
                     contatore++;
                 } else {
                     scheda.style.setProperty("display", "none", "important");
                 }
             });
 
-            if (contatore === 0) {
-                messaggioVuoto.style.display = "block";
-                listaSchede.style.display = "none";
-            } else {
-                messaggioVuoto.style.display = "none";
-            }
+            messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
         }
+
+        // 2. FUNZIONE DI FILTRO SOLO PER LETTERA (Azzera la barra di testo)
+        function filtraSoloLettera(letteraSelezionata) {
+            // Svuota l'input testuale per non creare conflitti
+            inputTesto.value = "";
+            
+            pannelloBenvenuto.style.display = "none";
+            listaSchede.style.display = "block";
+
+            let contatore = 0;
+            schede.forEach(scheda => {
+                const iniziale = scheda.getAttribute("data-iniziale") || "";
+                if (letteraSelezionata === "TUTTI" || iniziale === letteraSelezionata) {
+                    scheda.style.setProperty("display", "flex", "important");
+                    contatore++;
+                } else {
+                    scheda.style.setProperty("display", "none", "important");
+                }
+            });
+
+            messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
+        }
+
+        // ASSEGNAZIONE DEGLI EVENTI
+        inputTesto.addEventListener("input", filtraSoloTesto);
 
         tastiera.addEventListener("click", function(e) {
             if (!e.target.classList.contains("Btn-Lettera")) return;
-            
             tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
             e.target.classList.add("attiva");
             
-            letteraSelezionata = e.target.getAttribute("data-lettera");
-            eseguiFiltroGlobale();
+            const lettera = e.target.getAttribute("data-lettera");
+            filtraSoloLettera(lettera);
         });
-
-        inputTesto.addEventListener("input", eseguiFiltroGlobale);
     });
 </script>
