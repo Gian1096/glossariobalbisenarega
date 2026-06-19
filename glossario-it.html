@@ -32,7 +32,7 @@ title: Glossario Tradizionale (IT)
         border-radius: 8px;
         padding: 40px;
         margin-top: 35px;
-        max-width: 1000px;
+        max-width: 1100px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
@@ -52,6 +52,7 @@ title: Glossario Tradizionale (IT)
         outline: none;
         transition: all 0.2s ease;
         box-sizing: border-box;
+        text-align: center;
     }
 
     .Search-Input:focus {
@@ -66,7 +67,7 @@ title: Glossario Tradizionale (IT)
         flex-wrap: wrap;
         gap: 8px;
         margin-bottom: 35px;
-        max-width: 800px;
+        max-width: 850px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -96,35 +97,42 @@ title: Glossario Tradizionale (IT)
         border-color: #1a365d;
     }
 
-    /* --- LISTA SCHEDE GLOSSARIO --- */
+    /* --- NUOVA GRIGLIA ARMONICA A COLONNE --- */
     .Insieme-Schede {
         list-style: none;
         padding: 0;
         margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
     }
 
     .Voce-Scheda-Glossario {
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 8px;
-        padding: 20px 25px;
-        transition: transform 0.2s, box-shadow 0.2s;
+        padding: 16px 20px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .Voce-Scheda-Glossario:hover {
-        transform: translateX(4px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        border-color: #cbd5e1;
+        border-color: #2b6cb0;
+        box-shadow: 0 4px 12px rgba(43, 108, 176, 0.06);
+        transform: translateY(-2px);
     }
 
     .Voce-Scheda-Glossario a {
-        font-size: 1.25em;
+        font-size: 1.1em;
         font-weight: 700;
         color: #2b6cb0;
         text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 1;
     }
 
     .Voce-Scheda-Glossario a:hover {
@@ -133,15 +141,25 @@ title: Glossario Tradizionale (IT)
     }
 
     .Tag-Dominio {
-        display: inline-block;
-        font-size: 0.75em;
-        background: #e2e8f0;
-        color: #4a5568;
-        padding: 3px 8px;
+        font-size: 0.7em;
+        background: #eef4fa;
+        color: #1a365d;
+        padding: 3px 6px;
         border-radius: 4px;
         font-weight: 700;
         margin-left: 10px;
-        vertical-align: middle;
+        border: 1px solid #d0e1f2;
+    }
+
+    /* MESSAGGIO DI INVITO E VUOTO */
+    .Messaggio-Guida {
+        text-align: center;
+        color: #718096;
+        font-size: 1.1em;
+        padding: 40px;
+        background: #ffffff;
+        border: 2px dashed #cbd5e1;
+        border-radius: 8px;
     }
 
     .Nessun-Risultato {
@@ -208,18 +226,22 @@ title: Glossario Tradizionale (IT)
             </div>
             
             <div class="Search-Container">
-                <input type="text" id="Input-Filtro-Testo" class="Search-Input" placeholder="Filtra i lemmi del glossario italiano...">
+                <input type="text" id="Input-Filtro-Testo" class="Search-Input" placeholder="Digita un termine da cercare... (es. abside, loggia)">
             </div>
 
             <div class="Contenitore-Alfabeto" id="Tastiera-Lettere">
-                <button class="Btn-Lettera attiva" data-lettera="TUTTI">Tutti</button>
+                <button class="Btn-Lettera" data-lettera="TUTTI">Mostra Tutti</button>
                 {% assign lettere = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z" | split: "," %}
                 {% for l in lettere %}
                     <button class="Btn-Lettera" data-lettera="{{ l }}">{{ l }}</button>
                 {% endfor %}
             </div>
 
-            <ul class="Insieme-Schede" id="Lista-Schede-Elementi">
+            <div class="Messaggio-Guida" id="Pannello-Benvenuto">
+                🔍 Seleziona una lettera dall'alfabeto o inizia a digitare nella barra per consultare le schede del glossario.
+            </div>
+
+            <ul class="Insieme-Schede" id="Lista-Schede-Elementi" style="display: none;">
                 {% assign voci_it = site.pages | where: "lingua", "it" | sort: "title" %}
                 {% for voce in voci_it %}
                     {% assign prima_lettera = voce.title | slice: 0 | upcase %}
@@ -245,12 +267,26 @@ title: Glossario Tradizionale (IT)
         const tastiera = document.getElementById("Tastiera-Lettere");
         const listaSchede = document.getElementById("Lista-Schede-Elementi");
         const messaggioVuoto = document.getElementById("Messaggio-Vuoto");
+        const pannelloBenvenuto = document.getElementById("Pannello-Benvenuto");
         const schede = Array.from(listaSchede.children);
         
-        let letteraSelezionata = "TUTTI";
+        let letteraSelezionata = ""; 
+        let primaInterazione = false;
 
         function applicaFiltri() {
             const query = inputTesto.value.toLowerCase().trim();
+            
+            // Se non c'è stata interazione reale (nessuna lettera e testo vuoto), mantieni il benvenuto
+            if (!primaInterazione && !query && !letteraSelezionata) {
+                pannelloBenvenuto.style.display = "block";
+                listaSchede.style.display = "none";
+                messaggioVuoto.style.display = "none";
+                return;
+            }
+
+            pannelloBenvenuto.style.display = "none";
+            listaSchede.style.display = "grid"; // Attiva la griglia CSS dinamica
+
             let riscontrati = 0;
 
             schede.forEach(scheda => {
@@ -258,10 +294,10 @@ title: Glossario Tradizionale (IT)
                 const iniziale = scheda.getAttribute("data-iniziale") || "";
                 
                 const corrispondeTesto = titolo.includes(query);
-                const corrispondeLettera = (letteraSelezionata === "TUTTI" || iniziale === letteraSelezionata);
+                const corrispondeLettera = (letteraSelezionata === "TUTTI" || !letteraSelezionata || iniziale === letteraSelezionata);
 
                 if (corrispondeTesto && corrispondeLettera) {
-                    scheda.style.display = "block";
+                    scheda.style.display = "flex";
                     riscontrati++;
                 } else {
                     scheda.style.display = "none";
@@ -270,6 +306,7 @@ title: Glossario Tradizionale (IT)
 
             if (riscontrati === 0) {
                 messaggioVuoto.style.display = "block";
+                listaSchede.style.display = "none";
             } else {
                 messaggioVuoto.style.display = "none";
             }
@@ -278,6 +315,7 @@ title: Glossario Tradizionale (IT)
         tastiera.addEventListener("click", function(e) {
             if (!e.target.classList.contains("Btn-Lettera")) return;
             
+            primaInterazione = true;
             tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
             e.target.classList.add("attiva");
             
@@ -285,6 +323,11 @@ title: Glossario Tradizionale (IT)
             applicaFiltri();
         });
 
-        inputTesto.addEventListener("input", applicaFiltri);
+        inputTesto.addEventListener("input", function() {
+            if (this.value.trim().length > 0) {
+                primaInterazione = true;
+            }
+            applicaFiltri();
+        });
     });
 </script>
