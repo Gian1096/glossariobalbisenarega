@@ -241,4 +241,74 @@
                     
                     {% assign schede_totali_lingua = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua | sort: "title" %}
                     {% for scheda in schede_totali_lingua %}
-                        {% if trovato_corrente %}{% assign next_scheda = scheda %}{%
+                        {% if trovato_corrente %}{% assign next_scheda = scheda %}{% break %}{% endif %}
+                        {% if scheda.url == page.url %}{% assign trovato_corrente = true %}{% else %}{% assign prev_scheda = scheda %}{% endif %}
+                    {% endfor %}
+
+                    {% if prev_scheda %}
+                        <a href="{{ site.baseurl }}{{ prev_scheda.url }}" class="Btn-Navigazione">← {{ prev_scheda.title }}</a>
+                    {% else %}
+                        <span class="Btn-Navigazione" style="opacity: 0.3; cursor: not-allowed;">← Inizio</span>
+                    {% endif %}
+
+                    {% if next_scheda %}
+                        <a href="{{ site.baseurl }}{{ next_scheda.url }}" class="Btn-Navigazione">{{ next_scheda.title }} →</a>
+                    {% else %}
+                        <span class="Btn-Navigazione" style="opacity: 0.3; cursor: not-allowed;">Fine →</span>
+                    {% endif %}
+                </nav>
+            </div> 
+
+            <aside class="Sidebar-Immagine">
+                <div class="Sidebar-Titolo">Apparato visivo</div>
+                <div class="Visual-Card">
+                    <img src="{% if page.immagine %}{{ site.baseurl }}/{{ page.immagine }}{% else %}https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=500{% endif %}" class="Visual-Foto">
+                    <div class="Visual-Didascalia">
+                        <strong>Fig. 1:</strong> {% if page.didascalia %}{{ page.didascalia }}{% else %}Dettaglio strutturale inserito nel prospetto.{% endif %}
+                    </div>
+                </div>
+
+                <div class="Pannello-Comandi-Navigazione">
+                    <div style="font-size: 0.75em; text-transform: uppercase; font-weight: 800; color: #a0aec0; letter-spacing: 0.5px; margin-bottom: 5px;">Navigazione Portale</div>
+                    
+                    <a href="{{ site.baseurl }}/glossario-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
+                        📋 Elenco Glossario ({{ page.lingua | upcase }})
+                    </a>
+                    
+                    <a href="{{ site.baseurl }}/ricerca-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
+                        🔄 Ruota di Traduzione
+                    </a>
+                    
+                    <a href="{{ site.baseurl }}/" class="Btn-Comando-Laterale" style="border-color: #cbd5e1; background: #f8fafc;">
+                        🏠 Torna alla Home
+                    </a>
+                </div>
+            </aside>
+
+        </div> 
+        
+        <footer class="Footer-Curatore">Scheda a cura di: Giovanni Mantegazza (Università degli Studi di Genova)</footer>
+    </div> 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("Search-Sidebar-Input");
+            const listaElementi = document.getElementById("Albero-Lemmi-Lista");
+            const righe = Array.from(listaElementi.children);
+
+            searchInput.addEventListener("input", function() {
+                const query = this.value.toLowerCase().trim();
+                
+                righe.forEach(riga => {
+                    const lemma = riga.getAttribute("data-lemma") || "";
+                    if (!query || lemma.includes(query)) {
+                        riga.style.display = "block";
+                    } else {
+                        riga.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
