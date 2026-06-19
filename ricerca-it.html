@@ -320,25 +320,27 @@ title: Ricerca Lemmi (IT)
                 const angolo = diff * 24; 
 
                 if (Math.abs(diff) <= numeroElementiVisibili) {
-                    [itemsIT[i], itemsFR[i]].forEach(item => {
-                        if(item) {
-                            item.style.display = "block";
-                            item.style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
-                            
-                            if (i === indiceAttivoReale) {
-                                item.classList.add("attivo");
-                            } else {
-                                item.classList.remove("attivo");
-                            }
-                        }
-                    });
+                    if(itemsIT[i]) {
+                        itemsIT[i].style.display = "block";
+                        itemsIT[i].style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
+                        if (i === indiceAttivoReale) itemsIT[i].classList.add("attivo");
+                        else itemsIT[i].classList.remove("attivo");
+                    }
+                    if(itemsFR[i]) {
+                        itemsFR[i].style.display = "block";
+                        itemsFR[i].style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
+                        if (i === indiceAttivoReale) itemsFR[i].classList.add("attivo");
+                        else itemsFR[i].classList.remove("attivo");
+                    }
                 } else {
-                    [itemsIT[i], itemsFR[i]].forEach(item => {
-                        if(item) {
-                            item.style.display = "none";
-                            item.classList.remove("attivo");
-                        }
-                    });
+                    if(itemsIT[i]) {
+                        itemsIT[i].style.display = "none";
+                        itemsIT[i].classList.remove("attivo");
+                    }
+                    if(itemsFR[i]) {
+                        itemsFR[i].style.display = "none";
+                        itemsFR[i].classList.remove("attivo");
+                    }
                 }
             }
 
