@@ -170,11 +170,6 @@ title: Recherche Lemmes (FR)
         text-decoration: underline;
     }
 
-    .ruota-item.lemma-vuoto {
-        font-style: italic;
-        color: #cbd5e1;
-    }
-
     .info-scroll {
         text-align: center;
         font-size: 0.8em;
@@ -238,7 +233,7 @@ title: Recherche Lemmes (FR)
                         <ul class="ruota-lista" id="ListaFR">
                             {% assign pagine_fr = site.pages | where: "lingua", "fr" | sort: "title" %}
                             {% for p in pagine_fr %}
-                                <li class="ruota-item" data-id="{{ p.title | downcase | strip }}">
+                                <li class="ruota-item" data-id="{{ p.title | downcase | strip }}" data-target-it="{{ p.target_italien | downcase | strip }}">
                                     <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
                                 </li>
                             {% endfor %}
@@ -254,22 +249,10 @@ title: Recherche Lemmes (FR)
                     <div style="font-size: 0.8em; text-transform: uppercase; color: #718096; font-weight: 700; text-align: center; margin-bottom: 10px;">Italiano (IT)</div>
                     <div class="ruota-wrapper" id="WrapperIT" style="pointer-events: none;"> 
                         <ul class="ruota-lista" id="ListaIT">
-                            {% assign pagine_it = site.pages | where: "lingua", "it" %}
-                            {% for p_fr in pagine_fr %}
-                                {% assign target_it_min = p_fr.target_italien | downcase | strip %}
-                                {% assign trovato = false %}
-                                
-                                <li class="ruota-item" data-target="{{ p_fr.title | downcase | strip }}" style="display: none;">
-                                    {% for p_it in pagine_it %}
-                                        {% assign titolo_it_min = p_it.title | downcase | strip %}
-                                        {% if titolo_it_min == target_it_min %}
-                                            <a href="{{ p_it.url | relative_url }}" style="display: inline-block; width: auto; padding: 0 5px;">{{ p_it.title }}</a>
-                                            {% assign trovato = true %}
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% if trovato == false %}
-                                        <a href="#">&mdash;</a>
-                                    {% endif %}
+                            {% assign pagine_it = site.pages | where: "lingua", "it" | sort: "title" %}
+                            {% for p in pagine_it %}
+                                <li class="ruota-item" data-lemma-it="{{ p.title | downcase | strip }}">
+                                    <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -278,7 +261,7 @@ title: Recherche Lemmes (FR)
 
             </div>
             
-            <div class="info-scroll">Utilisez la molette de la souris ou glissez la roue française pour faire défiler i lemmi allineati</div>
+            <div class="info-scroll">Utilisez la molette de la souris ou glissez la roue française pour faire défiler les lemmes alignés</div>
         </div>
 
         <div class="Contenitore-Ritorno">
@@ -300,37 +283,113 @@ title: Recherche Lemmes (FR)
         let itemsFR = Array.from(listaFR.children);
         let itemsIT = Array.from(listaIT.children);
         
-        if (itemsFR.length === 0) return;
+        if (itemsFR.length === 0 || itemsIT.length === 0) return;
 
-        let indiceVirtuale = 0; 
+        let indiceVirtualeFR = 0; 
         const raggioCilindro = 180; 
         const numeroElementiVisibili = 7; 
-        const totaleElementi = itemsFR.length;
+        const totaleFR = itemsFR.length;
+        const totaleIT = itemsIT.length;
 
-        function aggiornaSincroRuote() {
-            let indiceAttivoReale = ((indiceVirtuale % totaleElementi) + totaleElementi) % totaleElementi;
+        function renderingCilindro(items, indiceAttivo, totale) {
+            let indiceAttivoReale = ((indiceAttivo % totale) + totale) % totale;
 
-            for (let i = 0; i < totaleElementi; i++) {
+            for (let i = 0; i < totale; i++) {
                 let diff = i - indiceAttivoReale;
                 
-                if (diff > totaleElementi / 2) diff -= totaleElementi;
-                if (diff < -totaleElementi / 2) diff += totaleElementi;
+                if (diff > totale / 2) diff -= totale;
+                if (diff < -totale / 2) diff += totale;
 
                 const angolo = diff * 24; 
 
                 if (Math.abs(diff) <= numeroElementiVisibili) {
-                    if(itemsFR[i]) {
-                        itemsFR[i].style.display = "block";
-                        itemsFR[i].style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
-                        if (i === indiceAttivoReale) itemsFR[i].classList.add("attivo");
-                        else itemsFR[i].classList.remove("attivo");
+                    items[i].style.display = "block";
+                    items[i].style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
+                    if (i === indiceAttivoReale) {
+                        items[i].classList.add("attivo");
+                        items[i].querySelectorAll("a").forEach(a => a.style.pointerEvents = "auto");
+                    } else {
+                        items[i].classList.remove("attivo");
+                        items[i].querySelectorAll("a").forEach(a => a.style.pointerEvents = "none");
                     }
-                    if(itemsIT[i]) {
-                        itemsIT[i].style.display = "block";
-                        itemsIT[i].style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
-                        if (i === indiceAttivoReale) {
-                            itemsIT[i].classList.add("attivo");
-                            itemsIT[i].querySelectorAll("a").forEach(a => a.style.pointerEvents = "auto");
-                        } else {
-                            itemsIT[i].classList.remove("attivo");
-                            itemsIT[i].
+                } else {
+                    items[i].style.display = "none";
+                    items[i].classList.remove("attivo");
+                }
+            }
+        }
+
+        function aggiornaSincroRuote() {
+            // 1. Calcola l'indice francese attivo
+            let indiceAttivoFR = ((indiceVirtualeFR % totaleFR) + totaleFR) % totaleFR;
+            renderingCilindro(itemsFR, indiceAttivoFR, totaleFR);
+
+            // 2. Trova il target italiano agganciato all'elemento francese corrente
+            const itemFrAttivo = itemsFR[indiceAttivoFR];
+            if (itemFrAttivo) {
+                const targetIT = itemFrAttivo.getAttribute("data-target-it") || "";
+                
+                // Cerca l'indice del lemma italiano corrispondente nella ruota destra
+                let indiceITCorrispondente = itemsIT.findIndex(item => item.getAttribute("data-lemma-it") === targetIT);
+                
+                // Se non lo trova, manda la ruota su un elemento neutro o iniziale
+                if (indiceITCorrispondente === -1) indiceITCorrispondente = 0;
+                
+                renderingCilindro(itemsIT, indiceITCorrispondente, totaleIT);
+            }
+
+            listaFR.style.transform = `translateZ(-${raggioCilindro}px)`;
+            listaIT.style.transform = `translateZ(-${raggioCilindro}px)`;
+        }
+
+        // Inizializzazione immediata delle ruote
+        aggiornaSincroRuote();
+
+        // Input barra di ricerca
+        inputRicerca.addEventListener("input", function() {
+            const query = this.value.toLowerCase().trim();
+            if (!query) return;
+
+            const indiceTrovato = itemsFR.findIndex(item => {
+                const idLemma = item.getAttribute("data-id") || "";
+                return idLemma.startsWith(query);
+            });
+
+            if (indiceTrovato !== -1) {
+                indiceVirtualeFR = indiceTrovato;
+                aggiornaSincroRuote();
+            }
+        });
+
+        // Gestione scorrimento rotella mouse
+        wrapperFR.addEventListener("wheel", function(e) {
+            e.preventDefault();
+            if (e.deltaY > 0) {
+                indiceVirtualeFR++;
+            } else {
+                indiceVirtualeFR--;
+            }
+            aggiornaSincroRuote();
+        }, { passive: false });
+
+        // Gestione Touchscreen
+        let startY = 0;
+        wrapperFR.addEventListener("touchstart", function(e) {
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        wrapperFR.addEventListener("touchmove", function(e) {
+            const currentY = e.touches[0].clientY;
+            const diffY = startY - currentY;
+            if (Math.abs(diffY) > 20) {
+                if (diffY > 0) {
+                    indiceVirtualeFR++;
+                } else {
+                    indiceVirtualeFR--;
+                }
+                startY = currentY;
+                aggiornaSincroRuote();
+            }
+        }, { passive: true });
+    });
+</script>
