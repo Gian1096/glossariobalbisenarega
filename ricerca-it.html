@@ -35,11 +35,12 @@ title: Ricerca Lemmi (IT)
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
+        position: relative;
     }
 
     .Search-Container {
         max-width: 750px;
-        margin: 0 auto 35px auto;
+        margin: 15px auto 35px auto;
         position: relative;
     }
 
@@ -224,16 +225,16 @@ title: Ricerca Lemmi (IT)
     </div>
 
     <main>
-        <div class="Sezione-Navigazione-Ricerca" style="position: relative;">
+        <div class="Sezione-Navigazione-Ricerca">
             
-            <div style="position: absolute; top: 15px; right: 20px; font-size: 0.9em; font-weight: 600;">
+            <div style="position: absolute; top: 15px; right: 20px; font-size: 0.9em; font-weight: 600; z-index: 20;">
                 <span style="color: #1a365d; margin-right: 5px;">Lingua / Langue:</span>
                 <span style="color: #718096; cursor: default;">IT</span>
                 <span style="color: #cbd5e1; margin: 0 5px;">|</span>
                 <a href="{{ '/ricerca-fr.html' | relative_url }}" style="color: #2b6cb0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#1a365d'" onmouseout="this.style.color='#2b6cb0'">FR 🇫🇷</a>
             </div>
             
-            <div class="Search-Container" style="margin-top: 15px;">
+            <div class="Search-Container">
                 <input type="text" id="Input-Ricerca-Dinamica" class="Search-Input" placeholder="Cerca un termine in italiano... (es. bordura, bucatura)">
             </div>
 
@@ -259,4 +260,150 @@ title: Ricerca Lemmi (IT)
 
                 <div class="Colonna-Ruota">
                     <div style="font-size: 0.8em; text-transform: uppercase; color: #718096; font-weight: 700; text-align: center; margin-bottom: 10px;">Français (FR)</div>
-                    <div class="ruota-wrapper" id="WrapperFR" style="pointer-events: none
+                    <div class="ruota-wrapper" id="WrapperFR" style="pointer-events: none;"> 
+                        <ul class="ruota-lista" id="ListaFR">
+                            {% assign pagine_fr = site.pages | where: "lingua", "fr" %}
+                            {% for p_it in pagine_it %}
+                                {% assign titolo_it_min = p_it.title | downcase | strip %}
+                                {% assign trovato = false %}
+                                
+                                <li class="ruota-item" data-target="{{ titolo_it_min }}" style="display: none;">
+                                    {% for p_fr in pagine_fr %}
+                                        {% assign target_fr_min = p_fr.target_italien | downcase | strip %}
+                                        {% if target_fr_min == titolo_it_min %}
+                                            <a href="{{ p_fr.url | relative_url }}" style="display: inline-block; width: auto; padding: 0 5px;">{{ p_fr.title }}</a>
+                                            {% assign trovato = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if trovato == false %}
+                                        <a href="#">&mdash;</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="info-scroll">Usa la rotella del mouse o trascina la ruota italiana per sfogliare i lemmi allineati</div>
+        </div>
+
+        <div class="Contenitore-Ritorno">
+            <a href="{{ '/' | relative_url }}" class="Btn-Ritorno">
+                &larr; Torna alla Home
+            </a>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const wrapperIT = document.getElementById("WrapperIT");
+        const listaIT = document.getElementById("ListaIT");
+        const listaFR = document.getElementById("ListaFR");
+        const inputRicerca = document.getElementById("Input-Ricerca-Dinamica");
+        
+        let itemsIT = Array.from(listaIT.children);
+        let itemsFR = Array.from(listaFR.children);
+        
+        if (itemsIT.length === 0) return;
+
+        let indiceVirtuale = 0; 
+        const raggioCilindro = 180; 
+        const numeroElementiVisibili = 7; 
+        const totaleElementi = itemsIT.length;
+
+        function aggiornaSincroRuote() {
+            let indiceAttivoReale = ((indiceVirtuale % totaleElementi) + totaleElementi) % totaleElementi;
+
+            for (let i = 0; i < totaleElementi; i++) {
+                let diff = i - indiceAttivoReale;
+                
+                if (diff > totaleElementi / 2) diff -= totaleElementi;
+                if (diff < -totaleElementi / 2) diff += totaleElementi;
+
+                const angolo = diff * 24; 
+
+                if (Math.abs(diff) <= numeroElementiVisibili) {
+                    if(itemsIT[i]) {
+                        itemsIT[i].style.display = "block";
+                        itemsIT[i].style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
+                        if (i === indiceAttivoReale) itemsIT[i].classList.add("attivo");
+                        else itemsIT[i].classList.remove("attivo");
+                    }
+                    if(itemsFR[i]) {
+                        itemsFR[i].style.display = "block";
+                        itemsFR[i].style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
+                        if (i === indiceAttivoReale) {
+                            itemsFR[i].classList.add("attivo");
+                            itemsFR[i].querySelectorAll("a").forEach(a => a.style.pointerEvents = "auto");
+                        } else {
+                            itemsFR[i].classList.remove("attivo");
+                            itemsFR[i].querySelectorAll("a").forEach(a => a.style.pointerEvents = "none");
+                        }
+                    }
+                } else {
+                    if(itemsIT[i]) {
+                        itemsIT[i].style.display = "none";
+                        itemsIT[i].classList.remove("attivo");
+                    }
+                    if(itemsFR[i]) {
+                        itemsFR[i].style.display = "none";
+                        itemsFR[i].classList.remove("attivo");
+                    }
+                }
+            }
+
+            listaIT.style.transform = `translateZ(-${raggioCilindro}px)`;
+            listaFR.style.transform = `translateZ(-${raggioCilindro}px)`;
+        }
+
+        aggiornaSincroRuote();
+
+        inputRicerca.addEventListener("input", function() {
+            const query = this.value.toLowerCase().trim();
+            if (!query) return;
+
+            const indiceTrovato = itemsIT.findIndex(item => {
+                const idLemma = item.getAttribute("data-id") || "";
+                return idLemma.startsWith(query);
+            });
+
+            if (indiceTrovato !== -1) {
+                indiceVirtuale = indiceTrovato;
+                aggiornaSincroRuote();
+            }
+        });
+
+        wrapperIT.addEventListener("wheel", function(e) {
+            e.preventDefault();
+            if (e.deltaY > 0) {
+                indiceVirtuale++;
+            } else {
+                indiceVirtuale--;
+            }
+            aggiornaSincroRuote();
+        }, { passive: false });
+
+        let startY = 0;
+        wrapperIT.addEventListener("touchstart", function(e) {
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        wrapperIT.addEventListener("touchmove", function(e) {
+            const currentY = e.touches[0].clientY;
+            const diffY = startY - currentY;
+            if (Math.abs(diffY) > 20) {
+                if (diffY > 0) {
+                    indiceVirtuale++;
+                } else {
+                    indiceVirtuale--;
+                }
+                startY = currentY;
+                aggiornaSincroRuote();
+            }
+        }, { passive: true });
+    });
+</script>
