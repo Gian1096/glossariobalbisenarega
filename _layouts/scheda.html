@@ -39,10 +39,33 @@
             align-items: flex-start;
         }
 
-        /* 1. Barra laterale sinistra (Indice fisso a schermo intero) */
+      /* 1. Barra laterale sinistra (Indice FISSO e SCORREVOLE INTERNAMENTE) */
         .Sidebar-Lemmi {
             border-right: 1px solid #e2e8f0;
             padding-right: 15px;
+            
+            /* --- BLOCCO E SCORRIMENTO INDIPENDENTE --- */
+            position: sticky;
+            top: 40px; /* Rimane ancorata in alto durante lo scroll della pagina */
+            max-height: 75vh; /* Altezza massima legata allo schermo dell'utente */
+            overflow-y: auto; /* Attiva la barra di scorrimento solo se i lemmi eccedono lo spazio */
+            padding-bottom: 20px;
+        }
+
+        /* Abbelliamo la barretta di scorrimento interna per non farla sembrare quella grezza del browser */
+        .Sidebar-Lemmi::-webkit-scrollbar {
+            width: 6px;
+        }
+        .Sidebar-Lemmi::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .Sidebar-Lemmi::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .Sidebar-Lemmi::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
 
         .Sidebar-Lemmi summary {
@@ -62,6 +85,12 @@
             color: #718096;
             margin-bottom: 15px;
             font-weight: 700;
+            /* Mantiene il titolo dell'indice fisso in cima mentre scorri l'elenco dei lemmi */
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            padding-bottom: 5px;
+            z-index: 10;
         }
 
         .Albero-Lemmi {
