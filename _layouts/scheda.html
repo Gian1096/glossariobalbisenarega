@@ -178,11 +178,22 @@
                     <input type="text" id="Search-Sidebar-Input" class="Sidebar-Search" placeholder="Filtra indice...">
                 </div>
                 <ul class="Albero-Lemmi" id="Albero-Lemmi-Lista">
-                    {% assign schede_ordinate = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua | sort: "title" %}
-                    {% for scheda in schede_ordinate %}
-                        <li class="{% if scheda.url == page.url %}attivo{% endif %}" data-lemma="{{ scheda.title | downcase }}">
-                            <a href="{{ site.baseurl }}{{ scheda.url }}">{{ scheda.title }}</a>
-                        </li>
+                    {% comment %} 
+                        1. Filtriamo le schede per lingua e ordiniamo. 
+                        Per mescolare maiuscole e minuscole, raggruppiamo temporaneamente i lemmi 
+                        trasformando la prima lettera in maiuscola tramite un'espressione personalizzata.
+                    {% endcomment %}
+                    {% assign schede_filtrate = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua %}
+                    {% assign gruppi_alfabetici = schede_filtrate | group_by_exp: "item", "item.title | slice: 0 | upcase" | sort: "name" %}
+                    
+                    {% comment %} 2. Cicliamo dentro i gruppi ordinati dalla A alla Z {% endcomment %}
+                    {% for gruppo in gruppi_alfabetici %}
+                        {% assign schede_gruppo_ordinate = gruppo.items | sort: "title" %}
+                        {% for scheda in schede_gruppo_ordinate %}
+                            <li class="{% if scheda.url == page.url %}attivo{% endif %}" data-lemma="{{ scheda.title | downcase }}">
+                                <a href="{{ site.baseurl }}{{ scheda.url }}">{{ scheda.title }}</a>
+                            </li>
+                        {% endfor %}
                     {% endfor %}
                 </ul>
             </div>
