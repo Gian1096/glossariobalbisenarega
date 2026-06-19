@@ -265,19 +265,19 @@ title: Glossario Tradizionale (IT)
         const pannelloBenvenuto = document.getElementById("Pannello-Benvenuto");
         const schede = Array.from(listaSchede.children);
 
-        // 1. FUNZIONE DI FILTRO SOLO PER IL TESTO (Cerca ovunque)
+        // 1. FILTRO TOTALMENTE LIBERO PER IL TESTO (Ignora e azzera le lettere)
         function filtraSoloTesto() {
             const query = inputTesto.value.toLowerCase().trim();
 
             if (!query) {
-                // Se svuoti la barra, torna allo stato di benvenuto iniziale
+                // Se la barra si svuota, torna allo stato iniziale di benvenuto
                 pannelloBenvenuto.style.display = "block";
                 listaSchede.style.display = "none";
                 messaggioVuoto.style.display = "none";
                 return;
             }
 
-            // Mostra la lista e resetta l'eventuale lettera attiva nella tastiera
+            // Stato attivo: mostra la lista e SPEGNE tassativamente tutti i bottoni delle lettere
             pannelloBenvenuto.style.display = "none";
             listaSchede.style.display = "block";
             tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
@@ -285,6 +285,8 @@ title: Glossario Tradizionale (IT)
             let contatore = 0;
             schede.forEach(scheda => {
                 const titolo = scheda.getAttribute("data-titolo") || "";
+                
+                // Il controllo è 100% indipendente: cerca solo la corrispondenza del testo
                 if (titolo.includes(query)) {
                     scheda.style.setProperty("display", "flex", "important");
                     contatore++;
@@ -296,9 +298,9 @@ title: Glossario Tradizionale (IT)
             messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
         }
 
-        // 2. FUNZIONE DI FILTRO SOLO PER LETTERA (Azzera la barra di testo)
+        // 2. FILTRO SOLO PER LETTERA (Svuota la barra di testo)
         function filtraSoloLettera(letteraSelezionata) {
-            // Svuota l'input testuale per non creare conflitti
+            // Svuota l'input di testo per evitare incroci malefici
             inputTesto.value = "";
             
             pannelloBenvenuto.style.display = "none";
@@ -307,6 +309,7 @@ title: Glossario Tradizionale (IT)
             let contatore = 0;
             schede.forEach(scheda => {
                 const iniziale = scheda.getAttribute("data-iniziale") || "";
+                
                 if (letteraSelezionata === "TUTTI" || iniziale === letteraSelezionata) {
                     scheda.style.setProperty("display", "flex", "important");
                     contatore++;
@@ -318,8 +321,10 @@ title: Glossario Tradizionale (IT)
             messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
         }
 
-        // ASSEGNAZIONE DEGLI EVENTI
-        inputTesto.addEventListener("input", filtraSoloTesto);
+        // RESET COMPLETO DEGLI EVENTI ASCOLTATI
+        inputTesto.replaceWith(inputTesto.cloneNode(true));
+        const nuovoInputTesto = document.getElementById("Input-Filtro-Testo");
+        nuovoInputTesto.addEventListener("input", filtraSoloTesto);
 
         tastiera.addEventListener("click", function(e) {
             if (!e.target.classList.contains("Btn-Lettera")) return;
