@@ -4,13 +4,26 @@ title: Glossario Tradizionale (IT)
 ---
 
 <style>
+    /* --- CONTENITORE GENERALE FLUIDO E AMPIO --- */
+    .Wrapper-Glossario-Globale {
+        width: 100%;
+        max-width: 1600px; /* <--- Permette alla pagina di aprirsi su schermi grandi */
+        margin: 20px auto;
+        padding: 40px;
+        background: #ffffff;
+        border-top: 6px solid #1a365d;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        box-sizing: border-box;
+    }
+
     /* --- STILE LOGHI ISTITUZIONALI --- */
     .Header-Podio {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 20px;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
         border-bottom: 2px solid #e2e8f0;
         padding-bottom: 20px;
     }
@@ -21,32 +34,33 @@ title: Glossario Tradizionale (IT)
     }
 
     .Header-Podio img {
-        max-height: 75px;
+        max-height: 85px;
         width: auto;
         object-fit: contain;
     }
 
-   .Sezione-Glossario-Statico {
+    /* --- PANNELLO DI RICERCA --- */
+    .Sezione-Glossario-Statico {
         background-color: #f8fafc; 
         border: 1px solid #e2e8f0;
-        border-radius: 8px;
+        border-radius: 12px;
         padding: 40px;
-        margin-top: 35px;
-        max-width: 1350px; /* <--- Aumentato per riempire i lati su schermi grandi */
-        margin-left: auto;
-        margin-right: auto;
+        margin-top: 20px;
+        width: 100%;
+        box-sizing: border-box;
         position: relative;
     }
 
     .Search-Container {
-        max-width: 750px;
-        margin: 15px auto 25px auto;
+        width: 100%;
+        max-width: 1000px;
+        margin: 15px auto 30px auto;
     }
 
     .Search-Input {
         width: 100%;
-        padding: 15px 22px;
-        font-size: 1.1em;
+        padding: 16px 25px;
+        font-size: 1.15em;
         border: 2px solid #cbd5e1;
         border-radius: 50px;
         outline: none;
@@ -65,21 +79,22 @@ title: Glossario Tradizionale (IT)
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 35px;
-        max-width: 1100px; /* <--- Allargata per distendere meglio le lettere */
+        gap: 10px;
+        margin-bottom: 40px;
+        width: 100%;
+        max-width: 1300px;
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     .Btn-Lettera {
         background: #ffffff;
         border: 1px solid #cbd5e1;
         color: #4a5568;
-        padding: 8px 14px;
-        font-size: 0.95em;
+        padding: 10px 18px;
+        font-size: 1em;
         font-weight: 600;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
         transition: all 0.15s ease;
         user-select: none;
@@ -97,13 +112,14 @@ title: Glossario Tradizionale (IT)
         border-color: #1a365d;
     }
 
-    /* --- NUOVA GRIGLIA ARMONICA A COLONNE --- */
+    /* --- SCACCHIERA COMPLETAMENTE ESPANSA --- */
     .Insieme-Schede {
         list-style: none;
         padding: 0;
-        margin: 0;
+        margin: 0 auto;
+        width: 100%;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* <--- Si adatta riempiendo lo schermo in base allo spazio */
         gap: 20px;
     }
 
@@ -111,16 +127,17 @@ title: Glossario Tradizionale (IT)
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 8px;
-        padding: 16px 20px;
+        padding: 18px 22px;
         transition: all 0.2s ease;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.01);
     }
 
     .Voce-Scheda-Glossario:hover {
         border-color: #2b6cb0;
-        box-shadow: 0 4px 12px rgba(43, 108, 176, 0.06);
+        box-shadow: 0 6px 15px rgba(43, 108, 176, 0.08);
         transform: translateY(-2px);
     }
 
@@ -151,15 +168,16 @@ title: Glossario Tradizionale (IT)
         border: 1px solid #d0e1f2;
     }
 
-    /* MESSAGGIO DI INVITO E VUOTO */
     .Messaggio-Guida {
         text-align: center;
         color: #718096;
-        font-size: 1.1em;
-        padding: 40px;
+        font-size: 1.15em;
+        padding: 50px;
         background: #ffffff;
         border: 2px dashed #cbd5e1;
         border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .Nessun-Risultato {
@@ -172,7 +190,7 @@ title: Glossario Tradizionale (IT)
 
     .Contenitore-Ritorno {
         text-align: center;
-        margin: 30px auto 10px auto;
+        margin: 40px auto 10px auto;
     }
 
     .Btn-Ritorno {
@@ -180,7 +198,7 @@ title: Glossario Tradizionale (IT)
         color: #4a5568;
         text-decoration: none;
         font-weight: 600;
-        padding: 10px 25px;
+        padding: 12px 30px;
         border-radius: 50px;
         border: 2px solid #cbd5e1;
         transition: all 0.2s ease;
@@ -199,9 +217,16 @@ title: Glossario Tradizionale (IT)
         box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         display: block;
     }
+
+    /* Responsive per schermi piccoli */
+    @media (max-width: 768px) {
+        .Wrapper-Glossario-Globale { padding: 20px; }
+        .Header-Podio { flex-direction: column; gap: 15px; }
+        .Sezione-Glossario-Statico { padding: 20px; }
+    }
 </style>
 
-<div class="Homepage-Container" style="background: #ffffff; border-top: 6px solid #1a365d; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); padding: 40px; margin-top: 20px;">
+<div class="Wrapper-Glossario-Globale">
     
     <div class="Header-Podio">
         <div class="Podio-Dipartimento">
@@ -238,7 +263,7 @@ title: Glossario Tradizionale (IT)
             </div>
 
             <div class="Messaggio-Guida" id="Pannello-Benvenuto">
-                🔍 Seleziona una lettera dall'alfabeto o inizia a digitare nella barra per consultare le schede del glossario.
+                🔍 Seleziona una letterina dall'alfabeto o inizia a digitare nella barra per consultare le schede del glossario.
             </div>
 
             <ul class="Insieme-Schede" id="Lista-Schede-Elementi" style="display: none;">
@@ -273,61 +298,4 @@ title: Glossario Tradizionale (IT)
         let letteraSelezionata = ""; 
         let primaInterazione = false;
 
-        function applicaFiltri() {
-            const query = inputTesto.value.toLowerCase().trim();
-            
-            // Se non c'è stata interazione reale (nessuna lettera e testo vuoto), mantieni il benvenuto
-            if (!primaInterazione && !query && !letteraSelezionata) {
-                pannelloBenvenuto.style.display = "block";
-                listaSchede.style.display = "none";
-                messaggioVuoto.style.display = "none";
-                return;
-            }
-
-            pannelloBenvenuto.style.display = "none";
-            listaSchede.style.display = "grid"; // Attiva la griglia CSS dinamica
-
-            let riscontrati = 0;
-
-            schede.forEach(scheda => {
-                const titolo = scheda.getAttribute("data-titolo") || "";
-                const iniziale = scheda.getAttribute("data-iniziale") || "";
-                
-                const corrispondeTesto = titolo.includes(query);
-                const corrispondeLettera = (letteraSelezionata === "TUTTI" || !letteraSelezionata || iniziale === letteraSelezionata);
-
-                if (corrispondeTesto && corrispondeLettera) {
-                    scheda.style.display = "flex";
-                    riscontrati++;
-                } else {
-                    scheda.style.display = "none";
-                }
-            });
-
-            if (riscontrati === 0) {
-                messaggioVuoto.style.display = "block";
-                listaSchede.style.display = "none";
-            } else {
-                messaggioVuoto.style.display = "none";
-            }
-        }
-
-        tastiera.addEventListener("click", function(e) {
-            if (!e.target.classList.contains("Btn-Lettera")) return;
-            
-            primaInterazione = true;
-            tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
-            e.target.classList.add("attiva");
-            
-            letteraSelezionata = e.target.getAttribute("data-lettera");
-            applicaFiltri();
-        });
-
-        inputTesto.addEventListener("input", function() {
-            if (this.value.trim().length > 0) {
-                primaInterazione = true;
-            }
-            applicaFiltri();
-        });
-    });
-</script>
+        function
