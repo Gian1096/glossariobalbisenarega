@@ -61,7 +61,7 @@ title: Ricerca Lemmi (IT)
         box-shadow: 0 10px 20px rgba(26, 54, 93, 0.1);
     }
 
-    /* --- LAYOUT DEL SISTEMA A TRE COLONNE (BILANCIATO) --- */
+    /* --- LAYOUT DEL SISTEMA A TRE COLONNE --- */
     .Griglia-Sincrona-Ruote {
         display: flex;
         align-items: center;
@@ -238,7 +238,7 @@ title: Ricerca Lemmi (IT)
                         <ul class="ruota-lista" id="ListaIT">
                             {% assign pagine_it = site.pages | where: "lingua", "it" | sort: "title" %}
                             {% for p in pagine_it %}
-                                <li class="ruota-item" data-id="{{ p.title | downcase }}">
+                                <li class="ruota-item" data-id="{{ p.title | downcase | strip }}">
                                     <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
                                 </li>
                             {% endfor %}
@@ -261,14 +261,14 @@ title: Ricerca Lemmi (IT)
                                 {% for p_fr in pagine_fr %}
                                     {% assign target_fr_min = p_fr.target_italien | downcase | strip %}
                                     {% if target_fr_min == titolo_it_min %}
-                                        <li class="ruota-item" data-target="{{ p_it.title | downcase }}">
+                                        <li class="ruota-item" data-target="{{ p_it.title | downcase | strip }}">
                                             <a href="{{ p_fr.url | relative_url }}">{{ p_fr.title }}</a>
                                         </li>
                                         {% assign trovato = true %}
                                     {% endif %}
                                 {% endfor %}
                                 {% if trovato == false %}
-                                    <li class="ruota-item lemma-vuoto" data-target="{{ p_it.title | downcase }}">
+                                    <li class="ruota-item lemma-vuoto" data-target="{{ p_it.title | downcase | strip }}">
                                         <a href="#">&mdash;</a>
                                     </li>
                                 {% endif %}
@@ -296,6 +296,7 @@ title: Ricerca Lemmi (IT)
         const wrapperIT = document.getElementById("WrapperIT");
         const listaIT = document.getElementById("ListaIT");
         const listaFR = document.getElementById("ListaFR");
+        const inputRicerca = document.getElementById("Input-Ricerca-Dinamica");
         
         let itemsIT = Array.from(listaIT.children);
         let itemsFR = Array.from(listaFR.children);
@@ -346,6 +347,24 @@ title: Ricerca Lemmi (IT)
         }
 
         aggiornaSincroRuote();
+
+        // --- MOTORE DI RICERCA INTERNO DIRETTO SUL CILINDRO ---
+        inputRicerca.addEventListener("input", function() {
+            const query = this.value.toLowerCase().trim();
+            if (!query) return;
+
+            // Cerca il primo lemma italiano che inizia con le lettere digitate
+            const indiceTrovato = itemsIT.findIndex(item => {
+                const idLemma = item.getAttribute("data-id") || "";
+                return idLemma.startsWith(query);
+            });
+
+            // Se lo trova, sposta la ruota su quell'indice
+            if (indiceTrovato !== -1) {
+                indiceVirtuale = indiceTrovato;
+                aggiornaSincroRuote();
+            }
+        });
 
         wrapperIT.addEventListener("wheel", function(e) {
             e.preventDefault();
