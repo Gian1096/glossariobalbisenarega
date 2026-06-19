@@ -224,10 +224,16 @@ title: Ricerca Lemmi (IT)
     </div>
 
     <main>
-        <div class="Sezione-Navigazione-Ricerca">
+       <div class="Sezione-Navigazione-Ricerca" style="position: relative;">
             
-            <div class="Search-Container">
-                <input type="text" id="Input-Ricerca-Dinamica" class="Search-Input" placeholder="Cerca un termine in italiano... (e.g., abside, loggia)">
+            <div style="position: absolute; top: 15px; right: 20px; font-size: 0.9em; font-weight: 600;">
+                <span style="color: #1a365d; margin-right: 5px;">Lingua / Langue:</span>
+                <span style="color: #718096; cursor: default; margin-right: 8px;">IT</span>
+                <a href="{{ '/ricerca-fr.html' | relative_url }}" style="color: #2b6cb0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#1a365d'" onmouseout="this.style.color='#2b6cb0'">FR 🇫🇷</a>
+            </div>
+            
+            <div class="Search-Container" style="margin-top: 15px;">
+                <input type="text" id="Input-Ricerca-Dinamica" class="Search-Input" placeholder="Cerca un termine in italiano... (es. bordura, bucatura)">
             </div>
 
             <div class="Griglia-Sincrona-Ruote">
