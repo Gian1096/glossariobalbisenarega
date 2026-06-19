@@ -348,18 +348,15 @@ title: Ricerca Lemmi (IT)
 
         aggiornaSincroRuote();
 
-        // --- MOTORE DI RICERCA INTERNO DIRETTO SUL CILINDRO ---
         inputRicerca.addEventListener("input", function() {
             const query = this.value.toLowerCase().trim();
             if (!query) return;
 
-            // Cerca il primo lemma italiano che inizia con le lettere digitate
             const indiceTrovato = itemsIT.findIndex(item => {
                 const idLemma = item.getAttribute("data-id") || "";
                 return idLemma.startsWith(query);
             });
 
-            // Se lo trova, sposta la ruota su quell'indice
             if (indiceTrovato !== -1) {
                 indiceVirtuale = indiceTrovato;
                 aggiornaSincroRuote();
