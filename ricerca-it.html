@@ -208,6 +208,16 @@ title: Ricerca Lemmi (IT)
         color: #1a365d;
         transform: translateY(-2px);
     }
+
+    /* --- STILE ICONE LINGUA COMPATIBILI WINDOWS --- */
+    .Bollino-Flag {
+        width: 32px;
+        height: 32px;
+        border-radius: 50px;
+        object-fit: cover;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        display: block;
+    }
 </style>
 
 <div class="Homepage-Container" style="background: #ffffff; border-top: 6px solid #1a365d; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); padding: 40px; margin-top: 20px;">
@@ -227,9 +237,11 @@ title: Ricerca Lemmi (IT)
     <main>
         <div class="Sezione-Navigazione-Ricerca">
             
-          <div style="position: absolute; top: 15px; right: 25px; font-size: 1.8em; line-height: 1; z-index: 20; display: flex; gap: 15px; align-items: center;">
-                <span style="opacity: 0.4; cursor: default; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));" title="Versione Italiana (Corrente)">🇮🇹</span>
-                <a href="{{ '/ricerca-fr.html' | relative_url }}" style="text-decoration: none; transition: transform 0.2s, filter 0.2s; display: inline-block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';" title="Version Française">🇫🇷</a>
+            <div style="position: absolute; top: 15px; right: 25px; z-index: 20; display: flex; gap: 15px; align-items: center;">
+                <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag" style="opacity: 0.35; cursor: default;" title="Versione Italiana (Corrente)">
+                <a href="{{ '/ricerca-fr.html' | relative_url }}" style="text-decoration: none; transition: transform 0.2s; display: block;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';" title="Version Française">
+                    <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag">
+                </a>
             </div>
             
             <div class="Search-Container">
