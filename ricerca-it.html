@@ -258,20 +258,19 @@ title: Ricerca Lemmi (IT)
                             {% for p_it in pagine_it %}
                                 {% assign titolo_it_min = p_it.title | downcase | strip %}
                                 {% assign trovato = false %}
-                                {% for p_fr in pagine_fr %}
-                                    {% assign target_fr_min = p_fr.target_italien | downcase | strip %}
-                                    {% if target_fr_min == titolo_it_min %}
-                                        <li class="ruota-item" data-target="{{ p_it.title | downcase | strip }}">
-                                            <a href="{{ p_fr.url | relative_url }}">{{ p_fr.title }}</a>
-                                        </li>
-                                        {% assign trovato = true %}
-                                    {% endif %}
-                                {% endfor %}
-                                {% if trovato == false %}
-                                    <li class="ruota-item lemma-vuoto" data-target="{{ p_it.title | downcase | strip }}">
+                                
+                                <li class="ruota-item" data-target="{{ titolo_it_min }}" style="display: none;">
+                                    {% for p_fr in pagine_fr %}
+                                        {% assign target_fr_min = p_fr.target_italien | downcase | strip %}
+                                        {% if target_fr_min == titolo_it_min %}
+                                            <a href="{{ p_fr.url | relative_url }}" style="display: inline-block; width: auto; padding: 0 5px;">{{ p_fr.title }}</a>
+                                            {% assign trovato = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if trovato == false %}
                                         <a href="#">&mdash;</a>
-                                    </li>
-                                {% endif %}
+                                    {% endif %}
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -329,8 +328,14 @@ title: Ricerca Lemmi (IT)
                     if(itemsFR[i]) {
                         itemsFR[i].style.display = "block";
                         itemsFR[i].style.transform = `rotateX(${-angolo}deg) translateZ(${raggioCilindro}px)`;
-                        if (i === indiceAttivoReale) itemsFR[i].classList.add("attivo");
-                        else itemsFR[i].classList.remove("attivo");
+                        if (i === indiceAttivoReale) {
+                            itemsFR[i].classList.add("attivo");
+                            // Abilita i click sui link interni dello slot attivo
+                            itemsFR[i].querySelectorAll("a").forEach(a => a.style.pointerEvents = "auto");
+                        } else {
+                            itemsFR[i].classList.remove("attivo");
+                            itemsFR[i].querySelectorAll("a").forEach(a => a.style.pointerEvents = "none");
+                        }
                     }
                 } else {
                     if(itemsIT[i]) {
