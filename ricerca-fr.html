@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Recherche Lemmes (FR)
+title: Recherche Termes (FR)
 ---
 
 <style>
@@ -35,11 +35,12 @@ title: Recherche Lemmes (FR)
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
+        position: relative;
     }
 
     .Search-Container {
         max-width: 750px;
-        margin: 0 auto 35px auto;
+        margin: 15px auto 35px auto;
         position: relative;
     }
 
@@ -170,6 +171,11 @@ title: Recherche Lemmes (FR)
         text-decoration: underline;
     }
 
+    .ruota-item.lemma-vuoto {
+        font-style: italic;
+        color: #cbd5e1;
+    }
+
     .info-scroll {
         text-align: center;
         font-size: 0.8em;
@@ -202,6 +208,16 @@ title: Recherche Lemmes (FR)
         color: #1a365d;
         transform: translateY(-2px);
     }
+
+    /* --- STILE ICONE LINGUA COMPATIBILI WINDOWS --- */
+    .Bollino-Flag {
+        width: 32px;
+        height: 32px;
+        border-radius: 50px;
+        object-fit: cover;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        display: block;
+    }
 </style>
 
 <div class="Homepage-Container" style="background: #ffffff; border-top: 6px solid #1a365d; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); padding: 40px; margin-top: 20px;">
@@ -221,8 +237,15 @@ title: Recherche Lemmes (FR)
     <main>
         <div class="Sezione-Navigazione-Ricerca">
             
+            <div style="position: absolute; top: 15px; right: 25px; z-index: 20; display: flex; gap: 15px; align-items: center;">
+                <a href="{{ '/ricerca-it.html' | relative_url }}" style="text-decoration: none; transition: transform 0.2s; display: block;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';" title="Versione Italiana">
+                    <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag">
+                </a>
+                <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag" style="opacity: 0.35; cursor: default;" title="Version Française (Courante)">
+            </div>
+            
             <div class="Search-Container">
-                <input type="text" id="Input-Ricerca-Dinamica" class="Search-Input" placeholder="Rechercher un terme en français... (e.g., bordure, bâtiment)">
+                <input type="text" id="Input-Ricerca-Dinamica" class="Search-Input" placeholder="Rechercher un terme en français... (ex. bordure)">
             </div>
 
             <div class="Griglia-Sincrona-Ruote">
@@ -254,11 +277,11 @@ title: Recherche Lemmes (FR)
                                 {% assign target_it_min = p_fr.target_italien | downcase | strip %}
                                 {% assign trovato = false %}
                                 
-                                <li class="ruota-item">
+                                <li class="ruota-item" data-target="{{ target_it_min }}" style="display: none;">
                                     {% for p_it in pagine_it %}
                                         {% assign titolo_it_min = p_it.title | downcase | strip %}
                                         {% if titolo_it_min == target_it_min %}
-                                            <a href="{{ p_it.url | relative_url }}">{{ p_it.title }}</a>
+                                            <a href="{{ p_it.url | relative_url }}" style="display: inline-block; width: auto; padding: 0 5px;">{{ p_it.title }}</a>
                                             {% assign trovato = true %}
                                         {% endif %}
                                     {% endfor %}
@@ -273,12 +296,12 @@ title: Recherche Lemmes (FR)
 
             </div>
             
-            <div class="info-scroll">Utilisez la molette de la souris ou glissez la roue française pour faire défiler les lemmes alignés</div>
+            <div class="info-scroll">Faites défiler la roue française avec la molette ou en glissant pour voir les correspondances</div>
         </div>
 
         <div class="Contenitore-Ritorno">
             <a href="{{ '/' | relative_url }}" class="Btn-Ritorno">
-                &larr; Retour à l'accueil
+                &larr; Retour à l'Accueil
             </a>
         </div>
 
