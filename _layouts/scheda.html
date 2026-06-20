@@ -244,7 +244,7 @@ title: {{ page.title }} | Glossario Rolli
                     {% assign schede_filtrate = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua | sort: "title" %}
                     {% for scheda in schede_filtrate %}
                         <li class="{% if scheda.url == page.url %}attivo{% endif %}" data-lemma="{{ scheda.title | downcase }}">
-                            <a href="{{ site.baseurl }}{{ scheda.url }}">{{ scheda.title }}</a>
+                            <a href="{{ scheda.url | relative_url }}">{{ scheda.title }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -262,7 +262,7 @@ title: {{ page.title }} | Glossario Rolli
                             {% assign min_titolo = s.title | downcase | strip %}
                             {% if min_titolo == min_target %}{% assign link_trovato = s.url %}{% endif %}
                         {% endfor %}
-                        <a href="{{ site.baseurl }}{{ link_trovato }}" class="Link-Equivalente-FR">
+                        <a href="{{ link_trovato | relative_url }}" class="Link-Equivalente-FR">
                             <span>fr</span> Équivalent: <strong>{{ page.fr_equivalent }}</strong>
                         </a>
                     {% endif %}
@@ -294,13 +294,13 @@ title: {{ page.title }} | Glossario Rolli
                     {% endfor %}
 
                     {% if prev_scheda %}
-                        <a href="{{ site.baseurl }}{{ prev_scheda.url }}" class="Btn-Navigazione">← {{ prev_scheda.title }}</a>
+                        <a href="{{ prev_scheda.url | relative_url }}" class="Btn-Navigazione">← {{ prev_scheda.title }}</a>
                     {% else %}
                         <span class="Btn-Navigazione" style="opacity: 0.3; cursor: not-allowed;">← Inizio</span>
                     {% endif %}
 
                     {% if next_scheda %}
-                        <a href="{{ site.baseurl }}{{ next_scheda.url }}" class="Btn-Navigazione">{{ next_scheda.title }} →</a>
+                        <a href="{{ next_scheda.url | relative_url }}" class="Btn-Navigazione">{{ next_scheda.title }} →</a>
                     {% else %}
                         <span class="Btn-Navigazione" style="opacity: 0.3; cursor: not-allowed;">Fine →</span>
                     {% endif %}
@@ -319,15 +319,23 @@ title: {{ page.title }} | Glossario Rolli
                 <div class="Pannello-Comandi-Navigazione">
                     <div style="font-size: 0.75em; text-transform: uppercase; font-weight: 800; color: #a0aec0; letter-spacing: 0.5px; margin-bottom: 5px;">Navigazione Portale</div>
                     
-                    <a href="{{ site.baseurl }}/glossario-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
-                        📋 Elenco Glossario ({{ page.lingua | upcase }})
-                    </a>
+                    {% if page.lingua == "it" %}
+                        <a href="/glossariobalbisenarega/glossario-it/" class="Btn-Comando-Laterale">
+                            📋 Elenco Glossario (IT)
+                        </a>
+                        <a href="/glossariobalbisenarega/ricerca-it/" class="Btn-Comando-Laterale">
+                            🔄 Ruota di Traduzione
+                        </a>
+                    {% else %}
+                        <a href="/glossariobalbisenarega/glossario-fr/" class="Btn-Comando-Laterale">
+                            📋 Liste du Glossaire (FR)
+                        </a>
+                        <a href="/glossariobalbisenarega/ricerca-fr/" class="Btn-Comando-Laterale">
+                            🔄 Roue de Traduction
+                        </a>
+                    {% endif %}
                     
-                    <a href="{{ site.baseurl }}/ricerca-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
-                        🔄 Ruota di Traduzione
-                    </a>
-                    
-                    <a href="{{ site.baseurl }}/" class="Btn-Comando-Laterale" style="border-color: #cbd5e1; background: #ffffff;">
+                    <a href="/glossariobalbisenarega/" class="Btn-Comando-Laterale" style="border-color: #cbd5e1; background: #ffffff;">
                         🏠 Torna alla Home
                     </a>
                 </div>
