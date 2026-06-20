@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Elenco Glossario | Glossario Rolli
+title: {{ page.title }} | Glossario Rolli
 ---
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>{{ page.title }}</title>
+    <title>{{ page.title }} | Glossario Rolli</title>
     <style>
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -15,200 +15,211 @@ title: Elenco Glossario | Glossario Rolli
             font-size: 1.15em;
             text-align: justify;
             margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            background-color: #eef2f7 !important;
+            padding: 30px 4% !important; /* Spaziatura fluida identica alla Home */
+            box-sizing: border-box;
+            
+            /* --- SFONDO ISTITUZIONALE E CALDO GLOBALE --- */
+            background-color: #f1f5f9;
+            background-image: 
+                radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0),
+                radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
         }
 
-        .Glossario-Container {
+        .Scheda-Container {
             background: #ffffff;
-            border-top: 6px solid #1a365d;
+            border-top: 10px solid #1a365d; /* Spessore maestoso coordinato */
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(26, 54, 93, 0.06);
             padding: 40px;
-            max-width: 1500px; 
-            margin: 0 auto; 
-            min-height: 100vh;
+            margin: 20px auto 0 auto;
+            width: 100%;
+            max-width: 1600px; /* Larghezza adattiva coordinata con tutto il portale */
             box-sizing: border-box;
         }
 
-        /* --- PODIO ISTITUZIONALE BIANCO SINCRONIZZATO --- */
-        .Header-Podio { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            border-bottom: 1px solid #e2e8f0; 
-            padding-bottom: 25px; 
-            margin-bottom: 35px; 
-            gap: 15px; 
-            background-color: #ffffff !important;
+        .Main-Layout {
+            display: grid;
+            grid-template-columns: 250px minmax(0, 1fr) 280px;
+            gap: 30px;
+            margin-top: 20px;
+            align-items: flex-start;
         }
 
-        .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
-        .Logo-Dip { height: 95px; width: auto; display: block; }
-        .Podio-Ateneo { flex: 1; display: flex; justify-content: center; align-items: center; }
-        .Logo-Unige-Sigillo { height: 125px; width: auto; display: block; }
-        .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
-        .Logo-Phd { height: 95px; width: auto; display: block; }
-
-        /* TITOLO E FUNZIONI DI RICERCA */
-        .Glossario-Header-Area {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 30px;
+        /* 1. BARRA LATERALE SINISTRA SCORREVOLE ED EVOLUTA */
+        .Sidebar-Lemmi {
+            border-right: 1px solid #e2e8f0;
+            padding-right: 15px;
+            position: sticky;
+            top: 20px; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            padding-bottom: 20px;
         }
 
-        h1.Glossario-Titolo { 
+        .Sidebar-Lemmi::-webkit-scrollbar { width: 5px; }
+        .Sidebar-Lemmi::-webkit-scrollbar-track { background: #f1f5f9; }
+        .Sidebar-Lemmi::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        .Sidebar-Titolo-Fisso {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            z-index: 10;
+            padding-bottom: 10px;
+        }
+
+        .Sidebar-Titolo {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #718096;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .Sidebar-Search {
+            width: 100%;
+            padding: 6px 12px;
+            font-size: 0.85em;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .Sidebar-Search:focus { border-color: #2b6cb0; }
+
+        .Albero-Lemmi { list-style: none; padding: 0; margin: 10px 0 0 0; }
+        .Albero-Lemmi li { margin-bottom: 5px; break-inside: avoid; }
+        .Albero-Lemmi a {
+            display: block; padding: 6px 10px; color: #4a5568;
+            text-decoration: none; border-radius: 6px; font-size: 0.85em; transition: all 0.2s ease;
+        }
+        .Albero-Lemmi a:hover { background-color: #f7fafc; color: #2b6cb0; }
+        .Albero-Lemmi li.attivo a {
+            background-color: #ebf8ff; color: #2b6cb0; font-weight: 600;
+            border-left: 4px solid #2b6cb0; border-radius: 0 6px 6px 0; padding-left: 6px;
+        }
+
+        /* 2. CONTENUTO CENTRALE */
+        .Contenuto-Scheda { min-width: 0; width: 100%; }
+        
+        .Contenuto-Scheda h1.Lemma-Visibile-Alto { 
             color: #1a365d; 
-            font-size: 2.4em; 
-            margin: 0; 
+            font-size: 2.3em; 
+            margin: 0 0 5px 0; 
             font-weight: 700; 
             letter-spacing: -0.5px; 
         }
-
-        .Search-Bar-Container {
-            flex: 1;
-            max-width: 450px;
-            min-width: 280px;
-        }
-
-        .Glossario-Search {
-            width: 100%;
-            padding: 12px 20px;
-            font-size: 0.95em;
-            border: 1px solid #cbd5e1;
-            border-radius: 30px;
-            outline: none;
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .Glossario-Search:focus { 
-            border-color: #2b6cb0; 
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
-        }
-
-        /* GRIGLIA ADATTIVA DEI LEMMI */
-        .Glossario-Grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            margin-top: 10px;
-        }
-
-        .Glossario-Card {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .Glossario-Card:hover {
-            border-color: #1a365d;
-            background-color: #f0f4f8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.05);
-        }
-
-        .Card-Top { margin-bottom: 12px; }
         
-        .Card-Lemma-Nome {
-            color: #1a365d;
-            font-size: 1.3em;
-            font-weight: 700;
-            margin: 0 0 5px 0;
-            text-transform: lowercase; /* Mantiene lo stile dei lemmi in minuscolo */
-        }
+        .Contenuto-Scheda h1:not(.Lemma-Visibile-Alto) { display: none; } 
 
-        .Card-Traduzione {
-            font-size: 0.95em;
+        .Contenuto-Scheda h3 {
+            color: #1a365d; font-size: 1.15em; text-transform: uppercase;
+            letter-spacing: 0.5px; margin: 30px 0 10px 0; display: flex; align-items: center; gap: 8px;
+        }
+        .Contenuto-Scheda h3::after { content: ""; flex: 1; height: 1px; background-color: #e2e8f0; margin-left: 10px; }
+        
+        .Contenuto-Scheda blockquote, .Contenuto-Scheda em {
+            display: block; background-color: #f2f9f8; border-left: 4px solid #1a365d;
+            padding: 20px; border-radius: 0 8px 8px 0; font-style: italic; color: #2d3748; line-height: 1.7; margin: 10px 0;
+        }
+        .Contenuto-Scheda code {
+            font-family: monospace; background-color: #f2f9f8; padding: 6px 10px;
+            border-radius: 4px; border: 1px solid #e8f9f7; display: inline-block; font-size: 1em; color: #2d3748;
+        }
+        .Contenuto-Scheda ol {
+            background-color: #f2f9f8; border: 1px solid #e2e8f0; padding: 20px 20px 20px 40px; border-radius: 6px; font-size: 0.9em; color: #4a5568; margin: 10px 0;
+        }
+        .Contenuto-Scheda ol li { margin-bottom: 12px; line-height: 1.6; word-break: break-all !important; overflow-wrap: break-word !important; }
+        .Contenuto-Scheda ol a { color: #2b6cb0; word-break: break-all !important; }
+        
+        .Contenuto-Scheda p { font-size: 1.05em; color: #4a5568; margin: 10px 0; }
+
+        /* Sfondo acquamarina chiaro coordinato per i box Note e Fonti */
+        .Contenuto-Scheda h3 + p:last-of-type,
+        .Contenuto-Scheda h3[id*="note"] + p,
+        .Contenuto-Scheda h3[id*="sources"] + p,
+        .Contenuto-Scheda h3[id*="fonti"] + p {
+            background-color: #f2f9f8; 
+            border: 1px solid #e8f9f7;
+            padding: 20px; 
+            border-radius: 6px; 
+            font-size: 0.9em; 
             color: #4a5568;
-            font-style: italic;
-        }
-        .Card-Traduzione strong {
-            color: #2c5282;
-            font-style: normal;
-        }
-
-        .Card-Badge-Area {
-            display: flex;
-            gap: 8px;
-            margin-top: 15px;
+            margin: 15px 0;
+            line-height: 1.8;
+            text-align: left;
+            white-space: pre-line;
         }
 
-        .Badge-Item {
-            background-color: #e2e8f0;
-            color: #4a5568;
-            font-size: 0.75em;
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .Badge-Item.Dominio-Badge {
-            background-color: #ebf8ff;
-            color: #2b6cb0;
+        /* 3. COLONNA DESTRA */
+        .Sidebar-Immagine {
+            border-left: 1px solid #e2e8f0; padding-left: 20px;
+            position: sticky; top: 20px; display: flex; flex-direction: column; gap: 20px;
         }
 
-        /* PANNELLO DI NAVIGAZIONE INFERIORE */
-        .Glossario-Footer-Nav {
-            margin-top: 50px;
-            padding-top: 25px;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .Visual-Card { background-color: #f2f9f8; border: 1px solid #e8f9f7; border-radius: 8px; overflow: hidden; }
+        .Visual-Foto { width: 100%; height: auto; display: block; object-fit: cover; }
+        .Visual-Didascalia { padding: 12px; font-size: 0.85em; color: #718096; line-height: 1.4; border-top: 1px solid #e8f9f7; background-color: #ffffff; }
+
+        /* Pannello comandi coordinato */
+        .Pannello-Comandi-Navigazione {
+            background-color: #f2f9f8; border: 1px solid #e8f9f7; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; gap: 10px;
+        }
+        .Btn-Comando-Laterale {
+            display: flex; align-items: center; gap: 10px; text-decoration: none; color: #4a5568; font-size: 0.85em; font-weight: 600; padding: 10px 12px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; transition: all 0.2s ease;
+        }
+        .Btn-Comando-Laterale:hover { border-color: #1a365d; color: #1a365d; background: #e8f9f7; transform: translateX(2px); }
+
+        /* Frecce di navigazione inferiori dello stesso stile blu */
+        .Navigazione-Schede { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 25px; border-top: 1px solid #e2e8f0; }
+        .Btn-Navigazione { display: inline-flex; align-items: center; text-decoration: none; color: #4a5568; background-color: #ffffff; border: 1px solid #cbd5e1; padding: 10px 18px; border-radius: 6px; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
+        .Btn-Navigazione:hover { background-color: #1a365d; color: #ffffff; border-color: #1a365d; }
+
+        /* --- PODIO ISTITUZIONALE MAESTOSO MENTA COERENTE CON LA HOME --- */
+        .Header-Podio { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end; /* Allineamento geometrico inferiore perfetto */
+            border-bottom: 2px solid #e2e8f0; 
+            padding: 60px 50px; /* Grandezza solenne ereditata */
+            margin: -40px -40px 35px -40px; 
+            gap: 25px; 
+            background-color: #e8f9f7 !important; /* Sfondo menta ufficiale */
         }
 
-        .Btn-Torna-Home {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: #4a5568;
-            background-color: #f7fafc;
-            border: 1px solid #cbd5e1;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-size: 0.9em;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-        .Btn-Torna-Home:hover {
-            background-color: #1a365d;
-            color: #ffffff;
-            border-color: #1a365d;
-        }
+        .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: flex-end; }
+        .Logo-Dip { height: 95px; width: auto; display: block; }
+        .Podio-Ateneo { flex: 1.2; display: flex; justify-content: center; align-items: flex-end; }
+        .Logo-Unige-Sigillo { height: 155px; width: auto; display: block; transition: transform 0.2s ease; }
+        .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: flex-end; }
+        .Logo-Phd { height: 95px; width: auto; display: block; }
+        
+        .Title-Area { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; width: 100%; }
+        
+        .Link-Equivalente-FR { display: inline-flex; align-items: center; background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 6px; text-decoration: none; color: #4a5568; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
+        .Link-Equivalente-FR:hover { border-color: #1a365d; color: #1a365d; background-color: #f2f9f8; }
+        .Link-Equivalente-FR span { background-color: #e8f9f7; color: #1a365d; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; margin-right: 8px; text-transform: uppercase; }
 
-        .Footer-Curatore { 
-            text-align: right; 
-            font-size: 0.85em; 
-            color: #718096; 
-            font-style: italic; 
-        }
+        .Meta-Grid { display: flex; gap: 12px; margin-bottom: 35px; flex-wrap: wrap; }
+        .Meta-Item { background-color: #ffffff; border: 1px solid #e2e8f0; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; color: #4a5568; }
+        .Meta-Item strong { color: #1a365d; margin-right: 5px; } 
+        .Meta-Item.lingua-active { background-color: #e8f9f7; border-color: #cbd5e1; color: #1a365d; }
+        .Footer-Curatore { margin-top: 40px; padding-top: 20px; border-top: 1px dashed #e2e8f0; text-align: right; font-size: 0.85em; color: #718096; font-style: italic; }
 
-        /* REATTIVITÀ PER SCHERMI PICCOLI */
-        @media (max-width: 768px) {
-            .Glossario-Container { padding: 20px; }
-            .Header-Podio { flex-direction: column; align-items: center; gap: 20px; text-align: center; }
-            .Podio-Dipartimento, .Podio-Ateneo, .Podio-Dottorato { justify-content: center; }
-            .Glossario-Header-Area { flex-direction: column; align-items: flex-start; }
-            .Search-Bar-Container { width: 100%; max-width: 100%; }
-            .Glossario-Grid { grid-template-columns: 1fr; }
-            .Glossario-Footer-Nav { flex-direction: column; gap: 20px; align-items: center; text-align: center; }
+        @media (max-width: 1100px) {
+            .Main-Layout { grid-template-columns: 1fr; gap: 20px; }
+            .Sidebar-Lemmi { border-right: none; padding-right: 0; background-color: #f2f9f8; border: 1px solid #e8f9f7; border-radius: 8px; padding: 12px 18px; position: relative; max-height: none; }
+            .Albero-Lemmi { columns: 3; column-gap: 20px; }
+            .Sidebar-Immagine { border-left: none; border-top: 1px solid #e2e8f0; padding-left: 0; padding-top: 20px; position: relative; }
         }
     </style>
 </head>
 <body>
 
-    <div class="Glossario-Container">
+    <div class="Scheda-Container">
         
         <div class="Header-Podio">
             <div class="Podio-Dipartimento">
@@ -222,59 +233,174 @@ title: Elenco Glossario | Glossario Rolli
             </div>
         </div>
 
-        <div class="Glossario-Header-Area">
-            <h1 class="Glossario-Titolo">Index des Termes (FR)</h1>
+        <div class="Main-Layout">
             
-            <div class="Search-Bar-Container">
-                <input type="text" id="Glossario-Live-Search" class="Glossario-Search" placeholder="Cerca un lemma in tempo reale...">
+            <div class="Sidebar-Lemmi">
+                <div class="Sidebar-Titolo-Fisso">
+                    <div class="Sidebar-Titolo">Indice Lemmi ({{ page.lingua | upcase }})</div>
+                    <input type="text" id="Search-Sidebar-Input" class="Sidebar-Search" placeholder="Filtra indice...">
+                </div>
+                <ul class="Albero-Lemmi" id="Albero-Lemmi-Lista">
+                    {% assign schede_filtrate = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua | sort: "title" %}
+                    {% for scheda in schede_filtrate %}
+                        <li class="{% if scheda.url == page.url %}attivo{% endif %}" data-lemma="{{ scheda.title | downcase }}">
+                            <a href="{{ site.baseurl }}{{ scheda.url }}">{{ scheda.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
-        </div>
 
-        <div class="Glossario-Grid" id="Glossario-Grid-Cards">
-            {% assign schede_totali = site.pages | where: "layout", "scheda" | where: "lingua", "fr" | sort: "title" %}
-            {% for scheda in schede_totali %}
-                <a href="{{ site.baseurl }}{{ scheda.url }}" class="Glossario-Card" data-lemma-search="{{ scheda.title | downcase }} {{ scheda.target_italien | downcase }}">
-                    <div class="Card-Top">
-                        <h2 class="Card-Lemma-Nome">{{ scheda.title }}</h2>
-                        {% if scheda.target_italien %}
-                            <div class="Card-Traduzione">it: <strong>{{ scheda.target_italien }}</strong></div>
+            <div class="Contenuto-Scheda">
+                <div class="Title-Area">
+                    <h1 class="Lemma-Visibile-Alto">{{ page.title }}</h1>
+                    
+                    {% if page.fr_equivalent %}
+                        {% assign min_target = page.fr_equivalent | downcase | strip %}
+                        {% assign schede_totali = site.pages | where: "layout", "scheda" %}
+                        {% assign link_trovato = "#" %}
+                        {% for s in schede_totali %}
+                            {% assign min_titolo = s.title | downcase | strip %}
+                            {% if min_titolo == min_target %}{% assign link_trovato = s.url %}{% endif %}
+                        {% endfor %}
+                        <a href="{{ site.baseurl }}{{ link_trovato }}" class="Link-Equivalente-FR">
+                            <span>fr</span> Équivalent: <strong>{{ page.fr_equivalent }}</strong>
+                        </a>
+                    {% endif %}
+                </div>
+                
+                <div class="Meta-Grid">
+                    <div class="Meta-Item lingua-active"><strong>Dominio:</strong> {{ page.dominio | default: "Architettura" }}</div>
+                    <div class="Meta-Item"><strong>Modello teorico:</strong> CeRTeM</div>
+                </div>
+
+                <div id="Blocco-Markdown-Contenuto">
+                    {{ content }}
+                </div>
+                
+                <nav class="Navigazione-Schede">
+                    {% assign prev_scheda = nil %}{% assign next_scheda = nil %}{% assign trovato_corrente = false %}
+                    {% assign schede_totali_lingua = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua | sort: "title" %}
+                    
+                    {% for scheda in schede_totali_lingua %}
+                        {% if trovato_corrente %}
+                            {% assign next_scheda = scheda %}
+                            {% break %}
                         {% endif %}
-                    </div>
-                    <div class="Card-Badge-Area">
-                        <span class="Badge-Item Dominio-Badge">{{ scheda.dominio | default: "ARCH" }}</span>
-                        <span class="Badge-Item">CeRTeM</span>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
+                        {% if scheda.url == page.url %}
+                            {% assign trovato_corrente = true %}
+                        {% else %}
+                            {% assign prev_scheda = scheda %}
+                        {% endif %}
+                    {% endfor %}
 
-        <div class="Glossario-Footer-Nav">
-            <a href="{{ site.baseurl }}/" class="Btn-Torna-Home">
-                🏠 Torna alla Home Principale
-            </a>
-            <div class="Footer-Curatore">Progetto dottorale a cura di: Giovanni Mantegazza</div>
-        </div>
+                    {% if prev_scheda %}
+                        <a href="{{ site.baseurl }}{{ prev_scheda.url }}" class="Btn-Navigazione">← {{ prev_scheda.title }}</a>
+                    {% else %}
+                        <span class="Btn-Navigazione" style="opacity: 0.3; cursor: not-allowed;">← Inizio</span>
+                    {% endif %}
 
-    </div>
+                    {% if next_scheda %}
+                        <a href="{{ site.baseurl }}{{ next_scheda.url }}" class="Btn-Navigazione">{{ next_scheda.title }} →</a>
+                    {% else %}
+                        <span class="Btn-Navigazione" style="opacity: 0.3; cursor: not-allowed;">Fine →</span>
+                    {% endif %}
+                </nav>
+            </div> 
+
+            <aside class="Sidebar-Immagine">
+                <div class="Sidebar-Titolo">Apparato visivo</div>
+                <div class="Visual-Card">
+                    <img src="{% if page.immagine %}{{ site.baseurl }}/{{ page.immagine }}{% else %}https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=500{% endif %}" class="Visual-Foto">
+                    <div class="Visual-Didascalia">
+                        <strong>Fig. 1:</strong> {% if page.didascalia %}{{ page.didascalia }}{% else %}Dettaglio strutturale inserito nel prospetto.{% endif %}
+                    </div>
+                </div>
+
+                <div class="Pannello-Comandi-Navigazione">
+                    <div style="font-size: 0.75em; text-transform: uppercase; font-weight: 800; color: #a0aec0; letter-spacing: 0.5px; margin-bottom: 5px;">Navigazione Portale</div>
+                    
+                    <a href="{{ site.baseurl }}/glossario-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
+                        📋 Elenco Glossario ({{ page.lingua | upcase }})
+                    </a>
+                    
+                    <a href="{{ site.baseurl }}/ricerca-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
+                        🔄 Ruota di Traduzione
+                    </a>
+                    
+                    <a href="{{ site.baseurl }}/" class="Btn-Comando-Laterale" style="border-color: #cbd5e1; background: #ffffff;">
+                        🏠 Torna alla Home
+                    </a>
+                </div>
+            </aside>
+
+        </div> 
+        
+        <footer class="Footer-Curatore">Scheda a cura di: Giovanni Mantegazza (Università degli Studi di Genova)</footer>
+    </div> 
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const searchInput = document.getElementById("Glossario-Live-Search");
-            const gridCards = document.getElementById("Glossario-Grid-Cards");
-            const cards = Array.from(gridCards.getElementsByClassName("Glossario-Card"));
+            // 1. FILTRO BARRA LATERALE
+            const searchInput = document.getElementById("Search-Sidebar-Input");
+            const listaElementi = document.getElementById("Albero-Lemmi-Lista");
+            const righe = Array.from(listaElementi.children);
 
             searchInput.addEventListener("input", function() {
                 const query = this.value.toLowerCase().trim();
-                
-                cards.forEach(card => {
-                    const dataSearch = card.getAttribute("data-lemma-search") || "";
-                    if (!query || dataSearch.includes(query)) {
-                        card.style.display = "flex";
-                    } else {
-                        card.style.display = "none";
-                    }
+                righe.forEach(riga => {
+                    const lemma = riga.getAttribute("data-lemma") || "";
+                    riga.style.display = (!query || lemma.includes(query)) ? "block" : "none";
                 });
             });
+
+            // 2. PARSER AUTOMATICO FONTI FRANCESI CON PRESERVAZIONE LINK
+            const linguaPagina = "{{ page.lingua }}";
+            
+            if (linguaPagina === "fr") {
+                const h3Elements = Array.from(document.querySelectorAll(".Contenuto-Scheda h3"));
+                const h3Sources = h3Elements.find(el => el.textContent.toLowerCase().includes("sources"));
+                
+                if (h3Sources) {
+                    let pSources = h3Sources.nextElementSibling;
+                    while (pSources && pSources.tagName !== "P") {
+                        pSources = pSources.nextElementSibling;
+                    }
+                    
+                    if (pSources) {
+                        const contenutoGrezzo = pSources.innerHTML;
+                        const regexSplit = /(consulté le \d{2}\/\d{2}\/\d{4}\.?\s*(?:<br\s*\/?>|\n)?)/gi;
+                        const parti = contenutoGrezzo.split(regexSplit);
+                        
+                        let fontiGenerate = [];
+                        let stringaCorrente = "";
+                        
+                        for (let i = 0; i < parti.length; i++) {
+                            stringaCorrente += parti[i];
+                            if (parti[i].toLowerCase().includes("consulté le")) {
+                                if (stringaCorrente.trim()) {
+                                    fontiGenerate.push(stringaCorrente.trim());
+                                }
+                                stringaCorrente = ""; 
+                            }
+                        }
+                        
+                        if (stringaCorrente.trim()) {
+                            fontiGenerate.push(stringaCorrente.trim());
+                        }
+
+                        if (fontiGenerate.length > 0) {
+                            let htmlFormattato = fontiGenerate
+                                .map((fonte, index) => {
+                                    let pulita = fonte.replace(/^(?:<br\s*\/?>|\n)+/gi, '').trim();
+                                    return `(${index + 1}) ${pulita}`;
+                                })
+                                .join("<br>\n");
+                            
+                            pSources.innerHTML = htmlFormattato;
+                        }
+                    }
+                }
+            }
         });
     </script>
 </body>
