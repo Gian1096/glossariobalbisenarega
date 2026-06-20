@@ -259,4 +259,116 @@ title: Glossaire Traditionnel (FR)
 
                 <div class="Contenitore-Alfabeto" id="Tastiera-Lettere">
                     <button class="Btn-Lettera" data-lettera="TUTTI">Afficher Tout</button>
-                    {% assign lettere = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,
+                    {% assign lettere = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z" | split: "," %}
+                    {% for l in lettere %}
+                        <button class="Btn-Lettera" data-lettera="{{ l }}">{{ l }}</button>
+                    {% endfor %}
+                </div>
+
+                <div class="Messaggio-Guida" id="Pannello-Benvenuto">
+                    🔍 Sélectionnez une lettre ou tapez un mot pour consulter les fiches du glossaire.
+                </div>
+
+                <ul class="Insieme-Schede" id="Lista-Schede-Elementi" style="display: none;">
+                    {% assign voci_fr = site.pages | where: "layout", "scheda" | where: "lingua", "fr" | sort: "title" %}
+                    {% for voce in voci_fr %}
+                        {% assign prima_lettera = voce.title | slice: 0 | upcase %}
+                        <li class="Voce-Scheda-Glossario" data-titolo="{{ voce.title | downcase }}" data-iniziale="{{ prima_lettera }}">
+                            <a href="{{ voce.url | relative_url }}">{{ voce.title }}</a>
+                            <span class="Tag-Dominio">{{ voce.dominio | default: "ARCH" }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="Nessun-Risultato" id="Messaggio-Vuoto">Aucun terme ne correspond aux critères de recherche</div>
+
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 35px; padding-top: 20px; border-top: 1px dashed #cbd5e1; flex-wrap: wrap;">
+                    <a href="ricerca-fr.html" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #4a5568; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.borderColor='#1a365d'; this.style.color='#1a365d'; this.style.background='#e8f9f7';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#4a5568'; this.style.background='#ffffff';">
+                        🔄 Traduction Rapide FR
+                    </a>
+                    
+                    <a href="index.html" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #1a365d; border: 1px solid #1a365d; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.background='#2b6cb0'; this.style.borderColor='#2b6cb0';" onmouseout="this.style.background='#1a365d'; this.style.borderColor='#1a365d';">
+                        🏠 Retour à l'Accueil
+                    </a>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tastiera = document.getElementById("Tastiera-Lettere");
+            const listaSchede = document.getElementById("Lista-Schede-Elementi");
+            const messaggioVuoto = document.getElementById("Messaggio-Vuoto");
+            const pannelloBenvenuto = document.getElementById("Pannello-Benvenuto");
+            const schede = Array.from(listaSchede.children);
+
+            function filtraSoloTesto(e) {
+                const query = e.target.value.toLowerCase().trim();
+
+                if (!query) {
+                    pannelloBenvenuto.style.display = "block";
+                    listaSchede.style.display = "none";
+                    messaggioVuoto.style.display = "none";
+                    return;
+                }
+
+                pannelloBenvenuto.style.display = "none";
+                listaSchede.style.display = "block";
+                tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
+
+                let contatore = 0;
+                schede.forEach(scheda => {
+                    const titolo = scheda.getAttribute("data-titolo") || "";
+                    if (titolo.includes(query)) {
+                        scheda.style.setProperty("display", "flex", "important");
+                        contatore++;
+                    } else {
+                        scheda.style.setProperty("display", "none", "important");
+                    }
+                });
+
+                messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
+            }
+
+            function filtraSoloLettera(letteraSelezionata) {
+                const inputElement = document.getElementById("Input-Filtro-Testo");
+                if (inputElement) inputElement.value = "";
+                
+                pannelloBenvenuto.style.display = "none";
+                listaSchede.style.display = "block";
+
+                let contatore = 0;
+                schede.forEach(scheda => {
+                    const iniziale = scheda.getAttribute("data-iniziale") || "";
+                    if (letteraSelezionata === "TUTTI" || iniziale === letteraSelezionata) {
+                        scheda.style.setProperty("display", "flex", "important");
+                        contatore++;
+                    } else {
+                        scheda.style.setProperty("display", "none", "important");
+                    }
+                });
+
+                messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
+            }
+
+            const inputOriginale = document.getElementById("Input-Filtro-Testo");
+            if (inputOriginale) {
+                inputOriginale.replaceWith(inputOriginale.cloneNode(true));
+                const nuovoInputTesto = document.getElementById("Input-Filtro-Testo");
+                nuovoInputTesto.addEventListener("input", filtraSoloTesto);
+            }
+
+            tastiera.addEventListener("click", function(e) {
+                if (!e.target.classList.contains("Btn-Lettera")) return;
+                tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
+                e.target.classList.add("attiva");
+                
+                const lettera = e.target.getAttribute("data-lettera");
+                filtraSoloLettera(lettera);
+            });
+        });
+    </script>
+</body>
+</html>
