@@ -245,49 +245,62 @@ title: Home
                 </p>
             </div>
 
-            <div class="Griglia-Accessi-Inferiore">
-                
-                <div class="Colonna-Pannello-Accesso">
-                    <div class="Categoria-Pulsanti-Titolo">Traduzione Rapida</div>
-                    <div class="Gruppo-Bottoni">
-                        <a href="{{ '/ricerca-it/' | relative_url }}" class="Card-Ingresso">
-                            <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
-                            <div class="Testi-Bottone">
-                                <span class="Titolo-Bottone">Interfaccia Italiana</span>
-                                <span class="Sottotitolo-Bottone">Navigazione tridimensionale sincrona da IT a FR</span>
-                            </div>
-                        </a>
-                        <a href="{{ '/ricerca-fr/' | relative_url }}" class="Card-Ingresso">
-                            <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
-                            <div class="Testi-Bottone">
-                                <span class="Titolo-Bottone">Interface Française</span>
-                                <span class="Sottotitolo-Bottone">Navigation synchrone tridimensionnelle de FR à IT</span>
-                            </div>
-                        </a>
-                    </div>
+            <div class="Griglia-Accessi-Inferiore" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+    
+    <div class="Colonna-Pannello-Accesso">
+        <div class="Categoria-Pulsanti-Titolo">Traduzione Rapida</div>
+        <div class="Gruppo-Bottoni">
+            <a href="{{ '/ricerca-it/' | relative_url }}" class="Card-Ingresso">
+                <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
+                <div class="Testi-Bottone">
+                    <span class="Titolo-Bottone">Interfaccia Italiana</span>
+                    <span class="Sottotitolo-Bottone">Navigazione tridimensionale sincrona</span>
                 </div>
-
-                <div class="Colonna-Pannello-Accesso">
-                    <div class="Categoria-Pulsanti-Titolo">Consultazione Glossario</div>
-                    <div class="Gruppo-Bottoni">
-                        <a href="{{ '/glossario-it/' | relative_url }}" class="Card-Ingresso">
-                            <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
-                            <div class="Testi-Bottone">
-                                <span class="Titolo-Bottone">Glossario Italiano</span>
-                                <span class="Sottotitolo-Bottone">Ricerca alfabetica tradizionale con barra e filtri</span>
-                            </div>
-                        </a>
-                        <a href="{{ '/glossario-fr/' | relative_url }}" class="Card-Ingresso">
-                            <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
-                            <div class="Testi-Bottone">
-                                <span class="Titolo-Bottone">Glossaire Français</span>
-                                <span class="Sottotitolo-Bottone">Recherche alphabétique traditionnelle avec filtres</span>
-                            </div>
-                        </a>
-                    </div>
+            </a>
+            <a href="{{ '/ricerca-fr/' | relative_url }}" class="Card-Ingresso">
+                <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
+                <div class="Testi-Bottone">
+                    <span class="Titolo-Bottone">Interface Française</span>
+                    <span class="Sottotitolo-Bottone">Navigation synchrone de FR à IT</span>
                 </div>
+            </a>
+        </div>
+    </div>
 
-            </div>
+    <div class="Colonna-Pannello-Accesso">
+        <div class="Categoria-Pulsanti-Titolo">Consultazione Glossario</div>
+        <div class="Gruppo-Bottoni">
+            <a href="{{ '/glossario-it/' | relative_url }}" class="Card-Ingresso">
+                <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
+                <div class="Testi-Bottone">
+                    <span class="Titolo-Bottone">Glossario Italiano</span>
+                    <span class="Sottotitolo-Bottone">Ricerca alfabetica tradizionale</span>
+                </div>
+            </a>
+            <a href="{{ '/glossario-fr/' | relative_url }}" class="Card-Ingresso">
+                <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
+                <div class="Testi-Bottone">
+                    <span class="Titolo-Bottone">Glossaire Français</span>
+                    <span class="Sottotitolo-Bottone">Recherche alphabétique par filtres</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="Colonna-Pannello-Accesso" style="background-color: #e8f9f7; border-color: #cbd5e1;">
+        <div class="Categoria-Pulsanti-Titolo" style="color: #1a365d; border-left-color: #1a365d;">Validazione Peer</div>
+        <div class="Gruppo-Bottoni">
+            <a href="/glossariobalbisenarega/contatti/" class="Card-Ingresso" style="border-color: #1a365d; height: 100%; align-items: center; justify-content: center; min-height: 140px;">
+                <div class="Testi-Bottone" style="text-align: center; align-items: center;">
+                    <span style="font-size: 2em; margin-bottom: 5px;">💬</span>
+                    <span class="Titolo-Bottone" style="color: #1a365d;">Revisione & Suggerimenti</span>
+                    <span class="Sottotitolo-Bottone" style="color: #4a5568; text-align: center;">Invia proposte terminologiche o segnala refusi della ricerca</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
         </main>
         
        <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px dashed #cbd5e1; font-size: 0.85em; color: #64748b; line-height: 1.6; text-align: left;">
