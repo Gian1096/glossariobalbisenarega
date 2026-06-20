@@ -1,3 +1,6 @@
+---
+layout: default
+---
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -9,169 +12,77 @@
             line-height: 1.6;
             color: #2d3748;
             font-size: 1.15em;
-            text-align: justify;
+
+            /* --- COERENZA SFONDO ED ELIMINAZIONE GABBIE --- */
             margin: 0 !important;
             padding: 0 !important;
-            width: 100% !important;
             max-width: 100% !important;
+            width: 100% !important;
             background-color: #eef2f7 !important;
         }
 
-        .Home-Container {
+        .Homepage-Container {
             background: #ffffff;
             border-top: 6px solid #1a365d;
             padding: 40px;
-            max-width: 1500px; 
-            margin: 0 auto; 
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        /* --- TESTATA CON PODIO BIANCO E LOGHI SCURI/COLORATI --- */
-        .Header-Podio { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            border-bottom: 3px solid #b91c1c; /* Linea di stacco Rosso UniGe */
-            padding: 25px 40px; 
-            margin: -40px -40px 35px -40px; 
-            gap: 15px; 
-            background-color: #ffffff !important; /* Sfondo bianco come mi chiedevi */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-
-        .Header-Podio img {
-            max-height: 95px;
-            width: auto;
-            display: block;
-            filter: none !important; /* Rimuoviamo qualsiasi filtro per mostrare i colori nativi */
-        }
-
-        /* --- CONTENUTO CENTRATO DELLA HOME --- */
-        .Contenuto-Home {
-            max-width: 1000px;
+            max-width: 1500px; /* Stessa identica larghezza della scheda! */
             margin: 0 auto;
-            padding: 20px 0;
+            min-height: 100vh;
         }
 
-        /* L'immagine della galleria in alto a tutta larghezza */
-        .Contenuto-Home p:first-of-type img {
-            width: 100%;
-            max-height: 450px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
-        }
-
-        /* Testo descrittivo introduttivo */
-        .Contenuto-Home p {
-            font-size: 1.05em;
-            color: #4a5568;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        /* Titoli delle sezioni dei bottoni */
-        .Contenuto-Home h3 {
-            color: #1a365d;
-            font-size: 1.25em;
-            margin-top: 40px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* --- GRIGLIA A DUE COLONNE PER I BOTTONI --- */
-        .Contenuto-Home h3 + p {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        /* Stile dei bottoni grandi e rifiniti */
-        .Contenuto-Home h3 + p a {
+        /* --- INTERFACCIA INTERNA (UGUALE ALLA SCHEDA) --- */
+        .Header-Podio {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 24px;
-            font-size: 0.95em;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.25s ease;
-            box-sizing: border-box;
-            text-align: center;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            gap: 15px;
         }
 
-        /* Bottone Sinistro: Italiano (Blu UniGe) */
-        .Contenuto-Home h3 + p a:first-child {
-            background-color: #1a365d !important;
-            color: #ffffff !important;
-            border: 1px solid #1a365d;
-        }
-        .Contenuto-Home h3 + p a:first-child:hover {
-            background-color: #2c5282 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(43, 108, 176, 0.2);
-        }
+        .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
+        .Logo-Dip { height: 95px; width: auto; display: block; }
+        .Podio-Ateneo { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .Logo-Unige-Sigillo { height: 125px; width: auto; display: block; }
+        .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+        .Logo-Phd { height: 95px; width: auto; display: block; }
 
-        /* Bottone Destra: Francese (Rosso di Ateneo) */
-        .Contenuto-Home h3 + p a:last-child {
-            background-color: #b91c1c !important;
-            color: #ffffff !important;
-            border: 1px solid #b91c1c;
-        }
-        .Contenuto-Home h3 + p a:last-child:hover {
-            background-color: #991b1b !important;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(185, 28, 28, 0.2);
+        .Main-Content-Area {
+            margin-top: 20px;
+            width: 100%;
         }
 
         .Footer-Curatore {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px dashed #e2e8f0;
-            text-align: right;
-            font-size: 0.85em;
-            color: #718096;
-            font-style: italic;
-        }
-
-        /* Responsività per schermi piccoli */
-        @media (max-width: 768px) {
-            .Contenuto-Home h3 + p {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .Header-Podio {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
+            margin-top: 40px; padding-top: 20px; border-top: 1px dashed #e2e8f0;
+            text-align: right; font-size: 0.85em; color: #718096; font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="Home-Container">
+    <div class="Homepage-Container">
         
         <div class="Header-Podio">
-            <div class="Podio-Dipartimento"><img src="{{ site.baseurl }}Logo_DLCM_UniGe_white.svg"></div>
-            <div class="Podio-Ateneo"><img src="{{ site.baseurl }}logo_verticale_BIANCO.svg"></div>
-            <div class="Podio-Dottorato"><img src="{{ site.baseurl }}Logo_PHD_DH_Monocromo_Bianco.svg"></div>
+            <div class="Podio-Dipartimento">
+                <img src="{{ site.baseurl }}/Logo_DLCM_UniGe_black.png" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
+            </div>
+            <div class="Podio-Ateneo">
+                <img src="{{ site.baseurl }}/logo_verticale_COLORE.png" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
+            </div>
+            <div class="Podio-Dottorato">
+                <img src="{{ site.baseurl }}/Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png" alt="Dottorato in Digital Humanities" class="Logo-Phd">
+            </div>
         </div>
 
-        <div class="Contenuto-Home">
+        <div class="Main-Content-Area">
             {{ content }}
         </div> 
         
-        <footer class="Footer-Curatore">Portale a cura di: Giovanni Mantegazza (Università degli Studi di Genova)</footer>
-    </div> 
+        <footer class="Footer-Curatore">
+            Progetto dottorale a cura di: Giovanni Mantegazza (Università degli Studi di Genova)
+        </footer>
 
+    </div> 
 </body>
 </html>
