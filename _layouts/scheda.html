@@ -18,12 +18,12 @@ title: {{ page.title }} | Glossario Rolli
             padding: 0 !important;
             width: 100% !important;
             max-width: 100% !important;
-            background-color: #eef2f7 !important;
+            background-color: #eef2f7 !important; /* Sfondo morbido esterno */
         }
 
         .Scheda-Container {
-            background: #ffffff;
-            border-top: 6px solid #1a365d;
+            background: #ffffff; /* Corpo scheda bianco */
+            border-top: 6px solid #1a365d; /* Linea blu notte istituzionale */
             padding: 40px;
             max-width: 1500px; 
             margin: 0 auto; 
@@ -39,7 +39,7 @@ title: {{ page.title }} | Glossario Rolli
             align-items: flex-start;
         }
 
-        /* 1. BARRA LATERALE SINISTRA SCORREVOLE ED EVOLUTA */
+        /* 1. BARRA LATERALE SINISTRA SCORREVOLE */
         .Sidebar-Lemmi {
             border-right: 1px solid #e2e8f0;
             padding-right: 15px;
@@ -94,10 +94,10 @@ title: {{ page.title }} | Glossario Rolli
             border-left: 4px solid #2b6cb0; border-radius: 0 6px 6px 0; padding-left: 6px;
         }
 
-        /* 2. CONTENUTO CENTRALE */
+        /* 2. CONTENUTO CENTRALE ADATTIVO */
         .Contenuto-Scheda { min-width: 0; width: 100%; }
         
-        /* RIPRISTINATO IL LEMMA VISIBILE IN ALTO */
+        /* Ripristino del Lemma visibile in alto */
         .Contenuto-Scheda h1.Lemma-Visibile-Alto { 
             color: #1a365d; 
             font-size: 2.3em; 
@@ -106,7 +106,7 @@ title: {{ page.title }} | Glossario Rolli
             letter-spacing: -0.5px; 
         }
         
-        /* Nasconde l'h1 standard generato dal markdown interno per evitare duplicati */
+        /* Nasconde l'h1 del markdown per evitare doppioni */
         .Contenuto-Scheda h1:not(.Lemma-Visibile-Alto) { display: none; } 
 
         .Contenuto-Scheda h3 {
@@ -114,6 +114,8 @@ title: {{ page.title }} | Glossario Rolli
             letter-spacing: 0.5px; margin: 30px 0 10px 0; display: flex; align-items: center; gap: 8px;
         }
         .Contenuto-Scheda h3::after { content: ""; flex: 1; height: 1px; background-color: #e2e8f0; margin-left: 10px; }
+        
+        /* Blocchi citazioni ed esempi armonizzati */
         .Contenuto-Scheda blockquote, .Contenuto-Scheda em {
             display: block; background-color: #f8fafc; border-left: 4px solid #3182ce;
             padding: 20px; border-radius: 0 8px 8px 0; font-style: italic; color: #2d3748; line-height: 1.7; margin: 10px 0;
@@ -122,14 +124,10 @@ title: {{ page.title }} | Glossario Rolli
             font-family: monospace; background-color: #f7fafc; padding: 6px 10px;
             border-radius: 4px; border: 1px solid #e2e8f0; display: inline-block; font-size: 1em; color: #2d3748;
         }
-        .Contenuto-Scheda ol {
-            background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 20px 20px 20px 40px; border-radius: 6px; font-size: 0.9em; color: #4a5568; margin: 10px 0;
-        }
-        .Contenuto-Scheda ol li { margin-bottom: 12px; line-height: 1.6; word-break: break-all !important; overflow-wrap: break-word !important; }
-        .Contenuto-Scheda ol a { color: #2b6cb0; word-break: break-all !important; }
         
         .Contenuto-Scheda p { font-size: 1.05em; color: #4a5568; margin: 10px 0; }
 
+        /* Box contenitore specifico per Note e Fonti */
         .Contenuto-Scheda h3 + p:last-of-type,
         .Contenuto-Scheda h3[id*="note"] + p,
         .Contenuto-Scheda h3[id*="sources"] + p,
@@ -146,7 +144,7 @@ title: {{ page.title }} | Glossario Rolli
             white-space: pre-line;
         }
 
-        /* 3. COLONNA DESTRA */
+        /* 3. COLONNA DESTRA (APPARATO VISIVO) */
         .Sidebar-Immagine {
             border-left: 1px solid #e2e8f0; padding-left: 20px;
             position: sticky; top: 20px; display: flex; flex-direction: column; gap: 20px;
@@ -168,7 +166,7 @@ title: {{ page.title }} | Glossario Rolli
         .Btn-Navigazione { display: inline-flex; align-items: center; text-decoration: none; color: #4a5568; background-color: #f7fafc; border: 1px solid #e2e8f0; padding: 10px 18px; border-radius: 6px; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
         .Btn-Navigazione:hover { background-color: #1a365d; color: #ffffff; border-color: #1a365d; }
 
-        /* --- PODIO ISTITUZIONALE BIANCO INALTERATO --- */
+        /* --- PODIO ISTITUZIONALE BIANCO --- */
         .Header-Podio { 
             display: flex; 
             justify-content: space-between; 
@@ -198,6 +196,7 @@ title: {{ page.title }} | Glossario Rolli
         .Meta-Item strong { color: #1a365d; margin-right: 5px; } .Meta-Item.lingua-active { background-color: #ebf8ff; border-color: #bee3f8; color: #2b6cb0; }
         .Footer-Curatore { margin-top: 40px; padding-top: 20px; border-top: 1px dashed #e2e8f0; text-align: right; font-size: 0.85em; color: #718096; font-style: italic; }
 
+        /* REATTIVITÀ PER MONITOR PICCOLI / TABLET */
         @media (max-width: 1100px) {
             .Main-Layout { grid-template-columns: 1fr; gap: 20px; }
             .Sidebar-Lemmi { border-right: none; padding-right: 0; background-color: #ebf8ff; border: 1px solid #bee3f8; border-radius: 8px; padding: 12px 18px; position: relative; max-height: none; }
@@ -242,7 +241,6 @@ title: {{ page.title }} | Glossario Rolli
             <div class="Contenuto-Scheda">
                 <div class="Title-Area">
                     <h1 class="Lemma-Visibile-Alto">{{ page.title }}</h1>
-                    
                     {% if page.fr_equivalent %}
                         {% assign min_target = page.fr_equivalent | downcase | strip %}
                         {% assign schede_totali = site.pages | where: "layout", "scheda" %}
@@ -277,7 +275,7 @@ title: {{ page.title }} | Glossario Rolli
                         {% endif %}
                         {% if scheda.url == page.url %}
                             {% assign trovato_corrente = true %}
-                        {% else %}
+                        else
                             {% assign prev_scheda = scheda %}
                         {% endif %}
                     {% endfor %}
@@ -307,15 +305,12 @@ title: {{ page.title }} | Glossario Rolli
 
                 <div class="Pannello-Comandi-Navigazione">
                     <div style="font-size: 0.75em; text-transform: uppercase; font-weight: 800; color: #a0aec0; letter-spacing: 0.5px; margin-bottom: 5px;">Navigazione Portale</div>
-                    
                     <a href="{{ site.baseurl }}/glossario-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
                         📋 Elenco Glossario ({{ page.lingua | upcase }})
                     </a>
-                    
                     <a href="{{ site.baseurl }}/ricerca-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
                         🔄 Ruota di Traduzione
                     </a>
-                    
                     <a href="{{ site.baseurl }}/" class="Btn-Comando-Laterale" style="border-color: #cbd5e1; background: #f8fafc;">
                         🏠 Torna alla Home
                     </a>
@@ -329,7 +324,7 @@ title: {{ page.title }} | Glossario Rolli
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // 1. FILTRO BARRA LATERALE
+            // 1. FILTRO LIVE BARRA LATERALE
             const searchInput = document.getElementById("Search-Sidebar-Input");
             const listaElementi = document.getElementById("Albero-Lemmi-Lista");
             const righe = Array.from(listaElementi.children);
@@ -342,28 +337,8 @@ title: {{ page.title }} | Glossario Rolli
                 });
             });
 
-            // CONTESTATORE E CONTENITORE PRINCIPALE
-            const bloccoContenuto = document.getElementById("Blocco-Markdown-Contenuto");
+            // 2. AUTOMATISMO NUMERAZIONE FONTI FRANCESI
             const linguaPagina = "{{ page.lingua }}";
-
-            if (bloccoContenuto) {
-                // CORREZIONE CRUCIALE: Rileva i finti link Markdown rimasti testuali a causa degli spazi e li trasforma in HTML
-                let htmlGrezzo = bloccoContenuto.innerHTML;
-                
-                // Questa Regex intercetta la struttura [Testo](Link con spazi)
-                const regexLinkMarkdownRotto = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/gi;
-                
-                htmlGrezzo = htmlGrezzo.replace(regexLinkMarkdownRotto, function(match, testoLink, urlLink) {
-                    // Rimuove tutti gli spazi malefici dall'URL riparandolo
-                    let urlPulito = urlLink.replace(/\s+/g, "");
-                    return `<a href="${urlPulito}" target="_blank">${testoLink}</a>`;
-                });
-                
-                // Sovrascrive il contenuto con i link ufficialmente sanati e attivi
-                bloccoContenuto.innerHTML = htmlGrezzo;
-            }
-
-            // 3. PARSER AUTOMATICO FONTI FRANCESI CON PRESERVAZIONE LINK RIGENERATI
             if (linguaPagina === "fr") {
                 const h3Elements = Array.from(document.querySelectorAll(".Contenuto-Scheda h3"));
                 const h3Sources = h3Elements.find(el => el.textContent.toLowerCase().includes("sources"));
