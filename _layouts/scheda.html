@@ -178,7 +178,7 @@ title: {{ page.title }} | Glossario Rolli
         .Btn-Navigazione { display: inline-flex; align-items: center; text-decoration: none; color: #4a5568; background-color: #ffffff; border: 1px solid #cbd5e1; padding: 10px 18px; border-radius: 6px; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
         .Btn-Navigazione:hover { background-color: #1a365d; color: #ffffff; border-color: #1a365d; }
 
-        /* --- PODIO ISTITUZIONALE MAESTOSO MENTA COERENTE CON LA HOME --- */
+        /* --- PODIO ISTITUZIONALE MAESTOSO MENTA COERENTE WITH THE HOME --- */
         .Header-Podio { 
             display: flex; 
             justify-content: space-between; 
@@ -233,7 +233,7 @@ title: {{ page.title }} | Glossario Rolli
             </div>
         </div>
 
-        <div class="Main-Layout">
+        <main class="Main-Layout">
             
             <div class="Sidebar-Lemmi">
                 <div class="Sidebar-Titolo-Fisso">
@@ -341,11 +341,68 @@ title: {{ page.title }} | Glossario Rolli
                 </div>
             </aside>
 
-        </div> 
+        </main> 
         
-        <footer class="Footer-Curatore">Scheda a cura di: Giovanni Mantegazza (Università degli Studi di Genova)</footer>
-    </div> 
+        {% if page.lingua == "it" %}
+            <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px dashed #cbd5e1; font-size: 0.85em; color: #64748b; line-height: 1.6; text-align: left; width: 100%;">
+                <div style="display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap;">
+                    <div style="flex: 2; min-width: 280px;">
+                        <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Glossario Terminologico di Palazzo Balbi Senarega</strong>
+                        <p style="margin: 0;">Progetto di ricerca dottorale in <em>Digital Humanities</em> sviluppato presso il <strong>Centro di Ricerca in Terminologia Multilingue (CeRTeM)</strong>, Dipartimento di Lingue e Culture Moderne, Università degli Studi di Genova.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Contatti e Segnalazioni</strong>
+                        <p style="margin: 0;">
+                            Curatore: Giovanni Mantegazza<br>
+                            Email: <a href="mailto:giovanni.mantegazza@edu.unige.it" style="color: #2b6cb0; text-decoration: none;">giovanni.mantegazza@edu.unige.it</a><br>
+                            <small style="color: #94a3b8;">Per proposte di revisione o refusi, scrivere via email.</small>
+                        </p>
+                    </div>
+                    <div style="flex: 1; min-width: 220px;">
+                        <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Licenza e Diritti</strong>
+                        <p style="margin: 0;">
+                            I dati terminologici sono distribuiti con Licenza<br>
+                            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it" target="_blank" style="color: #2b6cb0; text-decoration: none; font-weight: 600;">CC BY-NC-SA 4.0</a>.<br>
+                            <small style="color: #94a3b8;">Proprietà intellettuale riservata. Immagini dell'apparato visivo © dei rispettivi autori.</small>
+                        </p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #f1f5f9; font-size: 0.9em; color: #94a3b8;">
+                    © 2026 Università degli Studi di Genova | CeRTeM.
+                </div>
+            </footer>
+        {% else %}
+            <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px dashed #cbd5e1; font-size: 0.85em; color: #64748b; line-height: 1.6; text-align: left; width: 100%;">
+                <div style="display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap;">
+                    <div style="flex: 2; min-width: 280px;">
+                        <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Glossaire Terminologique du Palais Balbi Senarega</strong>
+                        <p style="margin: 0;">Projet de recherche doctorale en <em>Digital Humanities</em> développé au sein du <strong>Centre de Recherche en Terminologie Multilingue (CeRTeM)</strong>, Département de Langues et Cultures Modernes, Université des Études de Gênes.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Contacts et Retours</strong>
+                        <p style="margin: 0;">
+                            Auteur: Giovanni Mantegazza<br>
+                            E-mail: <a href="mailto:giovanni.mantegazza@edu.unige.it" style="color: #2b6cb0; text-decoration: none;">giovanni.mantegazza@edu.unige.it</a><br>
+                            <small style="color: #94a3b8;">Pour toute suggestion ou correction, veuillez nous contacter par courriel.</small>
+                        </p>
+                    </div>
+                    <div style="flex: 1; min-width: 220px;">
+                        <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Licence et Droits d'Auteur</strong>
+                        <p style="margin: 0;">
+                            Les données terminologiques sont protégées par la Licence<br>
+                            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" target="_blank" style="color: #2b6cb0; text-decoration: none; font-weight: 600;">CC BY-NC-SA 4.0</a>.<br>
+                            <small style="color: #94a3b8;">Images de l'appareil visuel © de leurs auteurs respectifs.</small>
+                        </p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #f1f5f9; font-size: 0.9em; color: #94a3b8;">
+                    © 2026 Université de Gênes | CeRTeM.
+                </div>
+            </footer>
+        {% endif %}
 
+    </div> 
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // 1. FILTRO BARRA LATERALE
