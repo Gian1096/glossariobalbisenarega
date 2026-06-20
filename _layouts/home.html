@@ -46,10 +46,57 @@
             opacity: 1;
         }
 
+        /* --- CONTENUTO CENTRATO DELLA HOME --- */
         .Contenuto-Home {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 30px 0;
+        }
+
+        /* --- STILIZZAZIONE BOTTONI DELLA HOME --- */
+        .Contenuto-Home p {
+            text-align: center;
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Regola per trasformare i link della Home in Bottoni */
+        .Contenuto-Home a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            color: #ffffff !important; /* Testo bianco */
+            background-color: #1a365d; /* Blu di Ateneo */
+            border: 2px solid #1a365d;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        /* Effetto al passaggio del mouse (Hover) */
+        .Contenuto-Home a:hover {
+            background-color: #2c5282;
+            border-color: #2c5282;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Se vuoi differenziare l'ultimo bottone o dargli un tocco alternativo rosso */
+        .Contenuto-Home a:last-of-type {
+            background-color: #b91c1c;
+            border-color: #b91c1c;
+        }
+        .Contenuto-Home a:last-of-type:hover {
+            background-color: #991b1b;
+            border-color: #991b1b;
         }
 
         .Footer-Curatore {
@@ -67,11 +114,11 @@
 
     <div class="Home-Container">
         
-       <div class="Header-Podio">
-    <div class="Podio-Dipartimento"><img src="{{ site.baseurl }}/DLCM_UniGe_white.svg"></div>
-    <div class="Podio-Ateneo"><img src="{{ site.baseurl }}/logo_verticale_WHITE.svg"></div>
-    <div class="Podio-Dottorato"><img src="{{ site.baseurl }}/logo_PHDDH_verticale_bianco.svg"></div>
-</div>
+        <div class="Header-Podio">
+            <div class="Podio-Dipartimento"><img src="{{ site.baseurl }}/Logo_DLCM_UniGe_white.svg"></div>
+            <div class="Podio-Ateneo"><img src="{{ site.baseurl }}/logo_verticale_BIANCO.svg"></div>
+            <div class="Podio-Dottorato"><img src="{{ site.baseurl }}/Logo_PHD_DH_Monocromo_Bianco.svg"></div>
+        </div>
 
         <div class="Contenuto-Home">
             {{ content }}
