@@ -253,16 +253,36 @@ title: {{ page.title }} | Glossario Rolli
                 <div class="Title-Area">
                     <h1 class="Lemma-Visibile-Alto">{{ page.title }}</h1>
                     
-                    {% if page.fr_equivalent %}
-                        {% assign min_target = page.fr_equivalent | downcase | strip %}
-                        {% assign schede_totali = site.pages | where: "layout", "scheda" %}
-                        {% assign link_trovato = "#" %}
+                    {% assign schede_totali = site.pages | where: "layout", "scheda" %}
+                    {% assign corrispettivo_trovato = nil %}
+                    
+                    {% if page.lingua == "it" %}
+                        {% assign current_it_title = page.title | downcase | strip %}
                         {% for s in schede_totali %}
-                            {% assign min_titolo = s.title | downcase | strip %}
-                            {% if min_titolo == min_target %}{% assign link_trovato = s.url %}{% endif %}
+                            {% assign target_fr_val = s.target_italien | downcase | strip %}
+                            {% if s.lingua == "fr" and target_fr_val == current_it_title %}
+                                {% assign corrispettivo_trovato = s %}
+                                {% break %}
+                            {% endif %}
                         {% endfor %}
-                        <a href="{{ link_trovato | relative_url }}" class="Link-Equivalente-FR">
-                            <span>fr</span> Équivalent: <strong>{{ page.fr_equivalent }}</strong>
+                    {% else %}
+                        {% if page.target_italien %}
+                            {% assign target_it_val = page.target_italien | downcase | strip %}
+                            {% for s in schede_totali %}
+                                {% assign current_it_val = s.title | downcase | strip %}
+                                {% if s.lingua == "it" and current_it_val == target_it_val %}
+                                    {% assign corrispettivo_trovato = s %}
+                                    {% break %}
+                                  {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if corrispettivo_trovato %}
+                        <a href="{{ corrispettivo_trovato.url | relative_url }}" class="Link-Equivalente-FR">
+                            <span>{{ corrispettivo_trovato.lingua | upcase }}</span> 
+                            {% if page.lingua == "it" %}Équivalent:{% else %}Equivalente:{% endif %} 
+                            <strong>{{ corrispettivo_trovato.title }}</strong>
                         </a>
                     {% endif %}
                 </div>
