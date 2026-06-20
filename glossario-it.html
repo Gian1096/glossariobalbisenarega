@@ -14,11 +14,9 @@ title: Glossario Tradizionale (IT)
             color: #2d3748;
             width: 100% !important;
             margin: 0 !important;
-            padding: 30px 4% !important; /* Spaziatura laterale fluida in percentuale */
+            padding: 30px 4% !important;
             font-size: 1.15em;
             box-sizing: border-box;
-            
-            /* --- SFONDO ISTITUZIONALE E CALDO --- */
             background-color: #f1f5f9;
             background-image: 
                 radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0),
@@ -34,36 +32,32 @@ title: Glossario Tradizionale (IT)
             box-shadow: 0 15px 35px rgba(26, 54, 93, 0.06);
             padding: 40px;
             margin: 20px auto 0 auto;
-            width: 100%; /* Occupa tutto lo spazio disponibile */
-            max-width: 1600px; /* Coordinato con la larghezza massima globale */
+            width: 100%;
+            max-width: 1600px;
             box-sizing: border-box;
         }
 
-        /* --- PODIO ISTITUZIONALE: VERSIONE MAESTOSA --- */
         .Header-Podio {
             display: flex; 
             justify-content: space-between; 
-            align-items: flex-end; /* Allineamento perfetto sulla linea di fondo */
+            align-items: flex-end;
             border-bottom: 2px solid #e2e8f0; 
-            padding: 60px 50px; /* Altezza solenne e ariosa */
+            padding: 60px 50px;
             margin: -40px -40px 35px -40px; 
             gap: 25px;
-            background-color: #e8f9f7; /* Sfondo menta/acquamarina coordinato */
+            background-color: #e8f9f7;
             box-sizing: border-box;
         }
 
         .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: flex-end; }
         .Logo-Dip { height: 95px; width: auto; display: block; }
-        
         .Podio-Ateneo { flex: 1.2; display: flex; justify-content: center; align-items: flex-end; } 
         .Logo-Unige-Sigillo { height: 155px; width: auto; display: block; transition: transform 0.2s ease; } 
-        
         .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: flex-end; }
         .Logo-Phd { height: 95px; width: auto; display: block; }
 
-        /* --- SEZIONE GLOSSARIO ADATTIVA --- */
         .Sezione-Glossario-Statico {
-            background-color: #f2f9f8; /* Sfondo acquamarina chiaro coordinato con la Home */
+            background-color: #f2f9f8;
             border: 1px solid #e8f9f7;
             border-radius: 8px;
             padding: 30px;
@@ -78,11 +72,10 @@ title: Glossario Tradizionale (IT)
             margin: 15px auto 25px auto;
         }
 
-        /* --- BARRA DI RICERCA INGRANDITA --- */
         .Search-Input {
             width: 100%;
-            padding: 18px 28px; /* Aumentato lo spazio interno */
-            font-size: 1.3em; /* Portato da 1.1em a 1.3em per renderlo bello visibile */
+            padding: 18px 28px;
+            font-size: 1.3em;
             border: 2px solid #cbd5e1;
             border-radius: 50px;
             outline: none;
@@ -97,15 +90,22 @@ title: Glossario Tradizionale (IT)
             box-shadow: 0 4px 12px rgba(26, 54, 93, 0.08);
         }
 
-        /* --- TASTIERA ALFABETICA CON LETTERE PIÙ GRANDI --- */
+        .Contenitore-Alfabeto {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 30px;
+        }
+
         .Btn-Lettera {
             background: #ffffff;
             border: 1px solid #cbd5e1;
             color: #4a5568;
-            padding: 10px 18px; /* Aumentato lo spazio interno per cliccarle facilmente */
-            font-size: 1.15em; /* Portato da 0.9em a 1.15em per ingrandire il carattere */
-            font-weight: 700; /* Spessore aumentato per dare più stacco visivo */
-            border-radius: 8px; /* Arrotondamento un pizzico più moderno */
+            padding: 10px 18px;
+            font-size: 1.15em;
+            font-weight: 700;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.15s ease;
             user-select: none;
@@ -123,7 +123,6 @@ title: Glossario Tradizionale (IT)
             border-color: #1a365d;
         }
 
-        /* --- DISPOSIZIONE MULTI-COLONNA ADATTIVA --- */
         .Insieme-Schede {
             list-style: none;
             padding: 0;
@@ -140,7 +139,7 @@ title: Glossario Tradizionale (IT)
             border-radius: 6px;
             padding: 12px 16px;
             margin-bottom: 12px;
-            break-inside: avoid; /* Impedisce interruzioni a metà lemma */
+            break-inside: avoid;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -204,16 +203,9 @@ title: Glossario Tradizionale (IT)
             display: block;
         }
 
-        /* --- RESPONSIVITÀ PER DISPLAY PICCOLI --- */
         @media (max-width: 950px) {
-            .Header-Podio {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-                padding: 30px 20px;
-            }
+            .Header-Podio { flex-direction: column; align-items: center; gap: 20px; padding: 30px 20px; }
         }
-
         @media (max-width: 768px) {
             .Insieme-Schede { column-count: 1; }
         }
@@ -258,10 +250,105 @@ title: Glossario Tradizionale (IT)
                 </div>
 
                 <div class="Messaggio-Guida" id="Pannello-Benvenuto">
-                    🔍 Seleziona una letter o scrivi nella barra per consultare i termini del glossario.
+                    🔍 Seleziona una lettera o scrivi nella barra per consultare i termini del glossario.
                 </div>
 
                 <ul class="Insieme-Schede" id="Lista-Schede-Elementi" style="display: none;">
                     {% assign voci_it = site.pages | where: "layout", "scheda" | where: "lingua", "it" | sort: "title" %}
                     {% for voce in voci_it %}
-                        {% assign prima_lettera = voce.
+                        {% assign prima_lettera = voce.title | slice: 0 | upcase %}
+                        <li class="Voce-Scheda-Glossario" data-titolo="{{ voce.title | downcase }}" data-iniziale="{{ prima_lettera }}">
+                            <a href="{{ voce.url | relative_url }}">{{ voce.title }}</a>
+                            <span class="Tag-Dominio">{{ voce.dominio | default: "ARCH" }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="Nessun-Risultato" id="Messaggio-Vuoto">Nessun lemma corrisponde ai criteri di ricerca</div>
+
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 35px; padding-top: 20px; border-top: 1px dashed #cbd5e1; flex-wrap: wrap;">
+                    <a href="ricerca-it.html" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #4a5568; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.borderColor='#1a365d'; this.style.color='#1a365d'; this.style.background='#e8f9f7';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#4a5568'; this.style.background='#ffffff';">
+                        🔄 Traduzione Rapida IT
+                    </a>
+                    
+                    <a href="index.html" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #1a365d; border: 1px solid #1a365d; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.background='#2b6cb0'; this.style.borderColor='#2b6cb0';" onmouseout="this.style.background='#1a365d'; this.style.borderColor='#1a365d';">
+                        🏠 Torna alla Home
+                    </a>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputTesto = document.getElementById("Input-Filtro-Testo");
+            const tastiera = document.getElementById("Tastiera-Lettere");
+            const listaSchede = document.getElementById("Lista-Schede-Elementi");
+            const messaggioVuoto = document.getElementById("Messaggio-Vuoto");
+            const pannelloBenvenuto = document.getElementById("Pannello-Benvenuto");
+            const schede = Array.from(listaSchede.children);
+
+            function filtraSoloTesto() {
+                const query = inputTesto.value.toLowerCase().trim();
+
+                if (!query) {
+                    pannelloBenvenuto.style.display = "block";
+                    listaSchede.style.display = "none";
+                    messaggioVuoto.style.display = "none";
+                    return;
+                }
+
+                pannelloBenvenuto.style.display = "none";
+                listaSchede.style.display = "block";
+                tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
+
+                let contatore = 0;
+                schede.forEach(scheda => {
+                    const titolo = scheda.getAttribute("data-titolo") || "";
+                    if (titolo.includes(query)) {
+                        scheda.style.setProperty("display", "flex", "important");
+                        contatore++;
+                    } else {
+                        scheda.style.setProperty("display", "none", "important");
+                    }
+                });
+
+                messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
+            }
+
+            function filtraSoloLettera(letteraSelezionata) {
+                inputTesto.value = "";
+                pannelloBenvenuto.style.display = "none";
+                listaSchede.style.display = "block";
+
+                let contatore = 0;
+                schede.forEach(scheda => {
+                    const iniziale = scheda.getAttribute("data-iniziale") || "";
+                    if (letteraSelezionata === "TUTTI" || iniziale === letteraSelezionata) {
+                        scheda.style.setProperty("display", "flex", "important");
+                        contatore++;
+                    } else {
+                        scheda.style.setProperty("display", "none", "important");
+                    }
+                });
+
+                messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
+            }
+
+            inputTesto.replaceWith(inputTesto.cloneNode(true));
+            const nuovoInputTesto = document.getElementById("Input-Filtro-Testo");
+            nuovoInputTesto.addEventListener("input", filtraSoloTesto);
+
+            tastiera.addEventListener("click", function(e) {
+                if (!e.target.classList.contains("Btn-Lettera")) return;
+                tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
+                e.target.classList.add("attiva");
+                
+                const lettera = e.target.getAttribute("data-lettera");
+                filtraSoloLettera(lettera);
+            });
+        });
+    </script>
+</body>
+</html>
