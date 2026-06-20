@@ -39,20 +39,19 @@ title: Home
             box-sizing: border-box;
         }
 
-       /* --- PODIO ISTITUZIONALE: VERSIONE MAESTOSA --- */
+        /* --- PODIO ISTITUZIONALE: VERSIONE MAESTOSA --- */
         .Header-Podio {
             display: flex; 
             justify-content: space-between; 
-            align-items: flex-end; /* Cambiato da center a flex-end: spinge la base di tutti e tre i blocchi verso il basso */
+            align-items: flex-end; 
             border-bottom: 2px solid #e2e8f0; 
-            padding: 60px 50px; /* Lasciamo intatti i tuoi 60px che danno la giusta altezza */
+            padding: 60px 50px; 
             margin: -40px -40px 50px -40px; 
             gap: 25px;
-            background-color: #e8f9f7 ;
+            background-color: #e8f9f7;
             box-sizing: border-box;
         }
 
-        /* Allineiamo in basso anche le strutture interne dei singoli contenitori */
         .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: flex-end; }
         .Logo-Dip { height: 95px; width: auto; display: block; }
         
@@ -62,7 +61,6 @@ title: Home
         .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: flex-end; }
         .Logo-Phd { height: 95px; width: auto; display: block; }
 
-        /* --- IMMAGINE IN EVIDENZA DINAMICA (MANTIENE LE PROPORZIONI ORIGINALI) --- */
         .Contenitore-Immagine-Evidenza {
             width: 100%;
             background-color: #e8f9f7;
@@ -75,7 +73,7 @@ title: Home
 
         .Immagine-Evidenza {
             width: 100%;
-            height: auto; /* Mantiene le proporzioni originali native dell'immagine */
+            height: auto; 
             max-width: 100%;
             display: block;
         }
@@ -90,7 +88,6 @@ title: Home
             text-align: left;
         }
 
-        /* --- AREA PRESENTAZIONE AMPIA --- */
         .Sezione-Presentazione {
             background-color: #f2f9f8; 
             border: 1px solid #e8f9f7;
@@ -116,10 +113,9 @@ title: Home
             line-height: 1.7;
         }
 
-        /* --- GRIGLIA ACCESSI ADATTIVA IN BASSO --- */
         .Griglia-Accessi-Inferiore {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* Si adatta e si allarga dinamicamente */
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
             gap: 40px;
             align-items: flex-start;
             width: 100%;
@@ -213,16 +209,8 @@ title: Home
         }
 
         @media (max-width: 950px) {
-            .Griglia-Accessi-Inferiore {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            .Header-Podio {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-                padding: 30px 20px;
-            }
+            .Griglia-Accessi-Inferiore { grid-template-columns: 1fr; gap: 25px; }
+            .Header-Podio { flex-direction: column; align-items: center; gap: 20px; padding: 30px 20px; }
         }
     </style>
 </head>
@@ -262,14 +250,14 @@ title: Home
                 <div class="Colonna-Pannello-Accesso">
                     <div class="Categoria-Pulsanti-Titolo">Traduzione Rapida</div>
                     <div class="Gruppo-Bottoni">
-                        <a href="{{ '/ricerca-it.html' | relative_url }}" class="Card-Ingresso">
+                        <a href="{{ '/ricerca-it/' | relative_url }}" class="Card-Ingresso">
                             <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
                             <div class="Testi-Bottone">
                                 <span class="Titolo-Bottone">Interfaccia Italiana</span>
                                 <span class="Sottotitolo-Bottone">Navigazione tridimensionale sincrona da IT a FR</span>
                             </div>
                         </a>
-                        <a href="{{ '/ricerca-fr.html' | relative_url }}" class="Card-Ingresso">
+                        <a href="{{ '/ricerca-fr/' | relative_url }}" class="Card-Ingresso">
                             <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
                             <div class="Testi-Bottone">
                                 <span class="Titolo-Bottone">Interface Française</span>
@@ -282,14 +270,14 @@ title: Home
                 <div class="Colonna-Pannello-Accesso">
                     <div class="Categoria-Pulsanti-Titolo">Consultazione Glossario</div>
                     <div class="Gruppo-Bottoni">
-                        <a href="{{ '/glossario-it.html' | relative_url }}" class="Card-Ingresso">
+                        <a href="{{ '/glossario-it/' | relative_url }}" class="Card-Ingresso">
                             <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
                             <div class="Testi-Bottone">
                                 <span class="Titolo-Bottone">Glossario Italiano</span>
                                 <span class="Sottotitolo-Bottone">Ricerca alfabetica tradizionale con barra e filtri</span>
                             </div>
                         </a>
-                        <a href="{{ '/glossario-fr.html' | relative_url }}" class="Card-Ingresso">
+                        <a href="{{ '/glossario-fr/' | relative_url }}" class="Card-Ingresso">
                             <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
                             <div class="Testi-Bottone">
                                 <span class="Titolo-Bottone">Glossaire Français</span>
