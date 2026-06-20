@@ -1,3 +1,7 @@
+---
+layout: default
+title: {{ page.title }} | Glossario Rolli
+---
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -67,7 +71,6 @@
             margin-bottom: 8px;
         }
 
-        /* Input di ricerca interna nell'indice */
         .Sidebar-Search {
             width: 100%;
             padding: 6px 12px;
@@ -113,11 +116,11 @@
         .Contenuto-Scheda ol li { margin-bottom: 12px; line-height: 1.6; word-break: break-all !important; overflow-wrap: break-word !important; }
         .Contenuto-Scheda ol a { color: #2b6cb0; word-break: break-all !important; }
         
-        /* PARAGRAFI STANDARD ED ELENCO FONTI SPECIALI */
         .Contenuto-Scheda p { font-size: 1.05em; color: #4a5568; margin: 10px 0; }
 
         .Contenuto-Scheda h3 + p:last-of-type,
         .Contenuto-Scheda h3[id*="note"] + p,
+        .Contenuto-Scheda h3[id*="sources"] + p,
         .Contenuto-Scheda h3[id*="fonti"] + p {
             background-color: #f8fafc; 
             border: 1px solid #e2e8f0;
@@ -131,7 +134,7 @@
             white-space: pre-line;
         }
 
-        /* 3. COLONNA DESTRA: IMMAGINE + PULSANTI DI RITORNO */
+        /* 3. COLONNA DESTRA */
         .Sidebar-Immagine {
             border-left: 1px solid #e2e8f0; padding-left: 20px;
             position: sticky; top: 20px; display: flex; flex-direction: column; gap: 20px;
@@ -141,7 +144,6 @@
         .Visual-Foto { width: 100%; height: auto; display: block; object-fit: cover; }
         .Visual-Didascalia { padding: 12px; font-size: 0.85em; color: #718096; line-height: 1.4; border-top: 1px solid #e2e8f0; background-color: #ffffff; }
 
-        /* PANNELLO COMANDI UTILI */
         .Pannello-Comandi-Navigazione {
             background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; gap: 10px;
         }
@@ -150,17 +152,16 @@
         }
         .Btn-Comando-Laterale:hover { border-color: #1a365d; color: #1a365d; background: #eef4fa; transform: translateX(2px); }
 
-        /* FRECCE DI SFOGLIO IN BASSO */
         .Navigazione-Schede { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 25px; border-top: 1px solid #e2e8f0; }
         .Btn-Navigazione { display: inline-flex; align-items: center; text-decoration: none; color: #4a5568; background-color: #f7fafc; border: 1px solid #e2e8f0; padding: 10px 18px; border-radius: 6px; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
         .Btn-Navigazione:hover { background-color: #1a365d; color: #ffffff; border-color: #1a365d; }
 
-        /* --- PODIO ISTITUZIONALE BIANCO RIPRISTINATO INTACTO --- */
+        /* --- PODIO ISTITUZIONALE BIANCO INALTERATO --- */
         .Header-Podio { 
             display: flex; 
             justify-content: space-between; 
             align-items: flex-end; 
-            border-bottom: 1px solid #e2e8f0; /* Stesso identico stile lineare della Home originale */
+            border-bottom: 1px solid #e2e8f0; 
             padding-bottom: 25px; 
             margin-bottom: 35px; 
             gap: 15px; 
@@ -200,13 +201,13 @@
         
         <div class="Header-Podio">
             <div class="Podio-Dipartimento">
-                <img src="Logo_DLCM_UniGe_black.png" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
+                <img src="{{ '/Logo_DLCM_UniGe_black.png' | relative_url }}" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
             </div>
             <div class="Podio-Ateneo">
-                <img src="logo_verticale_COLORE.png" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
+                <img src="{{ '/logo_verticale_COLORE.png' | relative_url }}" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
             </div>
             <div class="Podio-Dottorato">
-                <img src="Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png" alt="Dottorato in Digital Humanities" class="Logo-Phd">
+                <img src="{{ '/Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png' | relative_url }}" alt="Dottorato in Digital Humanities" class="Logo-Phd">
             </div>
         </div>
 
@@ -218,16 +219,11 @@
                     <input type="text" id="Search-Sidebar-Input" class="Sidebar-Search" placeholder="Filtra indice...">
                 </div>
                 <ul class="Albero-Lemmi" id="Albero-Lemmi-Lista">
-                    {% assign schede_filtrate = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua %}
-                    {% assign gruppi_alfabetici = schede_filtrate | group_by_exp: "item", "item.title | slice: 0 | upcase" | sort: "name" %}
-                    
-                    {% for gruppo in gruppi_alfabetici %}
-                        {% assign schede_gruppo_ordinate = gruppo.items | sort: "title" %}
-                        {% for scheda in schede_gruppo_ordinate %}
-                            <li class="{% if scheda.url == page.url %}attivo{% endif %}" data-lemma="{{ scheda.title | downcase }}">
-                                <a href="{{ site.baseurl }}{{ scheda.url }}">{{ scheda.title }}</a>
-                            </li>
-                        {% endfor %}
+                    {% assign schede_filtrate = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua | sort: "title" %}
+                    {% for scheda in schede_filtrate %}
+                        <li class="{% if scheda.url == page.url %}attivo{% endif %}" data-lemma="{{ scheda.title | downcase }}">
+                            <a href="{{ site.baseurl }}{{ scheda.url }}">{{ scheda.title }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -254,7 +250,9 @@
                     <div class="Meta-Item"><strong>Modello teorico:</strong> CeRTeM</div>
                 </div>
 
-                {{ content }}
+                <div id="Blocco-Markdown-Contenuto">
+                    {{ content }}
+                </div>
                 
                 <nav class="Navigazione-Schede">
                     {% assign prev_scheda = nil %}{% assign next_scheda = nil %}{% assign trovato_corrente = false %}
@@ -319,22 +317,71 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // 1. FILTRO BARRA LATERALE
             const searchInput = document.getElementById("Search-Sidebar-Input");
             const listaElementi = document.getElementById("Albero-Lemmi-Lista");
             const righe = Array.from(listaElementi.children);
 
             searchInput.addEventListener("input", function() {
                 const query = this.value.toLowerCase().trim();
-                
                 righe.forEach(riga => {
                     const lemma = riga.getAttribute("data-lemma") || "";
-                    if (!query || lemma.includes(query)) {
-                        riga.style.display = "block";
-                    } else {
-                        riga.style.display = "none";
-                    }
+                    riga.style.display = (!query || lemma.includes(query)) ? "block" : "none";
                 });
             });
+
+            // 2. PARSER AUTOMATICO FONTI FRANCESI (Sincronizzazione via RegEx)
+            const linguaPagina = "{{ page.lingua }}";
+            
+            if (linguaPagina === "fr") {
+                // Individua l'elemento p delle fonti (subito dopo l'h3 delle Sources)
+                const h3Elements = Array.from(document.querySelectorAll(".Contenuto-Scheda h3"));
+                const h3Sources = h3Elements.find(el => el.textContent.toLowerCase().includes("sources"));
+                
+                if (h3Sources) {
+                    let pSources = h3Sources.nextElementSibling;
+                    // Saltiamo eventuali elementi vuoti spuri
+                    while (pSources && pSources.tagName !== "P") {
+                        pSources = pSources.nextElementSibling;
+                    }
+                    
+                    if (pSources) {
+                        const testoGrezzo = pSources.textContent;
+                        
+                        // REGEX STRATEGICA: intercetta le date di consultazione che chiudono la linea 
+                        // Cerca "consulté le " seguito da una data e opzionalmente da un punto, gestendo l'andata a capo
+                        const regexSplit = /(consulté le \d{2}\/\d{2}\/\d{4}\.?)\s*\n?/gi;
+                        
+                        let fontiGenerate = [];
+                        let match;
+                        let ultimoIndice = 0;
+                        
+                        while ((match = regexSplit.exec(testoGrezzo)) !== null) {
+                            // Estrae la stringa della fonte fino alla fine del blocco "consulté..."
+                            let pezzoFonte = testoGrezzo.substring(ultimoIndice, regexSplit.lastIndex).trim();
+                            if (pezzoFonte) {
+                                fontiGenerate.push(pezzoFonte);
+                            }
+                            ultimoIndice = regexSplit.lastIndex;
+                        }
+                        
+                        // Gestisce eventuale testo residuo finale
+                        let residuo = testoGrezzo.substring(ultimoIndice).trim();
+                        if (residuo) {
+                            fontiGenerate.push(residuo);
+                        }
+
+                        // Se abbiamo trovato delle fonti valide, ricostruiamo il paragrafo numerato
+                        if (fontiGenerate.length > 0) {
+                            let testoFormattatoConNumeri = fontiGenerate
+                                .map((fonte, index) => `(${index + 1}) ${fonte}`)
+                                .join("\n");
+                            
+                            pSources.textContent = testoFormattatoConNumeri;
+                        }
+                    }
+                }
+            }
         });
     </script>
 </body>
