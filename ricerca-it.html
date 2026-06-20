@@ -117,7 +117,7 @@ title: Ricerca Lemmi (IT)
             flex: 1;
             position: relative;
             width: 100%;
-            min-width: 0; /* Impedisce ai testi lunghi di rompere il flexbox */
+            min-width: 0;
         }
 
         .Colonna-Connessione {
@@ -219,33 +219,6 @@ title: Ricerca Lemmi (IT)
             letter-spacing: 1px;
         }
 
-        .Contenitore-Ritorno {
-            text-align: center;
-            margin: 30px auto 10px auto;
-        }
-
-        .Btn-Ritorno {
-            display: inline-block;
-            background-color: #1a365d; /* Blu scuro istituzionale (lo stesso dei testi attivi) */
-            color: #ffffff; /* Scritta bianca */
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1em;
-            padding: 12px 30px; /* Un pizzico di respiro in più per il formato solido */
-            border-radius: 50px;
-            border: 2px solid #1a365d;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(26, 54, 93, 0.1); /* Una leggera ombra per dargli profondità */
-        }
-
-        .Btn-Ritorno:hover {
-            background-color: #2b6cb0; /* Si schiarisce su un blu più acceso al passaggio del mouse */
-            border-color: #2b6cb0;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(26, 54, 93, 0.15);
-        }
-
         .Bollino-Flag {
             width: 32px;
             height: 32px;
@@ -273,7 +246,7 @@ title: Ricerca Lemmi (IT)
                 width: 100%;
             }
             .Freccia-Asse {
-                transform: rotate(90deg); /* Ruota la freccia bidirezionale in verticale sui telefoni */
+                transform: rotate(90deg);
             }
         }
     </style>
@@ -299,7 +272,7 @@ title: Ricerca Lemmi (IT)
                 
                 <div style="position: absolute; top: 15px; right: 25px; z-index: 20; display: flex; gap: 15px; align-items: center;">
                     <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag" style="opacity: 0.35; cursor: default;" title="Versione Italiana (Corrente)">
-                    <a href="{{ '/ricerca-fr.html' | relative_url }}" style="text-decoration: none; transition: transform 0.2s; display: block;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';" title="Version Française">
+                    <a href="{{ '/ricerca-fr.html' | relative_url }}" style="text-decoration: none; transition: transform 0.2s; display: block;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)'" title="Version Française">
                         <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag">
                     </a>
                 </div>
@@ -357,12 +330,17 @@ title: Ricerca Lemmi (IT)
                 </div>
                 
                 <div class="info-scroll">Usa la rotella del mouse o trascina la ruota italiana per sfogliare i lemmi allineati</div>
-            </div>
 
-            <div class="Contenitore-Ritorno">
-                <a href="{{ '/' | relative_url }}" class="Btn-Ritorno">
-                    &larr; Torna alla Home
-                </a>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 35px; padding-top: 20px; border-top: 1px dashed #cbd5e1; flex-wrap: wrap;">
+                    <a href="{{ site.baseurl }}/glossario-it.html" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #4a5568; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.borderColor='#1a365d'; this.style.color='#1a365d'; this.style.background='#e8f9f7';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#4a5568'; this.style.background='#ffffff';">
+                        📋 Elenco Glossario (IT)
+                    </a>
+                    
+                    <a href="{{ site.baseurl }}/" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #1a365d; border: 1px solid #1a365d; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.background='#2b6cb0'; this.style.borderColor='#2b6cb0';" onmouseout="this.style.background='#1a365d'; this.style.borderColor='#1a365d';">
+                        🏠 Torna alla Home
+                    </a>
+                </div>
+
             </div>
         </main>
     </div>
