@@ -1,607 +1,294 @@
 ---
-
 layout: default
-
 title: Home
-
 ---
-
 <!DOCTYPE html>
-
 <html lang="it">
-
 <head>
-
     <meta charset="UTF-8">
-
     <title>Glossario Multilingue dei Rolli di Ateneo</title>
-
     <style>
-
         body {
-
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-
             line-height: 1.6;
-
             color: #2d3748;
-
             max-width: 1400px;
-
             margin: 0 auto;
-
             padding: 30px 20px;
-
             font-size: 1.15em;
-
             
-
             /* --- NUOVO SFONDO ISTITUZIONALE E CALDO --- */
-
             background-color: #f1f5f9;
-
             background-image: 
-
                 radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0),
-
                 radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0);
-
             background-size: 24px 24px;
-
             background-position: 0 0, 12px 12px;
-
         }
-
-
 
         .Homepage-Container {
-
             background: #ffffff;
-
             border-top: 6px solid #1a365d;
-
             border-radius: 12px;
-
             box-shadow: 0 15px 35px rgba(26, 54, 93, 0.06);
-
             padding: 40px;
-
             margin-top: 20px;
-
         }
 
-
-
-        /* --- PODIO ISTITUZIONALE --- */
-
+        /* --- PODIO ISTITUZIONALE INALTERATO --- */
         .Header-Podio {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: flex-end;
-
             border-bottom: 1px solid #e2e8f0;
-
             padding-bottom: 25px;
-
             margin-bottom: 35px;
-
             gap: 15px;
-
         }
-
-
 
         .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
-
         .Logo-Dip { height: 95px; width: auto; display: block; }
-
         .Podio-Ateneo { flex: 1; display: flex; justify-content: center; align-items: center; }
-
         .Logo-Unige-Sigillo { height: 125px; width: auto; display: block; }
-
         .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
-
         .Logo-Phd { height: 95px; width: auto; display: block; }
 
-
-
         /* --- IMMAGINE IN EVIDENZA (ORA IN ALTO A TUTTA LARGHEZZA) --- */
-
         .Contenitore-Immagine-Evidenza {
-
             width: 100%;
-
             background-color: #eef4fa;
-
             border: 1px solid #d0e1f2;
-
             border-radius: 8px;
-
             overflow: hidden;
-
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-
             margin-bottom: 40px;
-
         }
-
-
 
         .Immagine-Evidenza {
-
             width: 100%;
-
             height: auto;
-
             display: block;
-
         }
-
-
 
         .Didascalia-Evidenza {
-
             padding: 14px 20px;
-
             font-size: 0.85em;
-
             color: #718096;
-
             line-height: 1.4;
-
             border-top: 1px solid #d0e1f2;
-
             background-color: #ffffff;
-
             text-align: left;
-
         }
 
-
-
-        /* --- LAYOUT DINAMICO A DUE COLONNE (SOTTO LA FOTO) --- */
-
-        .Griglia-Home {
-
-            display: flex;
-
-            gap: 40px;
-
-            align-items: flex-start;
-
-        }
-
-
-
-        .Colonna-Presentazione {
-
-            flex: 1.4;
-
-            text-align: justify;
-
-        }
-
-
-
-        .Colonna-Pannello-Accesso {
-
-            flex: 1;
-
-            background-color: #f8fafc;
-
-            border: 1px solid #e2e8f0;
-
-            border-radius: 12px;
-
-            padding: 30px 25px;
-
-            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
-
-        }
-
-
-
+        /* --- AREA PRESENTAZIONE A TUTTA LARGHEZZA --- */
         .Sezione-Presentazione {
-
             background-color: #eef4fa; 
-
             border: 1px solid #d0e1f2;
-
             border-radius: 8px;
-
             padding: 30px;
-
+            margin-bottom: 40px;
+            text-align: justify;
         }
-
-
 
         .Titolo-Principale {
-
             color: #1a365d;
-
             font-size: 2.3em;
-
             font-weight: 700;
-
             line-height: 1.2;
-
             margin: 0 0 15px 0;
-
             letter-spacing: -0.5px;
-
         }
-
-
 
         .Testo-Introduzione {
-
             color: #4a5568;
-
             font-size: 1.05em;
-
             margin: 0;
-
             line-height: 1.7;
-
         }
 
+        /* --- NUOVA AREA ACCESSI IN BASSO DIVISA IN DUE COLONNE --- */
+        .Griglia-Accessi-Inferiore {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
 
-
-        /* --- BLOCCHI DI ACCESSO A DESTRA --- */
+        .Colonna-Pannello-Accesso {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            box-sizing: border-box;
+        }
 
         .Categoria-Pulsanti-Titolo {
-
             font-size: 0.9em;
-
             text-transform: uppercase;
-
             letter-spacing: 1px;
-
             color: #1a365d;
-
             font-weight: 800;
-
-            margin-bottom: 15px;
-
-            margin-top: 10px;
-
+            margin-bottom: 20px;
             border-left: 4px solid #1a365d;
-
             padding-left: 10px;
-
         }
-
-
 
         .Gruppo-Bottoni {
-
             display: flex;
-
             flex-direction: column;
-
             gap: 15px;
-
-            margin-bottom: 35px;
-
         }
-
-
 
         .Card-Ingresso {
-
             background: #ffffff;
-
             border: 2px solid #cbd5e1;
-
             border-radius: 10px;
-
             padding: 18px 20px;
-
             text-decoration: none;
-
             color: #1a365d;
-
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
-
             transition: all 0.2s ease;
-
             display: flex;
-
             align-items: center;
-
             gap: 15px;
-
         }
-
-
 
         .Card-Ingresso:hover {
-
             border-color: #1a365d;
-
             box-shadow: 0 6px 15px rgba(26, 54, 93, 0.08);
-
             transform: translateY(-2px);
-
             background-color: #ffffff;
-
         }
-
-
 
         .Bollino-Flag-Home {
-
             width: 35px;
-
             height: 35px;
-
             border-radius: 50px;
-
             object-fit: cover;
-
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
             flex-shrink: 0;
-
         }
-
-
 
         .Testi-Bottone {
-
             display: flex;
-
             flex-direction: column;
-
             text-align: left;
-
         }
-
-
 
         .Titolo-Bottone {
-
             font-size: 1.1em;
-
             font-weight: 700;
-
             line-height: 1.2;
-
             margin-bottom: 3px;
-
         }
-
-
 
         .Sottotitolo-Bottone {
-
             font-size: 0.8em;
-
             color: #718096;
-
             font-weight: 500;
-
             line-height: 1.3;
-
         }
-
-
 
         .Footer-Curatore {
-
             margin-top: 50px;
-
             padding-top: 20px;
-
             border-top: 1px dashed #e2e8f0;
-
             text-align: right;
-
             font-size: 0.85em;
-
             color: #718096;
-
             font-style: italic;
-
         }
-
-
 
         @media (max-width: 950px) {
-
-            .Griglia-Home {
-
-                flex-direction: column;
-
-                gap: 30px;
-
+            .Griglia-Accessi-Inferiore {
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
-
-            .Colonna-Presentazione, .Colonna-Pannello-Accesso {
-
-                width: 100%;
-
-                flex: none;
-
-            }
-
         }
-
     </style>
-
 </head>
-
 <body>
 
-
-
     <div class="Homepage-Container">
-
         
-
         <div class="Header-Podio">
-
             <div class="Podio-Dipartimento">
-
                 <img src="Logo_DLCM_UniGe_black.png" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
-
             </div>
-
             <div class="Podio-Ateneo">
-
                 <img src="logo_verticale_COLORE.png" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
-
             </div>
-
             <div class="Podio-Dottorato">
-
                 <img src="Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png" alt="Dottorato in Digital Humanities" class="Logo-Phd">
-
             </div>
-
         </div>
 
-
-
         <main>
-
             <div class="Contenitore-Immagine-Evidenza">
-
                 <img src="Galleria_Balbi_Senarega.jpg" alt="Galleria di Palazzo Balbi Senarega" class="Immagine-Evidenza">
-
                 <div class="Didascalia-Evidenza">
-
-                    <strong>Palazzo Balbi Senarega (Balbi 4):</strong> Vista prospettica della Galleria affrescata, prezioso esempio di spazio monumentale interno del palazzo di Ateneo. [cite: 2026-03-04]
-
+                    <strong>Palazzo Balbi Senarega (Balbi 4):</strong> Vista prospettica della Galleria affrescata, prezioso esempio di spazio monumentale interno del palazzo di Ateneo.
                 </div>
-
             </div>
 
+            <div class="Sezione-Presentazione">
+                <h1 class="Titolo-Principale">Glossario dei Rolli di Ateneo</h1>
+                <p class="Testo-Introduzione">
+                    Benvenuti nel repertorio terminologico digitale dedicato alla descrizione architettonica e artistica del sistema dei Palazzi dei Rolli di Genova di proprietà dell'Ateneo. Questo progetto di ricerca si propone di migliorare l'accessibilità culturale del patrimonio architettonico universitario attraverso l'implementazione di schede terminologiche basate sul modello teorico e metodologico utilizzato presso il Centro di Ricerca in Terminologia Multilingue (CeRTeM) dell'Università di Genova, consentendo al contempo una profonda valorizzazione del patrimonio culturale storico della città.
+                </p>
+            </div>
 
-
-            <div class="Griglia-Home">
-
+            <div class="Griglia-Accessi-Inferiore">
                 
-
-                <div class="Colonna-Presentazione">
-
-                    <div class="Sezione-Presentazione">
-
-                        <h1 class="Titolo-Principale">Glossario dei Rolli di Ateneo</h1>
-
-                        <p class="Testo-Introduzione">
-
-                            Benvenuti nel repertorio terminologico digitale dedicato alla descrizione architettonica e artistica del sistema dei Palazzi dei Rolli di Genova di proprietà dell'Ateneo. Questo progetto di ricerca si propone di migliorare l'accessibilità culturale del patrimonio architettonico universitario attraverso l'implementazione di schede terminologiche basate sul modello teorico e metodologico utilizzato presso il Centro di Ricerca in Terminologia Multilingue (CeRTeM) dell'Università di Genova, consentendo al contempo una profonda valorizzazione del patrimonio culturale storico della città.
-
-                        </p>
-
+                <div class="Colonna-Pannello-Accesso">
+                    <div class="Categoria-Pulsanti-Titolo">Traduzione Rapida</div>
+                    <div class="Gruppo-Bottoni">
+                        <a href="{{ '/ricerca-it.html' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone">Interfaccia Italiana</span>
+                                <span class="Sottotitolo-Bottone">Navigazione tridimensionale sincrona da IT a FR</span>
+                            </div>
+                        </a>
+                        <a href="{{ '/ricerca-fr.html' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone">Interface Française</span>
+                                <span class="Sottotitolo-Bottone">Navigation synchrone tridimensionnelle de FR à IT</span>
+                            </div>
+                        </a>
                     </div>
-
                 </div>
-
-
 
                 <div class="Colonna-Pannello-Accesso">
-
-                    
-
-                    <div class="Categoria-Pulsanti-Titolo">Traduzione Rapida</div>
-
-                    <div class="Gruppo-Bottoni">
-
-                        <a href="{{ '/ricerca-it.html' | relative_url }}" class="Card-Ingresso">
-
-                            <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
-
-                            <div class="Testi-Bottone">
-
-                                <span class="Titolo-Bottone">Interfaccia Italiana</span>
-
-                                <span class="Sottotitolo-Bottone">Navigazione tridimensionale sincrona da IT a FR</span>
-
-                            </div>
-
-                        </a>
-
-                        <a href="{{ '/ricerca-fr.html' | relative_url }}" class="Card-Ingresso">
-
-                            <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
-
-                            <div class="Testi-Bottone">
-
-                                <span class="Titolo-Bottone">Interface Française</span>
-
-                                <span class="Sottotitolo-Bottone">Navigation synchrone tridimensionnelle de FR à IT</span>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-
-
                     <div class="Categoria-Pulsanti-Titolo">Consultazione Glossario</div>
-
-                    <div class="Gruppo-Bottoni" style="margin-bottom: 10px;">
-
+                    <div class="Gruppo-Bottoni">
                         <a href="{{ '/glossario-it.html' | relative_url }}" class="Card-Ingresso">
-
                             <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
-
                             <div class="Testi-Bottone">
-
                                 <span class="Titolo-Bottone">Glossario Italiano</span>
-
                                 <span class="Sottotitolo-Bottone">Ricerca alfabetica tradizionale con barra e filtri</span>
-
                             </div>
-
                         </a>
-
                         <a href="{{ '/glossario-fr.html' | relative_url }}" class="Card-Ingresso">
-
                             <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
-
                             <div class="Testi-Bottone">
-
                                 <span class="Titolo-Bottone">Glossaire Français</span>
-
                                 <span class="Sottotitolo-Bottone">Recherche alphabétique traditionnelle avec filtres</span>
-
                             </div>
-
                         </a>
-
                     </div>
-
-
-
                 </div>
 
-
-
             </div>
-
         </main>
-
         
-
         <footer class="Footer-Curatore">
-
             Progetto di ricerca a cura di: Giovanni Mantegazza (Università degli Studi di Genova)
-
         </footer>
-
-
 
     </div>
 
-
-
 </body>
-
 </html>
