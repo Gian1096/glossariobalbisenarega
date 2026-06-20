@@ -226,21 +226,24 @@ title: Ricerca Lemmi (IT)
 
         .Btn-Ritorno {
             display: inline-block;
-            background-color: transparent;
-            color: #4a5568;
+            background-color: #1a365d; /* Blu scuro istituzionale (lo stesso dei testi attivi) */
+            color: #ffffff; /* Scritta bianca */
             text-decoration: none;
             font-weight: 600;
             font-size: 1em;
-            padding: 10px 25px;
+            padding: 12px 30px; /* Un pizzico di respiro in più per il formato solido */
             border-radius: 50px;
-            border: 2px solid #cbd5e1;
+            border: 2px solid #1a365d;
             transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(26, 54, 93, 0.1); /* Una leggera ombra per dargli profondità */
         }
 
         .Btn-Ritorno:hover {
-            background-color: #cbd5e1;
-            color: #1a365d;
+            background-color: #2b6cb0; /* Si schiarisce su un blu più acceso al passaggio del mouse */
+            border-color: #2b6cb0;
+            color: #ffffff;
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 54, 93, 0.15);
         }
 
         .Bollino-Flag {
