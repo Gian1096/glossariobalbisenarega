@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: null
 title: Home
 ---
 <!DOCTYPE html>
@@ -12,12 +12,13 @@ title: Home
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             color: #2d3748;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 20px;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 30px 4% !important; /* Spaziatura laterale fluida in percentuale */
             font-size: 1.15em;
+            box-sizing: border-box;
             
-            /* --- NUOVO SFONDO ISTITUZIONALE E CALDO --- */
+            /* --- SFONDO ISTITUZIONALE E CALDO --- */
             background-color: #f1f5f9;
             background-image: 
                 radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0),
@@ -32,7 +33,10 @@ title: Home
             border-radius: 12px;
             box-shadow: 0 15px 35px rgba(26, 54, 93, 0.06);
             padding: 40px;
-            margin-top: 20px;
+            margin: 20px auto 0 auto;
+            width: 100%; /* Occupa tutto lo spazio disponibile */
+            max-width: 1600px; /* Coordinato con la larghezza massima delle schede */
+            box-sizing: border-box;
         }
 
         /* --- PODIO ISTITUZIONALE INALTERATO --- */
@@ -42,8 +46,11 @@ title: Home
             align-items: flex-end;
             border-bottom: 1px solid #e2e8f0;
             padding-bottom: 25px;
-            margin-bottom: 35px;
+            margin: -40px -40px 35px -40px; /* Esteso perfettamente fino ai bordi del contenitore */
+            padding-left: 40px;
+            padding-right: 40px;
             gap: 15px;
+            background-color: #ffffff;
         }
 
         .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
@@ -53,7 +60,7 @@ title: Home
         .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
         .Logo-Phd { height: 95px; width: auto; display: block; }
 
-        /* --- IMMAGINE IN EVIDENZA (ORA IN ALTO A TUTTA LARGHEZZA) --- */
+        /* --- IMMAGINE IN EVIDENZA DINAMICA (MANTIENE LE PROPORZIONI ORIGINALI) --- */
         .Contenitore-Immagine-Evidenza {
             width: 100%;
             background-color: #eef4fa;
@@ -66,7 +73,8 @@ title: Home
 
         .Immagine-Evidenza {
             width: 100%;
-            height: auto;
+            height: auto; /* Mantiene le proporzioni originali native dell'immagine */
+            max-width: 100%;
             display: block;
         }
 
@@ -80,7 +88,7 @@ title: Home
             text-align: left;
         }
 
-        /* --- AREA PRESENTAZIONE A TUTTA LARGHEZZA --- */
+        /* --- AREA PRESENTAZIONE AMPIA --- */
         .Sezione-Presentazione {
             background-color: #eef4fa; 
             border: 1px solid #d0e1f2;
@@ -106,12 +114,13 @@ title: Home
             line-height: 1.7;
         }
 
-        /* --- NUOVA AREA ACCESSI IN BASSO DIVISA IN DUE COLONNE --- */
+        /* --- GRIGLIA ACCESSI ADATTIVA IN BASSO --- */
         .Griglia-Accessi-Inferiore {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* Si adatta e si allarga dinamicamente */
             gap: 40px;
             align-items: flex-start;
+            width: 100%;
         }
 
         .Colonna-Pannello-Accesso {
@@ -152,6 +161,7 @@ title: Home
             display: flex;
             align-items: center;
             gap: 15px;
+            box-sizing: border-box;
         }
 
         .Card-Ingresso:hover {
@@ -204,6 +214,12 @@ title: Home
             .Griglia-Accessi-Inferiore {
                 grid-template-columns: 1fr;
                 gap: 25px;
+            }
+            .Header-Podio {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 30px 20px;
             }
         }
     </style>
