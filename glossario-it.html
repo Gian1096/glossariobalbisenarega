@@ -258,105 +258,10 @@ title: Glossario Tradizionale (IT)
                 </div>
 
                 <div class="Messaggio-Guida" id="Pannello-Benvenuto">
-                    🔍 Seleziona una lettera o scrivi nella barra per consultare i termini del glossario.
+                    🔍 Seleziona una letter o scrivi nella barra per consultare i termini del glossario.
                 </div>
 
                 <ul class="Insieme-Schede" id="Lista-Schede-Elementi" style="display: none;">
                     {% assign voci_it = site.pages | where: "layout", "scheda" | where: "lingua", "it" | sort: "title" %}
                     {% for voce in voci_it %}
-                        {% assign prima_lettera = voce.title | slice: 0 | upcase %}
-                        <li class="Voce-Scheda-Glossario" data-titolo="{{ voce.title | downcase }}" data-iniziale="{{ prima_lettera }}">
-                            <a href="{{ voce.url | relative_url }}">{{ voce.title }}</a>
-                            <span class="Tag-Dominio">{{ voce.dominio | default: "ARCH" }}</span>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-                <div class="Nessun-Risultato" id="Messaggio-Vuoto">Nessun lemma corrisponde ai criteri di ricerca</div>
-
-                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 35px; padding-top: 20px; border-top: 1px dashed #cbd5e1; flex-wrap: wrap;">
-                    <a href="{{ site.baseurl }}/ricerca-it.html" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #4a5568; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.borderColor='#1a365d'; this.style.color='#1a365d'; this.style.background='#e8f9f7';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#4a5568'; this.style.background='#ffffff';">
-                        🔄 Ruota di Traduzione
-                    </a>
-                    
-                    <a href="{{ site.baseurl }}/" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #1a365d; border: 1px solid #1a365d; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.background='#2b6cb0'; this.style.borderColor='#2b6cb0';" onmouseout="this.style.background='#1a365d'; this.style.borderColor='#1a365d';">
-                        🏠 Torna alla Home
-                    </a>
-                </div>
-
-            </div>
-        </main>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const inputTesto = document.getElementById("Input-Filtro-Testo");
-            const tastiera = document.getElementById("Tastiera-Lettere");
-            const listaSchede = document.getElementById("Lista-Schede-Elementi");
-            const messaggioVuoto = document.getElementById("Messaggio-Vuoto");
-            const pannelloBenvenuto = document.getElementById("Pannello-Benvenuto");
-            const schede = Array.from(listaSchede.children);
-
-            function filtraSoloTesto() {
-                const query = inputTesto.value.toLowerCase().trim();
-
-                if (!query) {
-                    pannelloBenvenuto.style.display = "block";
-                    listaSchede.style.display = "none";
-                    messaggioVuoto.style.display = "none";
-                    return;
-                }
-
-                pannelloBenvenuto.style.display = "none";
-                listaSchede.style.display = "block";
-                tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
-
-                let contatore = 0;
-                schede.forEach(scheda => {
-                    const titolo = scheda.getAttribute("data-titolo") || "";
-                    if (titolo.includes(query)) {
-                        scheda.style.setProperty("display", "flex", "important");
-                        contatore++;
-                    } else {
-                        scheda.style.setProperty("display", "none", "important");
-                    }
-                });
-
-                messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
-            }
-
-            function filtraSoloLettera(letteraSelezionata) {
-                inputTesto.value = "";
-                pannelloBenvenuto.style.display = "none";
-                listaSchede.style.display = "block";
-
-                let contatore = 0;
-                schede.forEach(scheda => {
-                    const iniziale = scheda.getAttribute("data-iniziale") || "";
-                    if (letteraSelezionata === "TUTTI" || iniziale === letteraSelezionata) {
-                        scheda.style.setProperty("display", "flex", "important");
-                        contatore++;
-                    } else {
-                        scheda.style.setProperty("display", "none", "important");
-                    }
-                });
-
-                messaggioVuoto.style.display = (contatore === 0) ? "block" : "none";
-            }
-
-            inputTesto.replaceWith(inputTesto.cloneNode(true));
-            const nuovoInputTesto = document.getElementById("Input-Filtro-Testo");
-            nuovoInputTesto.addEventListener("input", filtraSoloTesto);
-
-            tastiera.addEventListener("click", function(e) {
-                if (!e.target.classList.contains("Btn-Lettera")) return;
-                tastiera.querySelectorAll(".Btn-Lettera").forEach(b => b.classList.remove("attiva"));
-                e.target.classList.add("attiva");
-                
-                const lettera = e.target.getAttribute("data-lettera");
-                filtraSoloLettera(lettera);
-            });
-        });
-    </script>
-</body>
-</html>
+                        {% assign prima_lettera = voce.
