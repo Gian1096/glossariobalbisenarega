@@ -1,170 +1,56 @@
+---
+layout: default
+title: Home
+---
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>{{ page.title }} | Glossario Rolli</title>
+    <title>Glossario Multilingue dei Rolli di Ateneo</title>
     <style>
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             color: #2d3748;
-            font-size: 1.15em;
-            text-align: justify;
-            margin: 0 !important;
-            padding: 0 !important;
             width: 100% !important;
-            max-width: 100% !important;
-            background-color: #eef2f7 !important;
+            margin: 0 !important;
+            padding: 30px 4% !important; /* Spaziatura laterale fluida in percentuale */
+            font-size: 1.15em;
+            box-sizing: border-box;
+            
+            /* --- SFONDO ISTITUZIONALE E CALDO --- */
+            background-color: #f1f5f9;
+            background-image: 
+                radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0),
+                radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
         }
 
-        .Scheda-Container {
+        .Homepage-Container {
             background: #ffffff;
             border-top: 6px solid #1a365d;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(26, 54, 93, 0.06);
             padding: 40px;
-            max-width: 1500px; 
-            margin: 0 auto; 
-            min-height: 100vh;
+            margin: 20px auto 0 auto;
+            width: 100%; /* Occupa tutto lo spazio disponibile */
+            max-width: 1600px; /* Coordinato con la larghezza massima delle schede */
             box-sizing: border-box;
         }
 
-        .Main-Layout {
-            display: grid;
-            grid-template-columns: 250px minmax(0, 1fr) 280px;
-            gap: 30px;
-            margin-top: 20px;
-            align-items: flex-start;
-        }
-
-        /* 1. BARRA LATERALE SINISTRA SCORREVOLE ED EVOLUTA */
-        .Sidebar-Lemmi {
-            border-right: 1px solid #e2e8f0;
-            padding-right: 15px;
-            position: sticky;
-            top: 20px; 
-            max-height: 85vh; 
-            overflow-y: auto; 
-            padding-bottom: 20px;
-        }
-
-        .Sidebar-Lemmi::-webkit-scrollbar { width: 5px; }
-        .Sidebar-Lemmi::-webkit-scrollbar-track { background: #f1f5f9; }
-        .Sidebar-Lemmi::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-
-        .Sidebar-Titolo-Fisso {
-            position: sticky;
-            top: 0;
-            background: #ffffff;
-            z-index: 10;
-            padding-bottom: 10px;
-        }
-
-        .Sidebar-Titolo {
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #718096;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        /* Input di ricerca interna nell'indice */
-        .Sidebar-Search {
-            width: 100%;
-            padding: 6px 12px;
-            font-size: 0.85em;
-            border: 1px solid #cbd5e1;
-            border-radius: 20px;
-            outline: none;
-            box-sizing: border-box;
-        }
-        .Sidebar-Search:focus { border-color: #2b6cb0; }
-
-        .Albero-Lemmi { list-style: none; padding: 0; margin: 10px 0 0 0; }
-        .Albero-Lemmi li { margin-bottom: 5px; break-inside: avoid; }
-        .Albero-Lemmi a {
-            display: block; padding: 6px 10px; color: #4a5568;
-            text-decoration: none; border-radius: 6px; font-size: 0.85em; transition: all 0.2s ease;
-        }
-        .Albero-Lemmi a:hover { background-color: #f7fafc; color: #2b6cb0; }
-        .Albero-Lemmi li.attivo a {
-            background-color: #ebf8ff; color: #2b6cb0; font-weight: 600;
-            border-left: 4px solid #2b6cb0; border-radius: 0 6px 6px 0; padding-left: 6px;
-        }
-
-        /* 2. CONTENUTO CENTRALE */
-        .Contenuto-Scheda { min-width: 0; width: 100%; }
-        .Contenuto-Scheda h1 { display: none; } 
-        .Contenuto-Scheda h3 {
-            color: #2c5282; font-size: 1.15em; text-transform: uppercase;
-            letter-spacing: 0.5px; margin: 30px 0 10px 0; display: flex; align-items: center; gap: 8px;
-        }
-        .Contenuto-Scheda h3::after { content: ""; flex: 1; height: 1px; background-color: #e2e8f0; margin-left: 10px; }
-        .Contenuto-Scheda blockquote, .Contenuto-Scheda em {
-            display: block; background-color: #f8fafc; border-left: 4px solid #3182ce;
-            padding: 20px; border-radius: 0 8px 8px 0; font-style: italic; color: #2d3748; line-height: 1.7; margin: 10px 0;
-        }
-        .Contenuto-Scheda code {
-            font-family: monospace; background-color: #f7fafc; padding: 6px 10px;
-            border-radius: 4px; border: 1px solid #e2e8f0; display: inline-block; font-size: 1em; color: #2d3748;
-        }
-        .Contenuto-Scheda ol {
-            background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 20px 20px 20px 40px; border-radius: 6px; font-size: 0.9em; color: #4a5568; margin: 10px 0;
-        }
-        .Contenuto-Scheda ol li { margin-bottom: 12px; line-height: 1.6; word-break: break-all !important; overflow-wrap: break-word !important; }
-        .Contenuto-Scheda ol a { color: #2b6cb0; word-break: break-all !important; }
-        
-        /* PARAGRAFI STANDARD ED ELENCO FONTI SPECIALI */
-        .Contenuto-Scheda p { font-size: 1.05em; color: #4a5568; margin: 10px 0; }
-
-        .Contenuto-Scheda h3 + p:last-of-type,
-        .Contenuto-Scheda h3[id*="note"] + p,
-        .Contenuto-Scheda h3[id*="fonti"] + p {
-            background-color: #f8fafc; 
-            border: 1px solid #e2e8f0;
-            padding: 20px; 
-            border-radius: 6px; 
-            font-size: 0.9em; 
-            color: #4a5568;
-            margin: 15px 0;
-            line-height: 1.8;
-            text-align: left;
-            white-space: pre-line;
-        }
-
-        /* 3. COLONNA DESTRA: IMMAGINE + PULSANTI DI RITORNO */
-        .Sidebar-Immagine {
-            border-left: 1px solid #e2e8f0; padding-left: 20px;
-            position: sticky; top: 20px; display: flex; flex-direction: column; gap: 20px;
-        }
-
-        .Visual-Card { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
-        .Visual-Foto { width: 100%; height: auto; display: block; object-fit: cover; }
-        .Visual-Didascalia { padding: 12px; font-size: 0.85em; color: #718096; line-height: 1.4; border-top: 1px solid #e2e8f0; background-color: #ffffff; }
-
-        /* PANNELLO COMANDI UTILI */
-        .Pannello-Comandi-Navigazione {
-            background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; gap: 10px;
-        }
-        .Btn-Comando-Laterale {
-            display: flex; align-items: center; gap: 10px; text-decoration: none; color: #4a5568; font-size: 0.85em; font-weight: 600; padding: 10px 12px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; transition: all 0.2s ease;
-        }
-        .Btn-Comando-Laterale:hover { border-color: #1a365d; color: #1a365d; background: #eef4fa; transform: translateX(2px); }
-
-        /* FRECCE DI SFOGLIO IN BASSO */
-        .Navigazione-Schede { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 25px; border-top: 1px solid #e2e8f0; }
-        .Btn-Navigazione { display: inline-flex; align-items: center; text-decoration: none; color: #4a5568; background-color: #f7fafc; border: 1px solid #e2e8f0; padding: 10px 18px; border-radius: 6px; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
-        .Btn-Navigazione:hover { background-color: #1a365d; color: #ffffff; border-color: #1a365d; }
-
-        /* --- PODIO ISTITUZIONALE BIANCO RIPRISTINATO INTACTO --- */
-        .Header-Podio { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            border-bottom: 1px solid #e2e8f0; /* Stesso identico stile lineare della Home originale */
-            padding-bottom: 25px; 
-            margin-bottom: 35px; 
-            gap: 15px; 
-            background-color: #ffffff !important;
+        /* --- PODIO ISTITUZIONALE INALTERATO --- */
+        .Header-Podio {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 25px;
+            margin: -40px -40px 35px -40px; /* Esteso perfettamente fino ai bordi del contenitore */
+            padding-left: 40px;
+            padding-right: 40px;
+            gap: 15px;
+            background-color: #ffffff;
         }
 
         .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
@@ -173,30 +59,174 @@
         .Logo-Unige-Sigillo { height: 125px; width: auto; display: block; }
         .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
         .Logo-Phd { height: 95px; width: auto; display: block; }
-        
-        .Title-Area { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; width: 100%; }
-        h1.Lemma-Titolo { color: #1a365d; font-size: 2.4em; margin: 0; font-weight: 700; letter-spacing: -0.5px; text-transform: lowercase; }
-        
-        .Link-Equivalente-FR { display: inline-flex; align-items: center; background-color: #f7fafc; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 6px; text-decoration: none; color: #4a5568; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
-        .Link-Equivalente-FR:hover { border-color: #2b6cb0; color: #2b6cb0; background-color: #f0f4f8; }
-        .Link-Equivalente-FR span { background-color: #e2e8f0; color: #4a5568; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; margin-right: 8px; text-transform: uppercase; }
 
-        .Meta-Grid { display: flex; gap: 12px; margin-bottom: 35px; flex-wrap: wrap; }
-        .Meta-Item { background-color: #f7fafc; border: 1px solid #e2e8f0; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; color: #4a5568; }
-        .Meta-Item strong { color: #1a365d; margin-right: 5px; } .Meta-Item.lingua-active { background-color: #ebf8ff; border-color: #bee3f8; color: #2b6cb0; }
-        .Footer-Curatore { margin-top: 40px; padding-top: 20px; border-top: 1px dashed #e2e8f0; text-align: right; font-size: 0.85em; color: #718096; font-style: italic; }
+        /* --- IMMAGINE IN EVIDENZA DINAMICA (MANTIENE LE PROPORZIONI ORIGINALI) --- */
+        .Contenitore-Immagine-Evidenza {
+            width: 100%;
+            background-color: #eef4fa;
+            border: 1px solid #d0e1f2;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            margin-bottom: 40px;
+        }
 
-        @media (max-width: 1100px) {
-            .Main-Layout { grid-template-columns: 1fr; gap: 20px; }
-            .Sidebar-Lemmi { border-right: none; padding-right: 0; background-color: #ebf8ff; border: 1px solid #bee3f8; border-radius: 8px; padding: 12px 18px; position: relative; max-height: none; }
-            .Albero-Lemmi { columns: 3; column-gap: 20px; }
-            .Sidebar-Immagine { border-left: none; border-top: 1px solid #e2e8f0; padding-left: 0; padding-top: 20px; position: relative; }
+        .Immagine-Evidenza {
+            width: 100%;
+            height: auto; /* Mantiene le proporzioni originali native dell'immagine */
+            max-width: 100%;
+            display: block;
+        }
+
+        .Didascalia-Evidenza {
+            padding: 14px 20px;
+            font-size: 0.85em;
+            color: #718096;
+            line-height: 1.4;
+            border-top: 1px solid #d0e1f2;
+            background-color: #ffffff;
+            text-align: left;
+        }
+
+        /* --- AREA PRESENTAZIONE AMPIA --- */
+        .Sezione-Presentazione {
+            background-color: #eef4fa; 
+            border: 1px solid #d0e1f2;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .Titolo-Principale {
+            color: #1a365d;
+            font-size: 2.3em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 15px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .Testo-Introduzione {
+            color: #4a5568;
+            font-size: 1.05em;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* --- GRIGLIA ACCESSI ADATTIVA IN BASSO --- */
+        .Griglia-Accessi-Inferiore {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* Si adatta e si allarga dinamicamente */
+            gap: 40px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .Colonna-Pannello-Accesso {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            box-sizing: border-box;
+        }
+
+        .Categoria-Pulsanti-Titolo {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1a365d;
+            font-weight: 800;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a365d;
+            padding-left: 10px;
+        }
+
+        .Gruppo-Bottoni {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .Card-Ingresso {
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: #1a365d;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-sizing: border-box;
+        }
+
+        .Card-Ingresso:hover {
+            border-color: #1a365d;
+            box-shadow: 0 6px 15px rgba(26, 54, 93, 0.08);
+            transform: translateY(-2px);
+            background-color: #ffffff;
+        }
+
+        .Bollino-Flag-Home {
+            width: 35px;
+            height: 35px;
+            border-radius: 50px;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        .Testi-Bottone {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .Titolo-Bottone {
+            font-size: 1.1em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+
+        .Sottotitolo-Bottone {
+            font-size: 0.8em;
+            color: #718096;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .Footer-Curatore {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px dashed #e2e8f0;
+            text-align: right;
+            font-size: 0.85em;
+            color: #718096;
+            font-style: italic;
+        }
+
+        @media (max-width: 950px) {
+            .Griglia-Accessi-Inferiore {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .Header-Podio {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="Scheda-Container">
+    <div class="Homepage-Container">
         
         <div class="Header-Podio">
             <div class="Podio-Dipartimento">
@@ -210,132 +240,71 @@
             </div>
         </div>
 
-        <div class="Main-Layout">
-            
-            <div class="Sidebar-Lemmi">
-                <div class="Sidebar-Titolo-Fisso">
-                    <div class="Sidebar-Titolo">Indice Lemmi ({{ page.lingua | upcase }})</div>
-                    <input type="text" id="Search-Sidebar-Input" class="Sidebar-Search" placeholder="Filtra indice...">
+        <main>
+            <div class="Contenitore-Immagine-Evidenza">
+                <img src="Galleria_Balbi_Senarega.jpg" alt="Galleria di Palazzo Balbi Senarega" class="Immagine-Evidenza">
+                <div class="Didascalia-Evidenza">
+                    <strong>Palazzo Balbi Senarega (Balbi 4):</strong> Vista prospettica della Galleria affrescata, prezioso esempio di spazio monumentale interno del palazzo di Ateneo.
                 </div>
-                <ul class="Albero-Lemmi" id="Albero-Lemmi-Lista">
-                    {% assign schede_filtrate = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua %}
-                    {% assign gruppi_alfabetici = schede_filtrate | group_by_exp: "item", "item.title | slice: 0 | upcase" | sort: "name" %}
-                    
-                    {% for gruppo in gruppi_alfabetici %}
-                        {% assign schede_gruppo_ordinate = gruppo.items | sort: "title" %}
-                        {% for scheda in schede_gruppo_ordinate %}
-                            <li class="{% if scheda.url == page.url %}attivo{% endif %}" data-lemma="{{ scheda.title | downcase }}">
-                                <a href="{{ site.baseurl }}{{ scheda.url }}">{{ scheda.title }}</a>
-                            </li>
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
             </div>
 
-            <div class="Contenuto-Scheda">
-                <div class="Title-Area">
-                    <h1 class="Lemma-Titolo">{{ page.title }}</h1>
-                    {% if page.fr_equivalent %}
-                        {% assign min_target = page.fr_equivalent | downcase | strip %}
-                        {% assign schede_totali = site.pages | where: "layout", "scheda" %}
-                        {% assign link_trovato = "#" %}
-                        {% for s in schede_totali %}
-                            {% assign min_titolo = s.title | downcase | strip %}
-                            {% if min_titolo == min_target %}{% assign link_trovato = s.url %}{% endif %}
-                        {% endfor %}
-                        <a href="{{ site.baseurl }}{{ link_trovato }}" class="Link-Equivalente-FR">
-                            <span>fr</span> Équivalent: <strong>{{ page.fr_equivalent }}</strong>
+            <div class="Sezione-Presentazione">
+                <h1 class="Titolo-Principale">Glossario dei Rolli di Ateneo</h1>
+                <p class="Testo-Introduzione">
+                    Benvenuti nel repertorio terminologico digitale dedicato alla descrizione architettonica e artistica del sistema dei Palazzi dei Rolli di Genova di proprietà dell'Ateneo. Questo progetto di ricerca si propone di migliorare l'accessibilità culturale del patrimonio architettonico universitario attraverso l'implementazione di schede terminologiche basate sul modello teorico e metodologico utilizzato presso il Centro di Ricerca in Terminologia Multilingue (CeRTeM) dell'Università di Genova, consentendo al contempo una profonda valorizzazione del patrimonio culturale storico della città.
+                </p>
+            </div>
+
+            <div class="Griglia-Accessi-Inferiore">
+                
+                <div class="Colonna-Pannello-Accesso">
+                    <div class="Categoria-Pulsanti-Titolo">Traduzione Rapida</div>
+                    <div class="Gruppo-Bottoni">
+                        <a href="{{ '/ricerca-it.html' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone">Interfaccia Italiana</span>
+                                <span class="Sottotitolo-Bottone">Navigazione tridimensionale sincrona da IT a FR</span>
+                            </div>
                         </a>
-                    {% endif %}
-                </div>
-                
-                <div class="Meta-Grid">
-                    <div class="Meta-Item lingua-active"><strong>Dominio:</strong> {{ page.dominio | default: "Architettura" }}</div>
-                    <div class="Meta-Item"><strong>Modello teorico:</strong> CeRTeM</div>
-                </div>
-
-                {{ content }}
-                
-                <nav class="Navigazione-Schede">
-                    {% assign prev_scheda = nil %}{% assign next_scheda = nil %}{% assign trovato_corrente = false %}
-                    {% assign schede_totali_lingua = site.pages | where: "layout", "scheda" | where: "lingua", page.lingua | sort: "title" %}
-                    
-                    {% for scheda in schede_totali_lingua %}
-                        {% if trovato_corrente %}
-                            {% assign next_scheda = scheda %}
-                            {% break %}
-                        {% endif %}
-                        {% if scheda.url == page.url %}
-                            {% assign trovato_corrente = true %}
-                        {% else %}
-                            {% assign prev_scheda = scheda %}
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if prev_scheda %}
-                        <a href="{{ site.baseurl }}{{ prev_scheda.url }}" class="Btn-Navigazione">← {{ prev_scheda.title }}</a>
-                    {% else %}
-                        <span class="Btn-Navigazione" style="opacity: 0.3; cursor: not-allowed;">← Inizio</span>
-                    {% endif %}
-
-                    {% if next_scheda %}
-                        <a href="{{ site.baseurl }}{{ next_scheda.url }}" class="Btn-Navigazione">{{ next_scheda.title }} →</a>
-                    {% else %}
-                        <span class="Btn-Navigazione" style="opacity: 0.3; cursor: not-allowed;">Fine →</span>
-                    {% endif %}
-                </nav>
-            </div> 
-
-            <aside class="Sidebar-Immagine">
-                <div class="Sidebar-Titolo">Apparato visivo</div>
-                <div class="Visual-Card">
-                    <img src="{% if page.immagine %}{{ site.baseurl }}/{{ page.immagine }}{% else %}https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=500{% endif %}" class="Visual-Foto">
-                    <div class="Visual-Didascalia">
-                        <strong>Fig. 1:</strong> {% if page.didascalia %}{{ page.didascalia }}{% else %}Dettaglio strutturale inserito nel prospetto.{% endif %}
+                        <a href="{{ '/ricerca-fr.html' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone">Interface Française</span>
+                                <span class="Sottotitolo-Bottone">Navigation synchrone tridimensionnelle de FR à IT</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
-                <div class="Pannello-Comandi-Navigazione">
-                    <div style="font-size: 0.75em; text-transform: uppercase; font-weight: 800; color: #a0aec0; letter-spacing: 0.5px; margin-bottom: 5px;">Navigazione Portale</div>
-                    
-                    <a href="{{ site.baseurl }}/glossario-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
-                        📋 Elenco Glossario ({{ page.lingua | upcase }})
-                    </a>
-                    
-                    <a href="{{ site.baseurl }}/ricerca-{{ page.lingua }}.html" class="Btn-Comando-Laterale">
-                        🔄 Ruota di Traduzione
-                    </a>
-                    
-                    <a href="{{ site.baseurl }}/" class="Btn-Comando-Laterale" style="border-color: #cbd5e1; background: #f8fafc;">
-                        🏠 Torna alla Home
-                    </a>
+                <div class="Colonna-Pannello-Accesso">
+                    <div class="Categoria-Pulsanti-Titolo">Consultazione Glossario</div>
+                    <div class="Gruppo-Bottoni">
+                        <a href="{{ '/glossario-it.html' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone">Glossario Italiano</span>
+                                <span class="Sottotitolo-Bottone">Ricerca alfabetica tradizionale con barra e filtri</span>
+                            </div>
+                        </a>
+                        <a href="{{ '/glossario-fr.html' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone">Glossaire Français</span>
+                                <span class="Sottotitolo-Bottone">Recherche alphabétique traditionnelle avec filtres</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </aside>
 
-        </div> 
+            </div>
+        </main>
         
-        <footer class="Footer-Curatore">Scheda a cura di: Giovanni Mantegazza (Università degli Studi di Genova)</footer>
-    </div> 
+        <footer class="Footer-Curatore">
+            Progetto di ricerca a cura di: Giovanni Mantegazza (Università degli Studi di Genova)
+        </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const searchInput = document.getElementById("Search-Sidebar-Input");
-            const listaElementi = document.getElementById("Albero-Lemmi-Lista");
-            const righe = Array.from(listaElementi.children);
+    </div>
 
-            searchInput.addEventListener("input", function() {
-                const query = this.value.toLowerCase().trim();
-                
-                righe.forEach(riga => {
-                    const lemma = riga.getAttribute("data-lemma") || "";
-                    if (!query || lemma.includes(query)) {
-                        riga.style.display = "block";
-                    } else {
-                        riga.style.display = "none";
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
