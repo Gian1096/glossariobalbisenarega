@@ -342,20 +342,28 @@ title: {{ page.title }} | Glossario Rolli
                 });
             });
 
-            // CORREZIONE 2: PULIZIA SPAZI NEGLI URL DI TUTTA LA PAGINA
-            const allLinks = document.querySelectorAll("#Blocco-Markdown-Contenuto a");
-            allLinks.forEach(link => {
-                let currentHref = link.getAttribute("href");
-                if (currentHref) {
-                    // Rimuove qualsiasi tipo di spazio vuoto presente all'interno dell'attributo href
-                    let cleanedHref = currentHref.replace(/\s+/g, "");
-                    link.setAttribute("href", cleanedHref);
-                }
-            });
-
-            // 3. PARSER AUTOMATICO FONTI FRANCESI CON PRESERVAZIONE LINK
+            // CONTESTATORE E CONTENITORE PRINCIPALE
+            const bloccoContenuto = document.getElementById("Blocco-Markdown-Contenuto");
             const linguaPagina = "{{ page.lingua }}";
-            
+
+            if (bloccoContenuto) {
+                // CORREZIONE CRUCIALE: Rileva i finti link Markdown rimasti testuali a causa degli spazi e li trasforma in HTML
+                let htmlGrezzo = bloccoContenuto.innerHTML;
+                
+                // Questa Regex intercetta la struttura [Testo](Link con spazi)
+                const regexLinkMarkdownRotto = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/gi;
+                
+                htmlGrezzo = htmlGrezzo.replace(regexLinkMarkdownRotto, function(match, testoLink, urlLink) {
+                    // Rimuove tutti gli spazi malefici dall'URL riparandolo
+                    let urlPulito = urlLink.replace(/\s+/g, "");
+                    return `<a href="${urlPulito}" target="_blank">${testoLink}</a>`;
+                });
+                
+                // Sovrascrive il contenuto con i link ufficialmente sanati e attivi
+                bloccoContenuto.innerHTML = htmlGrezzo;
+            }
+
+            // 3. PARSER AUTOMATICO FONTI FRANCESI CON PRESERVAZIONE LINK RIGENERATI
             if (linguaPagina === "fr") {
                 const h3Elements = Array.from(document.querySelectorAll(".Contenuto-Scheda h3"));
                 const h3Sources = h3Elements.find(el => el.textContent.toLowerCase().includes("sources"));
