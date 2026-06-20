@@ -14,7 +14,7 @@ title: Home
             color: #2d3748;
             width: 100% !important;
             margin: 0 !important;
-            padding: 30px 4% !important; /* Spaziatura laterale fluida in percentuale */
+            padding: 30px 4% !important;
             font-size: 1.15em;
             box-sizing: border-box;
             
@@ -34,12 +34,11 @@ title: Home
             box-shadow: 0 15px 35px rgba(26, 54, 93, 0.06);
             padding: 40px;
             margin: 20px auto 0 auto;
-            width: 100%; /* Occupa tutto lo spazio disponibile */
-            max-width: 1600px; /* Coordinato con la larghezza massima delle schede */
+            width: 100%;
+            max-width: 1600px;
             box-sizing: border-box;
         }
 
-        /* --- PODIO ISTITUZIONALE: VERSIONE MAESTOSA --- */
         .Header-Podio {
             display: flex; 
             justify-content: space-between; 
@@ -54,10 +53,8 @@ title: Home
 
         .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: flex-end; }
         .Logo-Dip { height: 95px; width: auto; display: block; }
-        
         .Podio-Ateneo { flex: 1.2; display: flex; justify-content: center; align-items: flex-end; } 
-        .Logo-Unige-Sigillo { height: 155px; width: auto; display: block; transition: transform 0.2s ease; } 
-        
+        .Logo-Unige-Sigillo { height: 155px; width: auto; display: block; } 
         .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: flex-end; }
         .Logo-Phd { height: 95px; width: auto; display: block; }
 
@@ -115,7 +112,7 @@ title: Home
 
         .Griglia-Accessi-Inferiore {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
             gap: 40px;
             align-items: flex-start;
             width: 100%;
@@ -176,7 +173,10 @@ title: Home
             object-fit: cover;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
+        .Bollino-Flag-Home:hover { transform: scale(1.15); }
 
         .Testi-Bottone {
             display: flex;
@@ -198,16 +198,6 @@ title: Home
             line-height: 1.3;
         }
 
-        .Footer-Curatore {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px dashed #e2e8f0;
-            text-align: right;
-            font-size: 0.85em;
-            color: #718096;
-            font-style: italic;
-        }
-
         @media (max-width: 950px) {
             .Griglia-Accessi-Inferiore { grid-template-columns: 1fr; gap: 25px; }
             .Header-Podio { flex-direction: column; align-items: center; gap: 20px; padding: 30px 20px; }
@@ -220,123 +210,209 @@ title: Home
         
         <div class="Header-Podio">
             <div class="Podio-Dipartimento">
-                <img src="Logo_DLCM_UniGe_black.png" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
+                <img src="{{ '/Logo_DLCM_UniGe_black.png' | relative_url }}" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
             </div>
             <div class="Podio-Ateneo">
-                <img src="logo_verticale_COLORE.png" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
+                <img src="{{ '/logo_verticale_COLORE.png' | relative_url }}" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
             </div>
             <div class="Podio-Dottorato">
-                <img src="Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png" alt="Dottorato in Digital Humanities" class="Logo-Phd">
+                <img src="{{ '/Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png' | relative_url }}" alt="Dottorato in Digital Humanities" class="Logo-Phd">
             </div>
         </div>
 
         <main>
+            <div style="text-align: right; margin-bottom: 20px; display: flex; gap: 15px; justify-content: flex-end; align-items: center;">
+                <img src="https://flagcdn.com/w40/it.png" id="btn-lang-it" class="Bollino-Flag-Home" style="border: 2px solid #1a365d;" title="In Italiano" onclick="switchLanguage('it')">
+                <img src="https://flagcdn.com/w40/fr.png" id="btn-lang-fr" class="Bollino-Flag-Home" style="opacity: 0.5; border: 2px solid transparent;" title="En Français" onclick="switchLanguage('fr')">
+            </div>
+
             <div class="Contenitore-Immagine-Evidenza">
-                <img src="Galleria_Balbi_Senarega.jpg" alt="Galleria di Palazzo Balbi Senarega" class="Immagine-Evidenza">
-                <div class="Didascalia-Evidenza">
+                <img src="{{ '/Galleria_Balbi_Senarega.jpg' | relative_url }}" alt="Galleria di Palazzo Balbi Senarega" class="Immagine-Evidenza">
+                <div class="Didascalia-Evidenza" id="txt-didascalia">
                     <strong>Palazzo Balbi Senarega (Balbi 4):</strong> Vista prospettica della Galleria affrescata, prezioso esempio di spazio monumentale interno del palazzo di Ateneo.
                 </div>
             </div>
 
             <div class="Sezione-Presentazione">
-                <h1 class="Titolo-Principale">Glossario dei Rolli di Ateneo</h1>
-                <p class="Testo-Introduzione">
+                <h1 class="Titolo-Principale" id="txt-titolo">Glossario dei Rolli di Ateneo</h1>
+                <p class="Testo-Introduzione" id="txt-introduzione">
                     Benvenuti nel repertorio terminologico digitale dedicato alla descrizione architettonica e artistica del sistema dei Palazzi dei Rolli di Genova di proprietà dell'Ateneo. Questo progetto di ricerca si propone di migliorare l'accessibilità culturale del patrimonio architettonico universitario attraverso l'implementazione di schede terminologiche basate sul modello teorico e metodologico utilizzato presso il Centro di Ricerca in Terminologia Multilingue (CeRTeM) dell'Università di Genova, consentendo al contempo una profonda valorizzazione del patrimonio culturale storico della città.
                 </p>
             </div>
 
-            <div class="Griglia-Accessi-Inferiore" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
-    
-    <div class="Colonna-Pannello-Accesso">
-        <div class="Categoria-Pulsanti-Titolo">Traduzione Rapida</div>
-        <div class="Gruppo-Bottoni">
-            <a href="{{ '/ricerca-it/' | relative_url }}" class="Card-Ingresso">
-                <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
-                <div class="Testi-Bottone">
-                    <span class="Titolo-Bottone">Interfaccia Italiana</span>
-                    <span class="Sottotitolo-Bottone">Navigazione tridimensionale sincrona</span>
+            <div class="Griglia-Accessi-Inferiore">
+                
+                <div class="Colonna-Pannello-Accesso">
+                    <div class="Categoria-Pulsanti-Titolo" id="cat-traduzione">Traduzione Rapida</div>
+                    <div class="Gruppo-Bottoni">
+                        <a href="{{ '/ricerca-it/' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" style="cursor:default;" alt="IT">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone" id="btn-it-interfaccia">Interfaccia Italiana</span>
+                                <span class="Sottotitolo-Bottone" id="btn-it-sub">Navigazione tridimensionnelle sincrona</span>
+                            </div>
+                        </a>
+                        <a href="{{ '/ricerca-fr/' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" style="cursor:default;" alt="FR">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone" id="btn-fr-interfaccia">Interface Française</span>
+                                <span class="Sottotitolo-Bottone" id="btn-fr-sub">Navigation synchrone de FR à IT</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
-            <a href="{{ '/ricerca-fr/' | relative_url }}" class="Card-Ingresso">
-                <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
-                <div class="Testi-Bottone">
-                    <span class="Titolo-Bottone">Interface Française</span>
-                    <span class="Sottotitolo-Bottone">Navigation synchrone de FR à IT</span>
-                </div>
-            </a>
-        </div>
-    </div>
 
-    <div class="Colonna-Pannello-Accesso">
-        <div class="Categoria-Pulsanti-Titolo">Consultazione Glossario</div>
-        <div class="Gruppo-Bottoni">
-            <a href="{{ '/glossario-it/' | relative_url }}" class="Card-Ingresso">
-                <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" alt="IT">
-                <div class="Testi-Bottone">
-                    <span class="Titolo-Bottone">Glossario Italiano</span>
-                    <span class="Sottotitolo-Bottone">Ricerca alfabetica tradizionale</span>
+                <div class="Colonna-Pannello-Accesso">
+                    <div class="Categoria-Pulsanti-Titolo" id="cat-glossario">Consultazione Glossario</div>
+                    <div class="Gruppo-Bottoni">
+                        <a href="{{ '/glossario-it/' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/it.png" class="Bollino-Flag-Home" style="cursor:default;" alt="IT">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone" id="btn-glo-it">Glossario Italiano</span>
+                                <span class="Sottotitolo-Bottone" id="btn-glo-it-sub">Ricerca alfabetica tradizionale</span>
+                            </div>
+                        </a>
+                        <a href="{{ '/glossario-fr/' | relative_url }}" class="Card-Ingresso">
+                            <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" style="cursor:default;" alt="FR">
+                            <div class="Testi-Bottone">
+                                <span class="Titolo-Bottone" id="btn-glo-fr">Glossaire Français</span>
+                                <span class="Sottotitolo-Bottone" id="btn-glo-fr-sub">Recherche alphabétique par filtres</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
-            <a href="{{ '/glossario-fr/' | relative_url }}" class="Card-Ingresso">
-                <img src="https://flagcdn.com/w40/fr.png" class="Bollino-Flag-Home" alt="FR">
-                <div class="Testi-Bottone">
-                    <span class="Titolo-Bottone">Glossaire Français</span>
-                    <span class="Sottotitolo-Bottone">Recherche alphabétique par filtres</span>
-                </div>
-            </a>
-        </div>
-    </div>
 
-    <div class="Colonna-Pannello-Accesso" style="background-color: #e8f9f7; border-color: #cbd5e1;">
-        <div class="Categoria-Pulsanti-Titolo" style="color: #1a365d; border-left-color: #1a365d;">Validazione Peer</div>
-        <div class="Gruppo-Bottoni">
-            <a href="/glossariobalbisenarega/contatti/" class="Card-Ingresso" style="border-color: #1a365d; height: 100%; align-items: center; justify-content: center; min-height: 140px;">
-                <div class="Testi-Bottone" style="text-align: center; align-items: center;">
-                    <span style="font-size: 2em; margin-bottom: 5px;">💬</span>
-                    <span class="Titolo-Bottone" style="color: #1a365d;">Revisione & Suggerimenti</span>
-                    <span class="Sottotitolo-Bottone" style="color: #4a5568; text-align: center;">Invia proposte terminologiche o segnala refusi della ricerca</span>
+                <div class="Colonna-Pannello-Accesso" style="background-color: #e8f9f7; border-color: #cbd5e1;">
+                    <div class="Categoria-Pulsanti-Titolo" id="cat-peer" style="color: #1a365d; border-left-color: #1a365d;">Validazione Peer</div>
+                    <div class="Gruppo-Bottoni">
+                        <a href="/glossariobalbisenarega/contatti/" class="Card-Ingresso" style="border-color: #1a365d; height: 100%; align-items: center; justify-content: center; min-height: 140px;">
+                            <div class="Testi-Bottone" style="text-align: center; align-items: center;">
+                                <span style="font-size: 2em; margin-bottom: 5px;">💬</span>
+                                <span class="Titolo-Bottone" id="btn-feed-title" style="color: #1a365d;">Revisione & Suggerimenti</span>
+                                <span class="Sottotitolo-Bottone" id="btn-feed-sub" style="color: #4a5568; text-align: center;">Invia proposte terminologiche o segnala refusi della ricerca</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </a>
-        </div>
-    </div>
 
-</div>
+            </div>
         </main>
         
-       <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px dashed #cbd5e1; font-size: 0.85em; color: #64748b; line-height: 1.6; text-align: left;">
-    <div style="display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap;">
-        
-        <div style="flex: 2; min-width: 280px;">
-            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Glossario Terminologico di Palazzo Balbi Senarega</strong>
-            <p style="margin: 0;">Progetto di ricerca dottorale in <em>Digital Humanities</em> sviluppato presso il <strong>Centro di Ricerca in Terminologia Multilingue (CeRTeM)</strong>, Dipartimento di Lingue e Culture Moderne, Università degli Studi di Genova.</p>
-        </div>
-        
-        <div style="flex: 1; min-width: 200px;">
-            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Contatti e Segnalazioni</strong>
-            <p style="margin: 0;">
-                Curatore: Giovanni Mantegazza<br>
-                Email: <a href="mailto:giovanni.mantegazza@edu.unige.it" style="color: #2b6cb0; text-decoration: none;">giovanni.mantegazza@edu.unige.it</a><br>
-                <small style="color: #94a3b8;">Per proposte di revisione o refusi, scrivere via email.</small>
-            </p>
-        </div>
-        
-        <div style="flex: 1; min-width: 220px;">
-            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Licenza e Diritti</strong>
-            <p style="margin: 0;">
-                I dati terminologici sono distribuiti con Licenza<br>
-                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it" target="_blank" style="color: #2b6cb0; text-decoration: none; font-weight: 600;">CC BY-NC-SA 4.0</a>.<br>
-                <small style="color: #94a3b8;">Proprietà intellettuale riservata. Immagini dell'apparato visivo © dei rispettivi autori.</small>
-            </p>
-        </div>
-        
-    </div>
-    
-    <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #f1f5f9; font-size: 0.9em; color: #94a3b8;">
-        © 2026 Università degli Studi di Genova | CeRTeM.
-    </div>
-</footer>
+        <footer id="footer-portale" style="margin-top: 60px; padding-top: 30px; border-top: 1px dashed #cbd5e1; font-size: 0.85em; color: #64748b; line-height: 1.6; text-align: left;">
+            </footer>
 
     </div>
 
+    <script>
+        const translations = {
+            it: {
+                didascalia: "<strong>Palazzo Balbi Senarega (Balbi 4):</strong> Vista prospettica della Galleria affrescata, prezioso esempio di spazio monumentale interno del palazzo di Ateneo.",
+                titolo: "Glossario dei Rolli di Ateneo",
+                introduzione: "Benvenuti nel repertorio terminologico digitale dedicato alla descrizione architettonica e artistica del sistema dei Palazzi dei Rolli di Genova di proprietà dell'Ateneo. Questo progetto di ricerca si propone di migliorare l'accessibilità culturale del patrimonio architettonico universitario attraverso l'implementazione di schede terminologiche basate sul modello teorico e metodologico utilizzato presso il Centro di Ricerca in Terminologia Multilingue (CeRTeM) dell'Università di Genova, consentendo al contempo una profonda valorizzazione del patrimonio culturale storico della città.",
+                catTraduzione: "Traduzione Rapida",
+                catGlossario: "Consultazione Glossario",
+                catPeer: "Validazione Peer",
+                btnItInterfaccia: "Interfaccia Italiana",
+                btnItSub: "Navigazione tridimensionale sincrona",
+                btnFrInterfaccia: "Interface Française",
+                btnFrSub: "Navigation synchrone de FR à IT",
+                btnGloIt: "Glossario Italiano",
+                btnGloItSub: "Ricerca alfabetica tradizionale",
+                btnGloFr: "Glossaire Français",
+                btnGloFrSub: "Recherche alphabétique par filtres",
+                btnFeedTitle: "Revisione & Suggerimenti",
+                btnFeedSub: "Invia proposte terminologiche o segnala refusi della ricerca",
+                footer: `
+                    <div style="display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap;">
+                        <div style="flex: 2; min-width: 280px;">
+                            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Glossario Terminologico di Palazzo Balbi Senarega</strong>
+                            <p style="margin: 0;">Progetto di ricerca dottorale in <em>Digital Humanities</em> sviluppato presso il <strong>Centro di Ricerca in Terminologia Multilingue (CeRTeM)</strong>, Dipartimento di Lingue e Culture Moderne, Università degli Studi di Genova.</p>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Contatti e Segnalazioni</strong>
+                            <p style="margin: 0;">Curatore: Giovanni Mantegazza<br>Email: <a href="mailto:giovanni.mantegazza@edu.unige.it" style="color: #2b6cb0; text-decoration: none;">giovanni.mantegazza@edu.unige.it</a></p>
+                        </div>
+                        <div style="flex: 1; min-width: 220px;">
+                            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Licenza e Diritti</strong>
+                            <p style="margin: 0;">I dati terminologici sono distribuiti con Licenza<br><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it" target="_blank" style="color: #2b6cb0; text-decoration: none; font-weight: 600;">CC BY-NC-SA 4.0</a>.</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #f1f5f9; font-size: 0.9em; color: #94a3b8;">© 2026 Università degli Studi di Genova | CeRTeM.</div>`
+            },
+            fr: {
+                didascalia: "<strong>Palais Balbi Senarega (Balbi 4) :</strong> Vue perspective de la Galerie des fresques, exemple précieux d'espace monumental intérieur de l'Université.",
+                titolo: "Glossaire des Palais des Rolli de l'Université",
+                introduzione: "Bienvenue dans le répertoire terminologique numérique dédié à la description architecturale et artistique du système des Palais des Rolli de Gênes appartenant à l'Université. Ce projet de recherche vise à améliorer l'accessibilité culturelle du patrimoine architectural universitaire à travers la mise en œuvre de fiches terminologiques basées sur le modèle théorique et méthodologique utilisé au Centre de Recherche en Terminologie Multilingue (CeRTeM) de l'Université de Gênes, permettant en même temps une valorisation profonde du patrimoine culturel historique de la ville.",
+                catTraduzione: "Traduction Rapide",
+                catGlossario: "Consultation du Glossaire",
+                catPeer: "Évaluation par les Pairs",
+                btnItInterfaccia: "Interface Italienne",
+                btnItSub: "Navigation tridimensionnelle synchrone",
+                btnFrInterfaccia: "Interface Française",
+                btnFrSub: "Navigation synchrone de FR à IT",
+                btnGloIt: "Glossaire Italien",
+                btnGloItSub: "Recherche alphabétique traditionnelle",
+                btnGloFr: "Glossaire Français",
+                btnGloFrSub: "Recherche alphabétique par filtres",
+                btnFeedTitle: "Commentaires & Suggestions",
+                btnFeedSub: "Envoyez des propositions terminologiques ou signalez des coquilles",
+                footer: `
+                    <div style="display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap;">
+                        <div style="flex: 2; min-width: 280px;">
+                            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Glossaire Terminologique du Palais Balbi Senarega</strong>
+                            <p style="margin: 0;">Projet de recherche doctorale en <em>Digital Humanities</em> développé au sein du <strong>Centre de Recherche en Terminologie Multilingue (CeRTeM)</strong>, Département de Langues et Cultures Modernes, Université des Études de Gênes.</p>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Contacts et Retours</strong>
+                            <p style="margin: 0;">Auteur: Giovanni Mantegazza<br>E-mail: <a href="mailto:giovanni.mantegazza@edu.unige.it" style="color: #2b6cb0; text-decoration: none;">giovanni.mantegazza@edu.unige.it</a></p>
+                        </div>
+                        <div style="flex: 1; min-width: 220px;">
+                            <strong style="color: #1a365d; display: block; margin-bottom: 5px;">Licence et Droits d'Auteur</strong>
+                            <p style="margin: 0;">Les données terminologiques sont protégées par la Licence<br><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" target="_blank" style="color: #2b6cb0; text-decoration: none; font-weight: 600;">CC BY-NC-SA 4.0</a>.</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #f1f5f9; font-size: 0.9em; color: #94a3b8;">© 2026 Université de Gênes | CeRTeM.</div>`
+            }
+        };
+
+        function switchLanguage(lang) {
+            // Aggiorna i testi dell'interfaccia
+            document.getElementById('txt-didascalia').innerHTML = translations[lang].didascalia;
+            document.getElementById('txt-titolo').innerText = translations[lang].titolo;
+            document.getElementById('txt-introduzione').innerText = translations[lang].introduzione;
+            document.getElementById('cat-traduzione').innerText = translations[lang].catTraduzione;
+            document.getElementById('cat-glossario').innerText = translations[lang].catGlossaire;
+            document.getElementById('cat-peer').innerText = translations[lang].catPeer;
+            document.getElementById('btn-it-interfaccia').innerText = translations[lang].btnItInterfaccia;
+            document.getElementById('btn-it-sub').innerText = translations[lang].btnItSub;
+            document.getElementById('btn-fr-interfaccia').innerText = translations[lang].btnFrInterfaccia;
+            document.getElementById('btn-fr-sub').innerText = translations[lang].btnFrSub;
+            document.getElementById('btn-glo-it').innerText = translations[lang].btnGloIt;
+            document.getElementById('btn-glo-it-sub').innerText = translations[lang].btnGloItSub;
+            document.getElementById('btn-glo-fr').innerText = translations[lang].btnGloFr;
+            document.getElementById('btn-glo-fr-sub').innerText = translations[lang].btnGloFrSub;
+            document.getElementById('btn-feed-title').innerText = translations[lang].btnFeedTitle;
+            document.getElementById('btn-feed-sub').innerText = translations[lang].btnFeedSub;
+            document.getElementById('footer-portale').innerHTML = translations[lang].footer;
+
+            // Gestione opacità ed evidenza visiva dei pulsanti flag
+            if(lang === 'it') {
+                document.getElementById('btn-lang-it').style.opacity = '1';
+                document.getElementById('btn-lang-it').style.borderColor = '#1a365d';
+                document.getElementById('btn-lang-fr').style.opacity = '0.5';
+                document.getElementById('btn-lang-fr').style.borderColor = 'transparent';
+                document.documentElement.lang = 'it';
+            } else {
+                document.getElementById('btn-lang-fr').style.opacity = '1';
+                document.getElementById('btn-lang-fr').style.borderColor = '#1a365d';
+                document.getElementById('btn-lang-it').style.opacity = '0.5';
+                document.getElementById('btn-lang-it').style.borderColor = 'transparent';
+                document.documentElement.lang = 'fr';
+            }
+        }
+
+        // Inizializza il footer al primo caricamento (Default: Italiano)
+        switchLanguage('it');
+    </script>
 </body>
 </html>
