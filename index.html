@@ -29,7 +29,7 @@ title: Home
 
         .Homepage-Container {
             background: #ffffff;
-            border-top: 6px solid #1a365d;
+            border-top: 10px solid #1a365d;
             border-radius: 12px;
             box-shadow: 0 15px 35px rgba(26, 54, 93, 0.06);
             padding: 40px;
@@ -39,29 +39,33 @@ title: Home
             box-sizing: border-box;
         }
 
-        /* --- PODIO ISTITUZIONALE CON PIÙ ARIA E ALTEZZA --- */
+       /* --- PODIO ISTITUZIONALE: VERSIONE MAESTOSA --- */
         .Header-Podio {
             display: flex; 
             justify-content: space-between; 
-            align-items: flex-end; 
-            border-bottom: 1px solid #e2e8f0;
-            padding: 40px 40px; /* Aumentato il padding verticale a 40px per dare aria sopra e sotto */
-            margin: -40px -40px 45px -40px; /* Aumentato il margine inferiore a 45px per staccarlo dai contenuti */
-            gap: 15px;
-            background-color: #ffffff;
+            align-items: flex-end; /* Cambiato da center a flex-end: spinge la base di tutti e tre i blocchi verso il basso */
+            border-bottom: 2px solid #e2e8f0; 
+            padding: 60px 50px; /* Lasciamo intatti i tuoi 60px che danno la giusta altezza */
+            margin: -40px -40px 50px -40px; 
+            gap: 25px;
+            background-color: #e8f9f7 ;
+            box-sizing: border-box;
         }
 
-        .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
+        /* Allineiamo in basso anche le strutture interne dei singoli contenitori */
+        .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: flex-end; }
         .Logo-Dip { height: 95px; width: auto; display: block; }
-        .Podio-Ateneo { flex: 1; display: flex; justify-content: center; align-items: center; }
-        .Logo-Unige-Sigillo { height: 125px; width: auto; display: block; }
-        .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+        
+        .Podio-Ateneo { flex: 1.2; display: flex; justify-content: center; align-items: flex-end; } 
+        .Logo-Unige-Sigillo { height: 155px; width: auto; display: block; transition: transform 0.2s ease; } 
+        
+        .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: flex-end; }
         .Logo-Phd { height: 95px; width: auto; display: block; }
 
         /* --- IMMAGINE IN EVIDENZA DINAMICA (MANTIENE LE PROPORZIONI ORIGINALI) --- */
         .Contenitore-Immagine-Evidenza {
             width: 100%;
-            background-color: #eef4fa;
+            background-color: #e8f9f7;
             border: 1px solid #d0e1f2;
             border-radius: 8px;
             overflow: hidden;
@@ -88,8 +92,8 @@ title: Home
 
         /* --- AREA PRESENTAZIONE AMPIA --- */
         .Sezione-Presentazione {
-            background-color: #eef4fa; 
-            border: 1px solid #d0e1f2;
+            background-color: #f2f9f8; 
+            border: 1px solid #e8f9f7;
             border-radius: 8px;
             padding: 30px;
             margin-bottom: 40px;
@@ -122,7 +126,7 @@ title: Home
         }
 
         .Colonna-Pannello-Accesso {
-            background-color: #f8fafc;
+            background-color: #f2f9f8;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             padding: 30px 25px;
