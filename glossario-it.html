@@ -97,15 +97,6 @@ title: Glossario Tradizionale (IT)
             box-shadow: 0 4px 12px rgba(26, 54, 93, 0.08);
         }
 
-        /* --- TASTIERA ALFABETICA --- */
-        .Contenitore-Alfabeto {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 30px;
-        }
-
         /* --- TASTIERA ALFABETICA CON LETTERE PIÙ GRANDI --- */
         .Btn-Lettera {
             background: #ffffff;
@@ -204,33 +195,6 @@ title: Glossario Tradizionale (IT)
             display: none;
         }
 
-        .Contenitore-Ritorno {
-            text-align: center;
-            margin: 30px auto 10px auto;
-        }
-
-        /* --- BOTTONE DI RITORNO SOLIDO BLU CON SCRITTA BIANCA --- */
-        .Btn-Ritorno {
-            display: inline-block;
-            background-color: #1a365d; /* Blu istituzionale scuro */
-            color: #ffffff; /* Testo bianco */
-            text-decoration: none;
-            font-weight: 600;
-            padding: 12px 30px;
-            border-radius: 50px;
-            border: 2px solid #1a365d;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px rgba(26, 54, 93, 0.1);
-        }
-
-        .Btn-Ritorno:hover {
-            background-color: #2b6cb0; /* Sfumatura azzurro dei link */
-            border-color: #2b6cb0;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(26, 54, 93, 0.15);
-        }
-
         .Bollino-Flag {
             width: 32px;
             height: 32px;
@@ -309,10 +273,17 @@ title: Glossario Tradizionale (IT)
                 </ul>
 
                 <div class="Nessun-Risultato" id="Messaggio-Vuoto">Nessun lemma corrisponde ai criteri di ricerca</div>
-            </div>
 
-            <div class="Contenitore-Ritorno">
-                <a href="{{ '/' | relative_url }}" class="Btn-Ritorno">&larr; Torna alla Home</a>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 35px; padding-top: 20px; border-top: 1px dashed #cbd5e1; flex-wrap: wrap;">
+                    <a href="{{ site.baseurl }}/ricerca-it.html" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #4a5568; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.borderColor='#1a365d'; this.style.color='#1a365d'; this.style.background='#e8f9f7';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#4a5568'; this.style.background='#ffffff';">
+                        🔄 Ruota di Traduzione
+                    </a>
+                    
+                    <a href="{{ site.baseurl }}/" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff; font-size: 0.85em; font-weight: 600; padding: 10px 16px; background: #1a365d; border: 1px solid #1a365d; border-radius: 6px; transition: all 0.2s ease;" onmouseover="this.style.background='#2b6cb0'; this.style.borderColor='#2b6cb0';" onmouseout="this.style.background='#1a365d'; this.style.borderColor='#1a365d';">
+                        🏠 Torna alla Home
+                    </a>
+                </div>
+
             </div>
         </main>
     </div>
