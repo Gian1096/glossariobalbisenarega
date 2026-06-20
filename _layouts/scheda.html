@@ -330,54 +330,59 @@ title: {{ page.title }} | Glossario Rolli
                 });
             });
 
-            // 2. PARSER AUTOMATICO FONTI FRANCESI (Sincronizzazione via RegEx)
+            // 2. PARSER AUTOMATICO FONTI FRANCESI CON PRESERVAZIONE LINK
             const linguaPagina = "{{ page.lingua }}";
             
             if (linguaPagina === "fr") {
-                // Individua l'elemento p delle fonti (subito dopo l'h3 delle Sources)
                 const h3Elements = Array.from(document.querySelectorAll(".Contenuto-Scheda h3"));
                 const h3Sources = h3Elements.find(el => el.textContent.toLowerCase().includes("sources"));
                 
                 if (h3Sources) {
                     let pSources = h3Sources.nextElementSibling;
-                    // Saltiamo eventuali elementi vuoti spuri
                     while (pSources && pSources.tagName !== "P") {
                         pSources = pSources.nextElementSibling;
                     }
                     
                     if (pSources) {
-                        const testoGrezzo = pSources.textContent;
+                        // Usiamo innerHTML per preservare i tag dei link <a>
+                        const contenutoGrezzo = pSources.innerHTML;
                         
-                        // REGEX STRATEGICA: intercetta le date di consultazione che chiudono la linea 
-                        // Cerca "consulté le " seguito da una data e opzionalmente da un punto, gestendo l'andata a capo
-                        const regexSplit = /(consulté le \d{2}\/\d{2}\/\d{4}\.?)\s*\n?/gi;
+                        // Spezziamo basandoci sulle date di consultazione seguite opzionalmente da punto e a capo/break html
+                        const regexSplit = /(consulté le \d{2}\/\d{2}\/\d{4}\.?\s*(?:<br\s*\/?>|\n)?)/gi;
+                        
+                        // Dividiamo il testo mantenendo i separatori catturati dalla RegEx
+                        const parti = contenutoGrezzo.split(regexSplit);
                         
                         let fontiGenerate = [];
-                        let match;
-                        let ultimoIndice = 0;
+                        let stringaCorrente = "";
                         
-                        while ((match = regexSplit.exec(testoGrezzo)) !== null) {
-                            // Estrae la stringa della fonte fino alla fine del blocco "consulté..."
-                            let pezzoFonte = testoGrezzo.substring(ultimoIndice, regexSplit.lastIndex).trim();
-                            if (pezzoFonte) {
-                                fontiGenerate.push(pezzoFonte);
+                        for (let i = 0; i < parti.length; i++) {
+                            stringaCorrente += parti[i];
+                            // Se la parte corrente contiene la stringa di chiusura "consulté le", abbiamo chiuso una fonte
+                            if (parti[i].toLowerCase().includes("consulté le")) {
+                                if (stringaCorrente.trim()) {
+                                    fontiGenerate.push(stringaCorrente.trim());
+                                }
+                                stringaCorrente = ""; // Resetta per la prossima fonte
                             }
-                            ultimoIndice = regexSplit.lastIndex;
                         }
                         
-                        // Gestisce eventuale testo residuo finale
-                        let residuo = testoGrezzo.substring(ultimoIndice).trim();
-                        if (residuo) {
-                            fontiGenerate.push(residuo);
+                        // Gestisce eventuale testo residuo rimasto fuori
+                        if (stringaCorrente.trim()) {
+                            fontiGenerate.push(stringaCorrente.trim());
                         }
 
-                        // Se abbiamo trovato delle fonti valide, ricostruiamo il paragrafo numerato
+                        // Se abbiamo estratto le fonti, ricostruiamo l'HTML iniettando i numeri
                         if (fontiGenerate.length > 0) {
-                            let testoFormattatoConNumeri = fontiGenerate
-                                .map((fonte, index) => `(${index + 1}) ${fonte}`)
-                                .join("\n");
+                            let htmlFormattato = fontiGenerate
+                                .map((fonte, index) => {
+                                    // Puliamo eventuali vecchi residui di a capo all'inizio della stringa
+                                    let pulita = fonte.replace(/^(?:<br\s*\/?>|\n)+/gi, '').trim();
+                                    return `(${index + 1}) ${pulita}`;
+                                })
+                                .join("<br>\n"); // Usiamo il break HTML per andare a capo nel box
                             
-                            pSources.textContent = testoFormattatoConNumeri;
+                            pSources.innerHTML = htmlFormattato;
                         }
                     }
                 }
