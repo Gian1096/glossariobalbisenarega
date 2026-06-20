@@ -281,7 +281,7 @@ title: {{ page.title }} | Glossario Rolli
                     {% if corrispettivo_trovato %}
                         <a href="{{ corrispettivo_trovato.url | relative_url }}" class="Link-Equivalente-FR">
                             <span>{{ corrispettivo_trovato.lingua | upcase }}</span> 
-                            {% if page.lingua == "it" %}Équivalent : {% else %}Equivalente: {% endif %} 
+                            {% if page.lingua == "it" %}Équivalent&nbsp;:&nbsp;{% else %}Equivalente:&nbsp;{% endif %} 
                             <strong>{{ corrispettivo_trovato.title }}</strong>
                         </a>
                     {% endif %}
