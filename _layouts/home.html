@@ -1,189 +1,59 @@
----
----
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>{{ page.title }} | Glossario Rolli</title>
     <style>
-        html, body {
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            font-size: 1.15em;
+            text-align: justify;
             margin: 0 !important;
             padding: 0 !important;
             width: 100% !important;
             max-width: 100% !important;
-            background-color: #eef2f7 !important; /* Il grigio azzurro copre tutto */
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            font-size: 1.15em;
+            background-color: #eef2f7 !important;
         }
 
-        .Homepage-Container {
+        .Home-Container {
             background: #ffffff;
             border-top: 6px solid #1a365d;
             padding: 40px;
-            max-width: 1500px;
-            margin: 0 auto !important;
+            max-width: 1500px; 
+            margin: 0 auto; 
             min-height: 100vh;
             box-sizing: border-box;
-            box-shadow: 0 0 30px rgba(0,0,0,0.05);
         }
 
-        /* --- INTERFACCIA INTERNA ISTITUZIONALE --- */
-        .Header-Podio {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 25px;
-            margin-bottom: 35px;
-            gap: 15px;
+        /* --- TESTATA BLU DI ATENEO --- */
+        .Header-Podio { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end; 
+            border-bottom: 3px solid #b91c1c; /* Rosso UniGe */
+            padding: 25px 40px; 
+            margin: -40px -40px 35px -40px; 
+            gap: 15px; 
+            background-color: #1a365d !important; 
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.15);
         }
 
-        .Podio-Dipartimento { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
-        .Logo-Dip { height: 95px; width: auto; display: block; }
-        .Podio-Ateneo { flex: 1; display: flex; justify-content: center; align-items: center; }
-        .Logo-Unige-Sigillo { height: 125px; width: auto; display: block; }
-        .Podio-Dottorato { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
-        .Logo-Phd { height: 95px; width: auto; display: block; }
-
-        /* --- IMMAGINE IN ALTO --- */
-        .Contenitore-Immagine-Evidenza {
-            width: 100%;
-            background-color: #eef4fa;
-            border: 1px solid #d0e1f2;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            margin-bottom: 40px;
+        .Header-Podio img {
+            max-height: 95px;
+            width: auto;
+            opacity: 1;
         }
 
-        .Immagine-Evidenza {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .Didascalia-Evidenza {
-            padding: 14px 20px;
-            font-size: 0.85em;
-            color: #718096;
-            line-height: 1.4;
-            border-top: 1px solid #d0e1f2;
-            background-color: #ffffff;
-            text-align: left;
-        }
-
-        /* --- DUE COLONNE FLUIDE --- */
-        .Griglia-Home {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-        }
-
-        .Colonna-Presentazione {
-            flex: 1.4;
-            text-align: justify;
-        }
-
-        .Sezione-Presentazione {
-            background-color: #eef4fa; 
-            border: 1px solid #d0e1f2;
-            border-radius: 8px;
-            padding: 30px;
-        }
-
-        .Titolo-Principale {
-            color: #1a365d;
-            font-size: 2.2em;
-            font-weight: 700;
-            line-height: 1.2;
-            margin: 0 0 15px 0;
-            letter-spacing: -0.5px;
-        }
-
-        .Testo-Introduzione {
-            color: #4a5568;
-            font-size: 1.05em;
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        .Colonna-Pannello-Accesso {
-            flex: 1;
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 30px 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
-        }
-
-        .Categoria-Pulsanti-Titolo {
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #1a365d;
-            font-weight: 800;
-            margin-bottom: 15px;
-            margin-top: 10px;
-            border-left: 4px solid #1a365d;
-            padding-left: 10px;
-        }
-
-        .Gruppo-Bottoni {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 35px;
-        }
-
-        .Card-Ingresso {
-            background: #ffffff;
-            border: 2px solid #cbd5e1;
-            border-radius: 10px;
-            padding: 18px 20px;
-            text-decoration: none;
-            color: #1a365d;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .Card-Ingresso:hover {
-            border-color: #1a365d;
-            box-shadow: 0 6px 15px rgba(26, 54, 93, 0.08);
-            transform: translateY(-2px);
-        }
-
-        .Bollino-Flag-Home {
-            width: 35px;
-            height: 35px;
-            border-radius: 50px;
-            object-fit: cover;
-            box-shrink: 0;
-        }
-
-        .Testi-Bottone {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-
-        .Titolo-Bottone {
-            font-size: 1.1em;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 3px;
-        }
-
-        .Sottotitolo-Bottone {
-            font-size: 0.8em;
-            color: #718096;
-            font-weight: 500;
-            line-height: 1.3;
+        .Contenuto-Home {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
         }
 
         .Footer-Curatore {
-            margin-top: 50px;
+            margin-top: 60px;
             padding-top: 20px;
             border-top: 1px dashed #e2e8f0;
             text-align: right;
@@ -191,37 +61,23 @@
             color: #718096;
             font-style: italic;
         }
-
-        @media (max-width: 950px) {
-            .Griglia-Home { flex-direction: column; gap: 30px; }
-            .Colonna-Presentazione, .Colonna-Pannello-Accesso { width: 100%; flex: none; }
-        }
     </style>
 </head>
 <body>
 
-    <div class="Homepage-Container">
+    <div class="Home-Container">
         
         <div class="Header-Podio">
-            <div class="Podio-Dipartimento">
-                <img src="{{ site.baseurl }}/Logo_DLCM_UniGe_black.png" alt="Dipartimento di Lingue e Culture Moderne" class="Logo-Dip">
-            </div>
-            <div class="Podio-Ateneo">
-                <img src="{{ site.baseurl }}/logo_verticale_COLORE.png" alt="Stemma Università di Genova" class="Logo-Unige-Sigillo">
-            </div>
-            <div class="Podio-Dottorato">
-                <img src="{{ site.baseurl }}/Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png" alt="Dottorato in Digital Humanities" class="Logo-Phd">
-            </div>
+            <div class="Podio-Dipartimento"><img src="{{ site.baseurl }}/Logo_DLCM_UniGe_white.svg"></div>
+            <div class="Podio-Ateneo"><img src="{{ site.baseurl }}/logo_verticale_BIANCO.svg"></div>
+            <div class="Podio-Dottorato"><img src="{{ site.baseurl }}/Logo_PHD_DH_Monocromo_Bianco.svg"></div>
         </div>
 
-        <main>
+        <div class="Contenuto-Home">
             {{ content }}
-        </main>
+        </div> 
         
-        <footer class="Footer-Curatore">
-            Progetto dottorale a cura di: Giovanni Mantegazza (Università degli Studi di Genova)
-        </footer>
-
+        <footer class="Footer-Curatore">Portale a cura di: Giovanni Mantegazza (Università degli Studi di Genova)</footer>
     </div> 
 
 </body>
