@@ -96,7 +96,19 @@ title: {{ page.title }} | Glossario Rolli
 
         /* 2. CONTENUTO CENTRALE */
         .Contenuto-Scheda { min-width: 0; width: 100%; }
-        .Contenuto-Scheda h1 { display: none; } 
+        
+        /* RIPRISTINATO IL LEMMA VISIBILE IN ALTO */
+        .Contenuto-Scheda h1.Lemma-Visibile-Alto { 
+            color: #1a365d; 
+            font-size: 2.3em; 
+            margin: 0 0 5px 0; 
+            font-weight: 700; 
+            letter-spacing: -0.5px; 
+        }
+        
+        /* Nasconde l'h1 standard generato dal markdown interno per evitare duplicati */
+        .Contenuto-Scheda h1:not(.Lemma-Visibile-Alto) { display: none; } 
+
         .Contenuto-Scheda h3 {
             color: #2c5282; font-size: 1.15em; text-transform: uppercase;
             letter-spacing: 0.5px; margin: 30px 0 10px 0; display: flex; align-items: center; gap: 8px;
@@ -176,7 +188,6 @@ title: {{ page.title }} | Glossario Rolli
         .Logo-Phd { height: 95px; width: auto; display: block; }
         
         .Title-Area { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; width: 100%; }
-        h1.Lemma-Titolo { color: #1a365d; font-size: 2.4em; margin: 0; font-weight: 700; letter-spacing: -0.5px; text-transform: lowercase; }
         
         .Link-Equivalente-FR { display: inline-flex; align-items: center; background-color: #f7fafc; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 6px; text-decoration: none; color: #4a5568; font-size: 0.9em; font-weight: 600; transition: all 0.2s ease; }
         .Link-Equivalente-FR:hover { border-color: #2b6cb0; color: #2b6cb0; background-color: #f0f4f8; }
@@ -230,7 +241,8 @@ title: {{ page.title }} | Glossario Rolli
 
             <div class="Contenuto-Scheda">
                 <div class="Title-Area">
-                    <h1 class="Lemma-Titolo">{{ page.title }}</h1>
+                    <h1 class="Lemma-Visibile-Alto">{{ page.title }}</h1>
+                    
                     {% if page.fr_equivalent %}
                         {% assign min_target = page.fr_equivalent | downcase | strip %}
                         {% assign schede_totali = site.pages | where: "layout", "scheda" %}
@@ -330,7 +342,18 @@ title: {{ page.title }} | Glossario Rolli
                 });
             });
 
-            // 2. PARSER AUTOMATICO FONTI FRANCESI CON PRESERVAZIONE LINK
+            // CORREZIONE 2: PULIZIA SPAZI NEGLI URL DI TUTTA LA PAGINA
+            const allLinks = document.querySelectorAll("#Blocco-Markdown-Contenuto a");
+            allLinks.forEach(link => {
+                let currentHref = link.getAttribute("href");
+                if (currentHref) {
+                    // Rimuove qualsiasi tipo di spazio vuoto presente all'interno dell'attributo href
+                    let cleanedHref = currentHref.replace(/\s+/g, "");
+                    link.setAttribute("href", cleanedHref);
+                }
+            });
+
+            // 3. PARSER AUTOMATICO FONTI FRANCESI CON PRESERVAZIONE LINK
             const linguaPagina = "{{ page.lingua }}";
             
             if (linguaPagina === "fr") {
@@ -344,13 +367,8 @@ title: {{ page.title }} | Glossario Rolli
                     }
                     
                     if (pSources) {
-                        // Usiamo innerHTML per preservare i tag dei link <a>
                         const contenutoGrezzo = pSources.innerHTML;
-                        
-                        // Spezziamo basandoci sulle date di consultazione seguite opzionalmente da punto e a capo/break html
                         const regexSplit = /(consulté le \d{2}\/\d{2}\/\d{4}\.?\s*(?:<br\s*\/?>|\n)?)/gi;
-                        
-                        // Dividiamo il testo mantenendo i separatori catturati dalla RegEx
                         const parti = contenutoGrezzo.split(regexSplit);
                         
                         let fontiGenerate = [];
@@ -358,29 +376,25 @@ title: {{ page.title }} | Glossario Rolli
                         
                         for (let i = 0; i < parti.length; i++) {
                             stringaCorrente += parti[i];
-                            // Se la parte corrente contiene la stringa di chiusura "consulté le", abbiamo chiuso una fonte
                             if (parti[i].toLowerCase().includes("consulté le")) {
                                 if (stringaCorrente.trim()) {
                                     fontiGenerate.push(stringaCorrente.trim());
                                 }
-                                stringaCorrente = ""; // Resetta per la prossima fonte
+                                stringaCorrente = ""; 
                             }
                         }
                         
-                        // Gestisce eventuale testo residuo rimasto fuori
                         if (stringaCorrente.trim()) {
                             fontiGenerate.push(stringaCorrente.trim());
                         }
 
-                        // Se abbiamo estratto le fonti, ricostruiamo l'HTML iniettando i numeri
                         if (fontiGenerate.length > 0) {
                             let htmlFormattato = fontiGenerate
                                 .map((fonte, index) => {
-                                    // Puliamo eventuali vecchi residui di a capo all'inizio della stringa
                                     let pulita = fonte.replace(/^(?:<br\s*\/?>|\n)+/gi, '').trim();
                                     return `(${index + 1}) ${pulita}`;
                                 })
-                                .join("<br>\n"); // Usiamo il break HTML per andare a capo nel box
+                                .join("<br>\n");
                             
                             pSources.innerHTML = htmlFormattato;
                         }
