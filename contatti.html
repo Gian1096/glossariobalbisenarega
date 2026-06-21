@@ -1,56 +1,97 @@
 ---
-layout: default
-title: Contatti
+layout: null
+title: Contatti e Feedback
 ---
-<div class="Contenuto-Scheda" style="max-width: 800px; margin: 0 auto;">
-    <div style="text-align: right; margin-bottom: 20px;">
-        <span onclick="switchLanguage('it')" style="cursor:pointer; font-weight:bold;">IT</span> | 
-        <span onclick="switchLanguage('fr')" style="cursor:pointer;">FR</span>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Glossario Multilingue dei Rolli di Ateneo - Contatti</title>
+    <style>
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; color: #2d3748; width: 100% !important; margin: 0 !important; padding: 30px 4% !important; font-size: 1.15em; box-sizing: border-box; background-color: #f1f5f9; }
+        .Homepage-Container { background: #ffffff; border-top: 10px solid #1a365d; border-radius: 12px; box-shadow: 0 15px 35px rgba(26, 54, 93, 0.06); padding: 40px; margin: 20px auto 0 auto; width: 100%; max-width: 1600px; box-sizing: border-box; }
+        .Header-Podio { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #e2e8f0; padding: 60px 50px; margin: -40px -40px 35px -40px; gap: 25px; background-color: #e8f9f7; box-sizing: border-box; }
+        .Logo-Dip { height: 95px; width: auto; display: block; }
+        .Logo-Unige-Sigillo { height: 155px; width: auto; display: block; }
+        .Logo-Phd { height: 95px; width: auto; display: block; }
+        .Sezione-Contatti { background-color: #f2f9f8; border: 1px solid #e8f9f7; border-radius: 8px; padding: 40px; margin-top: 35px; }
+        .Form-Container { max-width: 700px; margin: 30px auto 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; border: 1px solid #cbd5e1; }
+        .Form-Group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+        .Form-Label { font-size: 0.9em; font-weight: 700; color: #1a365d; text-transform: uppercase; }
+        .Form-Input, .Form-Textarea { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+        .Form-Textarea { min-height: 150px; resize: vertical; }
+        .Btn-Invia { background-color: #1a365d; color: #ffffff; padding: 12px 28px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .Bollino-Flag-Home { width: 35px; height: 35px; border-radius: 50px; cursor: pointer; transition: transform 0.2s; border: 2px solid transparent; }
+        @media (max-width: 950px) { .Header-Podio { flex-direction: column; align-items: center; } }
+    </style>
+</head>
+<body>
+
+<div class="Homepage-Container">
+    <div class="Header-Podio">
+        <img src="{{ '/Logo_DLCM_UniGe_black.png' | relative_url }}" class="Logo-Dip">
+        <img src="{{ '/logo_verticale_COLORE.png' | relative_url }}" class="Logo-Unige-Sigillo">
+        <img src="{{ '/Logo_PHD_DH_Informale_Monocromo_nero_Verticale.png' | relative_url }}" class="Logo-Phd">
     </div>
 
-    <h1 id="txt-contatti-titolo">Contatti e Segnalazioni</h1>
-    <p id="txt-contatti-intro">Compila il modulo sottostante per inviare una segnalazione, una proposta terminologica o per richiedere informazioni sul progetto.</p>
+    <main>
+        <div style="text-align: right; margin-bottom: 20px; display: flex; gap: 15px; justify-content: flex-end; align-items: center;">
+            <img src="https://flagcdn.com/w40/it.png" id="btn-lang-it" class="Bollino-Flag-Home" style="border: 2px solid #1a365d;" onclick="switchLanguage('it')">
+            <img src="https://flagcdn.com/w40/fr.png" id="btn-lang-fr" class="Bollino-Flag-Home" style="opacity: 0.5;" onclick="switchLanguage('fr')">
+        </div>
 
-    <form action="https://formsubmit.co/giovanni.mantegazza@edu.unige.it" method="POST">
-        <label id="lbl-nome">Nome e Cognome</label><br>
-        <input type="text" name="name" required style="width:100%; padding:10px; margin-bottom:15px;"><br>
-        
-        <label id="lbl-email">Indirizzo Email</label><br>
-        <input type="email" name="email" required style="width:100%; padding:10px; margin-bottom:15px;"><br>
-        
-        <label id="lbl-messaggio">Messaggio</label><br>
-        <textarea name="message" required style="width:100%; height:150px; padding:10px; margin-bottom:15px;"></textarea><br>
-        
-        <button type="submit" id="btn-invia" style="background:#1a365d; color:white; padding:12px 24px; border:none; cursor:pointer;">Invia Messaggio</button>
-    </form>
+        <div class="Sezione-Contatti">
+            <h1 id="txt-titolo" style="color: #1a365d; text-align: center;">Valutazione e Feedback di Ricerca</h1>
+            <p id="txt-intro" style="color: #4a5568; text-align: center; max-width: 800px; margin: 0 auto;">Questo spazio è dedicato alla raccolta di osservazioni, segnalazioni di refusi o proposte di integrazione terminologica da parte di revisori, docenti ed esperti del settore.</p>
+
+            <div class="Form-Container">
+                <form action="https://formsubmit.co/giovanni.mantegazza@edu.unige.it" method="POST">
+                    <div class="Form-Group">
+                        <label id="lbl-nome" class="Form-Label">Nome e Affiliazione Istituzionale</label>
+                        <input type="text" name="name" class="Form-Input" required>
+                    </div>
+                    <div class="Form-Group">
+                        <label id="lbl-email" class="Form-Label">Indirizzo Email</label>
+                        <input type="email" name="email" class="Form-Input" required>
+                    </div>
+                    <div class="Form-Group">
+                        <label id="lbl-tipo" class="Form-Label">Tipologia di feedback</label>
+                        <select name="type" class="Form-Input">
+                            <option id="opt-1" value="proposta">Proposta di modifica di una scheda</option>
+                            <option id="opt-2" value="refuso">Segnalazione di un refuso</option>
+                            <option id="opt-3" value="generale">Osservazione metodologica</option>
+                        </select>
+                    </div>
+                    <div class="Form-Group">
+                        <label id="lbl-msg" class="Form-Label">Messaggio / Note</label>
+                        <textarea name="message" class="Form-Textarea" required></textarea>
+                    </div>
+                    <button type="submit" id="btn-invia" class="Btn-Invia">Invia Segnalazione</button>
+                </form>
+            </div>
+        </div>
+    </main>
 </div>
 
 <script>
-    const traduzioni = {
-        it: {
-            titolo: "Contatti e Segnalazioni",
-            intro: "Compila il modulo sottostante per inviare una segnalazione, una proposta terminologica o per richiedere informazioni sul progetto.",
-            nome: "Nome e Cognome",
-            email: "Indirizzo Email",
-            messaggio: "Messaggio",
-            invia: "Invia Messaggio"
-        },
-        fr: {
-            titolo: "Contacts et Retours",
-            intro: "Remplissez le formulaire ci-dessous pour envoyer un signalement, une proposition terminologique ou demander des informations sur le projet.",
-            nome: "Nom et Prénom",
-            email: "Adresse E-mail",
-            messaggio: "Message",
-            invia: "Envoyer le Message"
-        }
+    const trad = {
+        it: { titolo: "Valutazione e Feedback di Ricerca", intro: "Questo spazio è dedicato alla raccolta di osservazioni, segnalazioni di refusi o proposte di integrazione terminologica da parte di revisori, docenti ed esperti del settore.", nome: "Nome e Affiliazione Istituzionale", email: "Indirizzo Email", tipo: "Tipologia di feedback", opt1: "Proposta di modifica di una scheda", opt2: "Segnalazione di un refuso", opt3: "Osservazione metodologica", msg: "Messaggio / Note", invia: "Invia Segnalazione" },
+        fr: { titolo: "Évaluation et Feedback de Recherche", intro: "Cet espace est dédié à la collecte d'observations, de signalements d'erreurs ou de propositions d'intégration terminologique de la part des réviseurs, enseignants et experts.", nome: "Nom et Affiliation Institutionnelle", email: "Adresse E-mail", tipo: "Type de feedback", opt1: "Proposition de modification", opt2: "Signalement d'une erreur", opt3: "Observation méthodologique", msg: "Message / Notes", invia: "Envoyer le signalement" }
     };
-
     function switchLanguage(lang) {
-        document.getElementById('txt-contatti-titolo').innerText = traduzioni[lang].titolo;
-        document.getElementById('txt-contatti-intro').innerText = traduzioni[lang].intro;
-        document.getElementById('lbl-nome').innerText = traduzioni[lang].nome;
-        document.getElementById('lbl-email').innerText = traduzioni[lang].email;
-        document.getElementById('lbl-messaggio').innerText = traduzioni[lang].messaggio;
-        document.getElementById('btn-invia').innerText = traduzioni[lang].invia;
+        document.getElementById('txt-titolo').innerText = trad[lang].titolo;
+        document.getElementById('txt-intro').innerText = trad[lang].intro;
+        document.getElementById('lbl-nome').innerText = trad[lang].nome;
+        document.getElementById('lbl-email').innerText = trad[lang].email;
+        document.getElementById('lbl-tipo').innerText = trad[lang].tipo;
+        document.getElementById('opt-1').innerText = trad[lang].opt1;
+        document.getElementById('opt-2').innerText = trad[lang].opt2;
+        document.getElementById('opt-3').innerText = trad[lang].opt3;
+        document.getElementById('lbl-msg').innerText = trad[lang].msg;
+        document.getElementById('btn-invia').innerText = trad[lang].invia;
+        document.getElementById('btn-lang-it').style.opacity = (lang === 'it') ? '1' : '0.5';
+        document.getElementById('btn-lang-fr').style.opacity = (lang === 'fr') ? '1' : '0.5';
     }
 </script>
+</body>
+</html>
