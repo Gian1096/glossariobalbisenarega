@@ -21,6 +21,8 @@ title: Contatti e Feedback
         .Form-Input, .Form-Textarea { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
         .Form-Textarea { min-height: 150px; resize: vertical; }
         .Btn-Invia { background-color: #1a365d; color: #ffffff; padding: 12px 28px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .Btn-Home-Card { background: #ffffff; border: 2px solid #cbd5e1; border-radius: 6px; padding: 12px 20px; text-decoration: none; color: #1a365d; font-weight: 600; transition: all 0.2s; }
+        .Btn-Home-Card:hover { border-color: #1a365d; background-color: #f2f9f8; }
         .Bollino-Flag-Home { width: 35px; height: 35px; border-radius: 50px; cursor: pointer; transition: transform 0.2s; border: 2px solid transparent; }
         @media (max-width: 950px) { .Header-Podio { flex-direction: column; align-items: center; } }
     </style>
@@ -45,44 +47,43 @@ title: Contatti e Feedback
             <p id="txt-intro" style="color: #4a5568; text-align: center; max-width: 800px; margin: 0 auto;">Questo spazio è dedicato alla raccolta di osservazioni, segnalazioni di refusi o proposte di integrazione terminologica da parte di revisori, docenti ed esperti del settore.</p>
 
             <div class="Form-Container">
-                    <form action="https://formsubmit.co/giovanni.mantegazza@edu.unige.it" method="POST">
-                        <input type="hidden" name="_captcha" value="true">
-                        
-                        <div class="Form-Group">
-                            <label id="lbl-nome" class="Form-Label">Nome e Affiliazione Istituzionale</label>
-                            <input type="text" name="name" class="Form-Input" required>
-                        </div>
-                        <div class="Form-Group">
-                            <label id="lbl-email" class="Form-Label">Indirizzo Email</label>
-                            <input type="email" name="email" class="Form-Input" required>
-                        </div>
-                        <div class="Form-Group">
-                            <label id="lbl-tipo" class="Form-Label">Tipologia di feedback</label>
-                            <select name="type" class="Form-Input">
-                                <option id="opt-1" value="proposta">Proposta di modifica di una scheda</option>
-                                <option id="opt-2" value="refuso">Segnalazione di un refuso</option>
-                                <option id="opt-3" value="generale">Osservazione metodologica</option>
-                            </select>
-                        </div>
-                        <div class="Form-Group">
-                            <label id="lbl-msg" class="Form-Label">Messaggio / Note</label>
-                            <textarea name="message" class="Form-Textarea" required></textarea>
-                        </div>
-                        
-                        <div style="display: flex; gap: 15px; align-items: center;">
-                            <button type="submit" id="btn-invia" class="Btn-Invia">Invia Segnalazione</button>
-                            <a href="{{ '/' | relative_url }}" id="btn-home" style="text-decoration:none; color:#1a365d; font-weight:600;">Torna alla Home</a>
-                        </div>
-                    </form>
-                </div>
+                <form action="https://formsubmit.co/giovanni.mantegazza@edu.unige.it" method="POST">
+                    <input type="hidden" name="_captcha" value="true">
+
+                    <div class="Form-Group">
+                        <label id="lbl-nome" class="Form-Label">Nome e Affiliazione Istituzionale</label>
+                        <input type="text" name="name" class="Form-Input" required>
+                    </div>
+                    <div class="Form-Group">
+                        <label id="lbl-email" class="Form-Label">Indirizzo Email</label>
+                        <input type="email" name="email" class="Form-Input" required>
+                    </div>
+                    <div class="Form-Group">
+                        <label id="lbl-tipo" class="Form-Label">Tipologia di feedback</label>
+                        <select name="type" class="Form-Input">
+                            <option id="opt-1" value="proposta">Proposta di modifica di una scheda</option>
+                            <option id="opt-2" value="refuso">Segnalazione di un refuso</option>
+                            <option id="opt-3" value="generale">Osservazione metodologica</option>
+                        </select>
+                    </div>
+                    <div class="Form-Group">
+                        <label id="lbl-msg" class="Form-Label">Messaggio / Note</label>
+                        <textarea name="message" class="Form-Textarea" required></textarea>
+                    </div>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <button type="submit" id="btn-invia" class="Btn-Invia">Invia Segnalazione</button>
+                        <a href="{{ '/' | relative_url }}" id="btn-home" class="Btn-Home-Card">🏠 <span id="txt-home-label">Torna alla Home</span></a>
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
 </div>
 
 <script>
     const trad = {
-        it: { titolo: "Valutazione e Feedback di Ricerca", intro: "Questo spazio è dedicato alla raccolta di osservazioni, segnalazioni di refusi o proposte di integrazione terminologica da parte di revisori, docenti ed esperti del settore.", nome: "Nome e Affiliazione Istituzionale", email: "Indirizzo Email", tipo: "Tipologia di feedback", opt1: "Proposta di modifica di una scheda", opt2: "Segnalazione di un refuso", opt3: "Osservazione metodologica", msg: "Messaggio / Note", invia: "Invia Segnalazione" },
-        fr: { titolo: "Évaluation et Feedback de Recherche", intro: "Cet espace est dédié à la collecte d'observations, de signalements d'erreurs ou de propositions d'intégration terminologique de la part des réviseurs, enseignants et experts.", nome: "Nom et Affiliation Institutionnelle", email: "Adresse E-mail", tipo: "Type de feedback", opt1: "Proposition de modification", opt2: "Signalement d'une erreur", opt3: "Observation méthodologique", msg: "Message / Notes", invia: "Envoyer le signalement" }
+        it: { titolo: "Valutazione e Feedback di Ricerca", intro: "Questo spazio è dedicato alla raccolta di osservazioni, segnalazioni di refusi o proposte di integrazione terminologica da parte di revisori, docenti ed esperti del settore.", nome: "Nome e Affiliazione Istituzionale", email: "Indirizzo Email", tipo: "Tipologia di feedback", opt1: "Proposta di modifica di una scheda", opt2: "Segnalazione di un refuso", opt3: "Osservazione metodologica", msg: "Messaggio / Note", invia: "Invia Segnalazione", home: "Torna alla Home" },
+        fr: { titolo: "Évaluation et Feedback de Recherche", intro: "Cet espace est dédié à la collecte d'observations, de signalements d'erreurs ou de propositions d'intégration terminologique de la part des réviseurs, enseignants et experts.", nome: "Nom et Affiliation Institutionnelle", email: "Adresse E-mail", tipo: "Type de feedback", opt1: "Proposition de modification", opt2: "Signalement d'une erreur", opt3: "Observation méthodologique", msg: "Message / Notes", invia: "Envoyer le signalement", home: "Retour à l'Accueil" }
     };
     function switchLanguage(lang) {
         document.getElementById('txt-titolo').innerText = trad[lang].titolo;
@@ -95,6 +96,9 @@ title: Contatti e Feedback
         document.getElementById('opt-3').innerText = trad[lang].opt3;
         document.getElementById('lbl-msg').innerText = trad[lang].msg;
         document.getElementById('btn-invia').innerText = trad[lang].invia;
+        document.getElementById('txt-home-label').innerText = trad[lang].home;
+        document.getElementById('btn-lang-it').style.border = (lang === 'it') ? '2px solid #1a365d' : '2px solid transparent';
+        document.getElementById('btn-lang-fr').style.border = (lang === 'fr') ? '2px solid #1a365d' : '2px solid transparent';
         document.getElementById('btn-lang-it').style.opacity = (lang === 'it') ? '1' : '0.5';
         document.getElementById('btn-lang-fr').style.opacity = (lang === 'fr') ? '1' : '0.5';
     }
