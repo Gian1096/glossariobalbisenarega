@@ -45,30 +45,36 @@ title: Contatti e Feedback
             <p id="txt-intro" style="color: #4a5568; text-align: center; max-width: 800px; margin: 0 auto;">Questo spazio è dedicato alla raccolta di osservazioni, segnalazioni di refusi o proposte di integrazione terminologica da parte di revisori, docenti ed esperti del settore.</p>
 
             <div class="Form-Container">
-                <form action="https://formsubmit.co/giovanni.mantegazza@edu.unige.it" method="POST">
-                    <div class="Form-Group">
-                        <label id="lbl-nome" class="Form-Label">Nome e Affiliazione Istituzionale</label>
-                        <input type="text" name="name" class="Form-Input" required>
-                    </div>
-                    <div class="Form-Group">
-                        <label id="lbl-email" class="Form-Label">Indirizzo Email</label>
-                        <input type="email" name="email" class="Form-Input" required>
-                    </div>
-                    <div class="Form-Group">
-                        <label id="lbl-tipo" class="Form-Label">Tipologia di feedback</label>
-                        <select name="type" class="Form-Input">
-                            <option id="opt-1" value="proposta">Proposta di modifica di una scheda</option>
-                            <option id="opt-2" value="refuso">Segnalazione di un refuso</option>
-                            <option id="opt-3" value="generale">Osservazione metodologica</option>
-                        </select>
-                    </div>
-                    <div class="Form-Group">
-                        <label id="lbl-msg" class="Form-Label">Messaggio / Note</label>
-                        <textarea name="message" class="Form-Textarea" required></textarea>
-                    </div>
-                    <button type="submit" id="btn-invia" class="Btn-Invia">Invia Segnalazione</button>
-                </form>
-            </div>
+                    <form action="https://formsubmit.co/giovanni.mantegazza@edu.unige.it" method="POST">
+                        <input type="hidden" name="_captcha" value="true">
+                        
+                        <div class="Form-Group">
+                            <label id="lbl-nome" class="Form-Label">Nome e Affiliazione Istituzionale</label>
+                            <input type="text" name="name" class="Form-Input" required>
+                        </div>
+                        <div class="Form-Group">
+                            <label id="lbl-email" class="Form-Label">Indirizzo Email</label>
+                            <input type="email" name="email" class="Form-Input" required>
+                        </div>
+                        <div class="Form-Group">
+                            <label id="lbl-tipo" class="Form-Label">Tipologia di feedback</label>
+                            <select name="type" class="Form-Input">
+                                <option id="opt-1" value="proposta">Proposta di modifica di una scheda</option>
+                                <option id="opt-2" value="refuso">Segnalazione di un refuso</option>
+                                <option id="opt-3" value="generale">Osservazione metodologica</option>
+                            </select>
+                        </div>
+                        <div class="Form-Group">
+                            <label id="lbl-msg" class="Form-Label">Messaggio / Note</label>
+                            <textarea name="message" class="Form-Textarea" required></textarea>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px; align-items: center;">
+                            <button type="submit" id="btn-invia" class="Btn-Invia">Invia Segnalazione</button>
+                            <a href="{{ '/' | relative_url }}" id="btn-home" style="text-decoration:none; color:#1a365d; font-weight:600;">Torna alla Home</a>
+                        </div>
+                    </form>
+                </div>
         </div>
     </main>
 </div>
