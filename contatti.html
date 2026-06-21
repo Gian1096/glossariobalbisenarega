@@ -18,11 +18,16 @@ title: Contatti e Feedback
         .Form-Container { max-width: 700px; margin: 30px auto 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; border: 1px solid #cbd5e1; }
         .Form-Group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
         .Form-Label { font-size: 0.9em; font-weight: 700; color: #1a365d; text-transform: uppercase; }
-        .Form-Input, .Form-Textarea { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+        .Form-Input, .Form-Textarea { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-family: inherit; }
         .Form-Textarea { min-height: 150px; resize: vertical; }
-        .Btn-Invia { background-color: #1a365d; color: #ffffff; padding: 12px 28px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
-        .Btn-Home-Card { background: #ffffff; border: 2px solid #cbd5e1; border-radius: 6px; padding: 12px 20px; text-decoration: none; color: #1a365d; font-weight: 600; transition: all 0.2s; }
-        .Btn-Home-Card:hover { border-color: #1a365d; background-color: #f2f9f8; }
+        
+        /* Bottoni Uniformati */
+        .Btn-Form-Action { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; font-size: 1em; font-weight: 600; border-radius: 6px; text-decoration: none; cursor: pointer; transition: all 0.2s ease; border: 2px solid #1a365d; }
+        .Btn-Invia { background-color: #1a365d; color: #ffffff; }
+        .Btn-Invia:hover { background-color: #2b6cb0; border-color: #2b6cb0; }
+        .Btn-Home-Card { background: #ffffff; color: #1a365d; }
+        .Btn-Home-Card:hover { background-color: #f2f9f8; }
+
         .Bollino-Flag-Home { width: 35px; height: 35px; border-radius: 50px; cursor: pointer; transition: transform 0.2s; border: 2px solid transparent; }
         @media (max-width: 950px) { .Header-Podio { flex-direction: column; align-items: center; } }
     </style>
@@ -70,9 +75,14 @@ title: Contatti e Feedback
                         <label id="lbl-msg" class="Form-Label">Messaggio / Note</label>
                         <textarea name="message" class="Form-Textarea" required></textarea>
                     </div>
-                    <div style="display: flex; gap: 15px; align-items: center;">
-                        <button type="submit" id="btn-invia" class="Btn-Invia">Invia Segnalazione</button>
-                        <a href="{{ '/' | relative_url }}" id="btn-home" class="Btn-Home-Card">🏠 <span id="txt-home-label">Torna alla Home</span></a>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px;">
+                        <a href="{{ '/' | relative_url }}" id="btn-home" class="Btn-Form-Action Btn-Home-Card">
+                            🏠 <span id="txt-home-label">Torna alla Home</span>
+                        </a>
+                        <button type="submit" id="btn-invia" class="Btn-Form-Action Btn-Invia">
+                            ✉️ <span id="txt-invia-label">Invia Segnalazione</span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -95,7 +105,7 @@ title: Contatti e Feedback
         document.getElementById('opt-2').innerText = trad[lang].opt2;
         document.getElementById('opt-3').innerText = trad[lang].opt3;
         document.getElementById('lbl-msg').innerText = trad[lang].msg;
-        document.getElementById('btn-invia').innerText = trad[lang].invia;
+        document.getElementById('txt-invia-label').innerText = trad[lang].invia;
         document.getElementById('txt-home-label').innerText = trad[lang].home;
         document.getElementById('btn-lang-it').style.border = (lang === 'it') ? '2px solid #1a365d' : '2px solid transparent';
         document.getElementById('btn-lang-fr').style.border = (lang === 'fr') ? '2px solid #1a365d' : '2px solid transparent';
