@@ -209,11 +209,29 @@ title: {{ page.title }} | Glossario Rolli
         .Meta-Item.lingua-active { background-color: #e8f9f7; border-color: #cbd5e1; color: #1a365d; }
 
         @media (max-width: 1100px) {
-            .Main-Layout { grid-template-columns: 1fr; gap: 20px; }
-            .Sidebar-Lemmi { border-right: none; padding-right: 0; background-color: #f2f9f8; border: 1px solid #e8f9f7; border-radius: 8px; padding: 12px 18px; position: relative; max-height: none; }
-            .Albero-Lemmi { columns: 3; column-gap: 20px; }
-            .Sidebar-Immagine { border-left: none; border-top: 1px solid #e2e8f0; padding-left: 0; padding-top: 20px; position: relative; }
-        }
+    .Main-Layout { 
+        display: flex; 
+        flex-direction: column; 
+    }
+    .Contenuto-Scheda { 
+        order: 1; /* Il contenuto va al primo posto */
+    }
+    .Sidebar-Lemmi { 
+        order: 2; /* L'elenco lemmi va al secondo posto */
+        border-right: none; padding-right: 0; 
+        background-color: #f2f9f8; border: 1px solid #e8f9f7; 
+        border-radius: 8px; padding: 12px 18px; 
+        position: relative; max-height: none; 
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .Albero-Lemmi { columns: 2; } /* Su mobile 2 colonne sono più leggibili */
+    .Sidebar-Immagine { 
+        order: 3; /* L'immagine va in fondo */
+        border-left: none; border-top: 1px solid #e2e8f0; 
+        padding-left: 0; padding-top: 20px; 
+    }
+}
     </style>
 </head>
 <body>
