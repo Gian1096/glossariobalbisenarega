@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /_site/
+Disallow: /_includes/
+Disallow: /_layouts/
+Allow: /
